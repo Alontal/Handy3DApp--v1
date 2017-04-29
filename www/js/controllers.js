@@ -53,4 +53,8 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
+})
+
+.controller('cameraCtrl', function($scope, $stateParams) {
+  $scope.camera = 'scope :)'
 });

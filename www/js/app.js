@@ -35,8 +35,9 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         url: '/camera',
         views: {
           'menuContent': {
-            templateUrl: 'templates/camera.html'
-          }
+            templateUrl: 'templates/camera.html',
+            controller: 'cameraCtrl'
+          },
         }
       })
 
