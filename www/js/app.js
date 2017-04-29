@@ -23,13 +23,37 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
 
   .config(function ($stateProvider, $urlRouterProvider) {
-    $stateProvider
 
+    var token = '';
+    //check for existing token in local storage
+    function checkToken() {
+      token = localStorage.getItem('token')
+    //if not exist then redirect to login 
+      if (token == null) {
+          $urlRouterProvider
+          .otherwise('/app/login');
+      }
+      else{
+        $urlRouterProvider
+          .otherwise('/app/home');
+      }
+    }
+
+    $stateProvider
       .state('app', {
         url: '/app',
         abstract: true,
         templateUrl: 'templates/menu.html',
         controller: 'AppCtrl'
+      })
+      .state('app.home', {
+        url: '/home',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/home.html',
+            //controller: 'homeCtrl'
+          },
+        }
       })
       .state('app.login', {
         url: '/login',

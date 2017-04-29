@@ -5,7 +5,7 @@
       <button class="button button-clear" ng-click="closeLogin()">Close</button>
     </div>
   </ion-header-bar>
-  <ion-content>
+  <ion-content ng-controller="LoginCtrl">
 
 
     <form name="login" ng-submit="doLogin()">
@@ -13,18 +13,16 @@
       <div class="list">
         <label class="item item-input item-floating-label">
           <span class="input-label">Email</span>
-          <input type="email" ng-model="login.email" placeholder="Email" required>
+          <input type="text" ng-model="login.email" placeholder="Email" required>
             </label>
         <label class="item item-input item-floating-label">
               <span class="input-label">Password</span>
               <input type="password" ng-model="login.password" placeholder="Password" required>
              </label>
-
         <button class="button button-block button-positive" ng-disabled="login.$invalid" type="submit">Log in</button>
-
       </div>
     </form>
 
-    
+
   </ion-content>
 </ion-modal-view>

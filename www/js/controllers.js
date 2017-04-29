@@ -39,16 +39,72 @@ angular.module('starter.controllers', [])
         $scope.closeModal();
       }, 1000);
     };
+
+
+    //links 
+
+    $scope.links = {
+      general: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx',
+    }
   })
-  .controller('LoginCtrl', function ($scope, $http) {
+  .controller('LoginCtrl', ['$scope', '$http', function ($scope, $http) {
 
-    $scope.doLogin = function(){
-      
-      console.log('Doing login', $scope.loginData);
-    } 
+    //$scope.login = {};
+
+    $scope.doLogin = function () {
+      var u = {
+        Email: $scope.login.email,
+        Password: $scope.login.password
+      }
+      console.info('trying to login....', u)
+
+      $http({
+        method: "GET",
+        url: $scope.links.general + '/LoginAuth',
+        // headers: {
+        //   'Content-Type': 'application/json; charset=utf-8',
+        //   'Content-Type': 'application/x-www-form-urlencoded'
+        // },
+        params: {
+          email: u.Email,
+          password: u.Password
+        }
+
+      }).then(function (res) {
+        console.info('success', res.data)
+      }),
+        function (err) {
+          console.log('Something went wrong');
+        }
+
+    }
+
+    //   check authentication  
+    //   $http.post($scope.links.general + 'LoginAuth',{params: {u}} )
+    //     .then(function (response) {
+    //       // var data = response.data.d;
+    //       // $scope.user= {
+    //       //   Fname: data.name,
+    //       //   Lname: '',
+    //       //   type: data.type,
+    //       //   desciption: '',
+    //       //   email: $scope.email,
+    //       //   id: ''
+    //       // }
+    //       // console.info('user: ', $scope.user);
+    //     },
+    //     function (err) {
+    //       console.log('failed to load ');
+    //     })
+    // };
 
 
-  })
+    function saveToken(token) {
+      if (token) {
+        localStorage.setItem('token', token)
+      }
+    }
+  }])
 
   .controller('PlaylistsCtrl', function ($scope) {
     $scope.playlists = [
@@ -66,4 +122,7 @@ angular.module('starter.controllers', [])
 
   .controller('cameraCtrl', function ($scope, $stateParams) {
     $scope.camera = 'scope :)'
+  })
+
+  .controller('GeneralCtrl', function ($scope, $stateParams) {
   });
