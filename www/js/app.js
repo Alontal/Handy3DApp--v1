@@ -8,6 +8,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
+      //get device type
+
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -49,6 +51,18 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           },
         }
       })
+      .state('app.todo', {
+        url: '/todo',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/todo.html',
+            controller: 'TodoCtrl'
+          },
+        }
+      })
+      .state('app.todo.list', {
+        url: '/{fold}'
+      })
       .state('app.camera', {
         url: '/camera',
         views: {
@@ -58,7 +72,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           },
         }
       })
-
       .state('app.search', {
         url: '/search',
         views: {
@@ -67,7 +80,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           }
         }
       })
-
       .state('app.browse', {
         url: '/browse',
         views: {
@@ -97,10 +109,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       });
 
     // if none of the above states are matched, use this as the fallback
-     $urlRouterProvider.otherwise('/app/home');
+    $urlRouterProvider.otherwise('/app/home');
 
     // fall back when insert incorrect address >> fallback to index.html
     //$urlRouterProvider.otherwise(function () {
-     // window.location = 'index.html';
+    // window.location = 'index.html';
     //})
   });

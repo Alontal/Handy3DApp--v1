@@ -1,5 +1,6 @@
 angular.module('starter.controllers', [])
 
+
   .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
 
     // With the new view caching in Ionic, Controllers are only called
@@ -9,17 +10,18 @@ angular.module('starter.controllers', [])
     //$scope.$on('$ionicView.enter', function(e) {
     //});
 
+
     //init user
-      $scope.getUserDetails = function(){
-        $scope.user = JSON.parse( localStorage.getItem('_user'));
-        console.info('Welcome to Handy 3D', $scope.user);
-        // alert('Welcome '+$scope.user.name);
-      }
+    $scope.getUserDetails = function () {
+      $scope.user = JSON.parse(localStorage.getItem('_user'));
+      console.info('Welcome to Handy 3D', $scope.user);
+      // alert('Welcome '+$scope.user.name);
+    }
     //settings init
     $scope.app = {
-      user:{
-      name: 'Handy3D MobileApp',
-      version: '0.0.1',
+      user: {
+        name: 'Handy3D MobileApp',
+        version: '0.0.1',
       },
       // for chart colors
       color: {
@@ -74,11 +76,11 @@ angular.module('starter.controllers', [])
   .controller('LoginCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
 
     //check for existing token --> if exist redirect to home 
-    $scope.checkForExistingToken = function(){
+    $scope.checkForExistingToken = function () {
       token = localStorage.getItem('_token_s$#@')
       //if exist redirect to main 
-      console.log('token is: ',token);
-      if ( token != null ){
+      console.log('token is: ', token);
+      if (token != null) {
         window.location = 'main.html';
       }
     }
@@ -107,13 +109,13 @@ angular.module('starter.controllers', [])
         .then(function (res) {
           $scope.user = res.data;
           console.info('Success, Hi mr/ms :', $scope.user);
-          localStorage.setItem('_user', JSON.stringify($scope.user) );
+          localStorage.setItem('_user', JSON.stringify($scope.user));
           saveToken($scope.user.token);
           //$state.go('app.home');
           window.location = 'main.html';
         }),
         function (err) {
-          console.log('Something went wrong');
+          console.error('Something went wrong');
         }
     }
     // .   / Login authentication 
@@ -151,4 +153,142 @@ angular.module('starter.controllers', [])
   .controller('HomeCtrl', function ($scope, $stateParams) {
     $scope.home = 'home :)';
 
-  });
+  })
+
+
+
+  .factory('todoStorage', function () {
+    var STORAGE_ID = 'todos';
+
+    return {
+      sync: function () {
+        // sync  Todo's  with DB
+        $scope.syncTodo = function () {
+          var u = {
+            Email: $scope.login.email,
+            Password: $scope.login.password
+          }
+          console.info('Trying to login....', u)
+          // http get user by password & email  
+          $http({
+            method: "GET",
+            url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/LoginAuth',
+            headers: {
+              'Content-Type': 'application/json; charset=utf-8',
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            params: {
+              title: '',
+              completed: ''
+            }
+          })
+            .then(function (res) {
+              $scope.user = res.data;
+              console.log('ToDo was Synced :');
+            }),
+            function (err) {
+              console.error('Todo - Something went wrong');
+            }
+        }
+        // .   / Login authentication 
+
+
+      },
+      get: function () {
+        return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+      },
+
+      put: function (todos) {
+        localStorage.setItem(STORAGE_ID, JSON.stringify(todos));
+      }
+    };
+  })
+
+  .controller('TodoCtrl', ['$scope', '$location', '$filter', 'todoStorage', function ($scope, $location, $filter, todoStorage) {
+    var todos = $scope.todos = todoStorage.get();
+
+    $scope.newTodo = '';
+    $scope.remainingCount = $filter('filter')(todos, { completed: false }).length;
+
+
+    if ($location.path() === '') {
+      $location.path('/');
+    }
+
+    $scope.location = $location;
+
+    $scope.$watch('location.path()', function (path) {
+      console.log(path);
+      $scope.statusFilter = { '/app/todo/active': { completed: false }, '/app/todo/completed': { completed: true } }[path];
+    });
+
+    $scope.$watch('remainingCount == 0', function (val) {
+      $scope.allChecked = val;
+    });
+
+    $scope.addTodo = function () {
+      var newTodo = $scope.newTodo.trim();
+      if (newTodo.length === 0) {
+        return;
+      }
+
+      todos.push({
+        title: newTodo,
+        completed: false
+      });
+      todoStorage.put(todos);
+
+      $scope.newTodo = '';
+      $scope.remainingCount++;
+    };
+
+    $scope.editTodo = function (todo) {
+      todo.editedTodo = true;
+      // Clone the original todo to restore it on demand.
+      $scope.originalTodo = angular.extend({}, todo);
+    };
+
+    $scope.doneEditing = function (todo) {
+      todo.editedTodo = false;
+      todo.title = todo.title.trim();
+
+      if (!todo.title) {
+        $scope.removeTodo(todo);
+      }
+
+      todoStorage.put(todos);
+    };
+
+    $scope.revertEditing = function (todo) {
+      todos[todos.indexOf(todo)] = $scope.originalTodo;
+      $scope.doneEditing($scope.originalTodo);
+    };
+
+    $scope.removeTodo = function (todo) {
+      $scope.remainingCount -= todo.completed ? 0 : 1;
+      todos.splice(todos.indexOf(todo), 1);
+      todoStorage.put(todos);
+    };
+
+    $scope.todoCompleted = function (todo) {
+      $scope.remainingCount += todo.completed ? -1 : 1;
+      todoStorage.put(todos);
+    };
+
+    $scope.clearCompletedTodos = function () {
+      $scope.todos = todos = todos.filter(function (val) {
+        return !val.completed;
+      });
+      todoStorage.put(todos);
+    };
+
+    $scope.markAll = function (completed) {
+      todos.forEach(function (todo) {
+        todo.completed = completed;
+      });
+      $scope.remainingCount = !completed ? todos.length : 0;
+      todoStorage.put(todos);
+    };
+  }]);
+
+
