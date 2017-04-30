@@ -72,6 +72,12 @@ angular.module('starter.controllers', [])
 
     // Login authentication 
     $scope.doLogin = function () {
+       token = localStorage.getItem('token')
+       if (token != '') {
+        //$urlRouterProvider
+        //   .otherwise('/app/login');
+        window.location = 'main.html';
+      }
       var u = {
         Email: $scope.login.email,
         Password: $scope.login.password
@@ -95,7 +101,7 @@ angular.module('starter.controllers', [])
           console.info('Success, new user :', $scope.user)
           saveToken($scope.user.token);
           //$state.go('app.home');
-          window.location = '../main.html';
+          window.location = '../templates/main.html';
         }),
         function (err) {
           console.log('Something went wrong');
