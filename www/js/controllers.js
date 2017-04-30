@@ -10,22 +10,23 @@ angular.module('starter.controllers', [])
     //});
 
     //init user
-    $scope.user = {};
 
     //settings init
     $scope.app = {
-       name: 'Handy3D MobileApp',
-       version: '0.0.1',
+      user:{
+      name: 'Handy3D MobileApp',
+      version: '0.0.1',
+      },
       // for chart colors
-        color: {
-          primary: '#7266ba',
-          info: '#23b7e5',
-          success: '#27c24c',
-          warning: '#fad733',
-          danger: '#f05050',
-          light: '#e8eff0',
-          dark: '#3a3f51',
-          black: '#1c2b36'
+      color: {
+        primary: '#7266ba',
+        info: '#23b7e5',
+        success: '#27c24c',
+        warning: '#fad733',
+        danger: '#f05050',
+        light: '#e8eff0',
+        dark: '#3a3f51',
+        black: '#1c2b36'
       }
     }
     // Form data for the login modal
@@ -66,18 +67,27 @@ angular.module('starter.controllers', [])
       general: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx',
     }
   })
-  
+
   .controller('LoginCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
 
+    //check for existing token --> if exist redirect to home 
+      
+    //check for existing token in local storage
+    $scope.checkForExistingToken = function(){
+      token = localStorage.getItem('token')
+      //if not exist then redirect to login S
+      console.log('token is: ',token);
+      if ( token != null ){
+        window.location = 'main.html';
+      }
+
+        // $urlRouterProvider
+        //  .otherwise('/app/home');
+      
+    }
 
     // Login authentication 
     $scope.doLogin = function () {
-       token = localStorage.getItem('token')
-       if (token != '') {
-        //$urlRouterProvider
-        //   .otherwise('/app/login');
-        window.location = 'main.html';
-      }
       var u = {
         Email: $scope.login.email,
         Password: $scope.login.password
@@ -101,7 +111,7 @@ angular.module('starter.controllers', [])
           console.info('Success, new user :', $scope.user)
           saveToken($scope.user.token);
           //$state.go('app.home');
-          window.location = '../templates/main.html';
+          window.location = 'main.html';
         }),
         function (err) {
           console.log('Something went wrong');
@@ -139,5 +149,6 @@ angular.module('starter.controllers', [])
   })
 
   .controller('HomeCtrl', function ($scope, $stateParams) {
-  $scope.home = 'home :)'
+    $scope.home = 'home :)';
+
   });

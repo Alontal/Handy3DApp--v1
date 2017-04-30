@@ -24,21 +24,21 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
   .config(function ($stateProvider, $urlRouterProvider) {
 
-    var token = '';
-    //check for existing token in local storage
-    function checkToken() {
-      token = localStorage.getItem('token')
-      //if not exist then redirect to login 
-      if (token == '') {
-        //$urlRouterProvider
-        //   .otherwise('/app/login');
-        window.location = '../index.html';
-      }
-      else {
-        $urlRouterProvider
-         .otherwise('/app/home');
-      }
-    }
+    // var token = '';
+    // //check for existing token in local storage
+    // function checkToken() {
+    //   token = localStorage.getItem('token')
+    //   //if not exist then redirect to login 
+    //   if (token == '') {
+    //     //$urlRouterProvider
+    //     //   .otherwise('/app/login');
+    //     window.location = 'index.html';
+    //   }
+    //   else {
+    //     $urlRouterProvider
+    //      .otherwise('/app/home');
+    //   }
+    // }
 
     $stateProvider
       .state('app', {

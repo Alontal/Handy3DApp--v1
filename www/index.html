@@ -35,7 +35,7 @@
   </head>
 
   <body ng-app="starter">
-    <form ng-controller="LoginCtrl" name="login">
+    <form ng-controller="LoginCtrl" name="login" ng-init="checkForExistingToken()">
 
       <div class="list">
         <label class="item item-input item-floating-label">
