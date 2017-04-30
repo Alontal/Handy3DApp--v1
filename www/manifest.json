@@ -1,11 +1,11 @@
 
 {
-  "name": "My Ionic App",
-  "short_name": "My Ionic App",
+  "name": "Handy3D Mobile",
+  "short_name": "Mobile Application",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
-    "src": "icon.png",
+    "src": "../img/small-logo.png",
     "sizes": "512x512",
     "type": "image/png"
   }]

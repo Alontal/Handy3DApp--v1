@@ -35,19 +35,6 @@
   </head>
 
   <body ng-app="starter">
-    <form ng-controller="LoginCtrl" name="login">
-
-      <div class="list">
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Email</span>
-          <input type="text" ng-model="login.email" placeholder="Email" required>
-            </label>
-        <label class="item item-input item-floating-label">
-              <span class="input-label">Password</span>
-              <input type="password" ng-model="login.password" placeholder="Password" required>
-             </label>
-        <button class="button button-block button-positive" ng-disabled="login.$invalid" ng-click="doLogin()">Log in</button>
-      </div>
-    </form>
+    <ion-nav-view></ion-nav-view>
   </body>
 </html>

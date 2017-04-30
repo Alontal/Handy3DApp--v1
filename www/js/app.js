@@ -28,14 +28,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     //check for existing token in local storage
     function checkToken() {
       token = localStorage.getItem('token')
-    //if not exist then redirect to login 
-      if (token == null) {
-          $urlRouterProvider
-          .otherwise('/app/login');
+      //if not exist then redirect to login 
+      if (token == '') {
+        //$urlRouterProvider
+        //   .otherwise('/app/login');
+        window.location = '../index.html';
       }
-      else{
+      else {
         $urlRouterProvider
-          .otherwise('/app/home');
+         .otherwise('/app/home');
       }
     }
 
@@ -51,7 +52,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         views: {
           'menuContent': {
             templateUrl: 'templates/home.html',
-            //controller: 'homeCtrl'
+            controller: 'HomeCtrl'
           },
         }
       })
@@ -111,5 +112,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/login');
+    $urlRouterProvider.otherwise('/app/home');
+
+    // XXXX need to be uncomment and fix login
+    // $urlRouterProvider.otherwise(function () {
+    //   window.location = '../templates/login.html';
+    // })
   });

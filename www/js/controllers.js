@@ -9,6 +9,25 @@ angular.module('starter.controllers', [])
     //$scope.$on('$ionicView.enter', function(e) {
     //});
 
+    //init user
+    $scope.user = {};
+
+    //settings init
+    $scope.app = {
+       name: 'Handy3D MobileApp',
+       version: '0.0.1',
+      // for chart colors
+        color: {
+          primary: '#7266ba',
+          info: '#23b7e5',
+          success: '#27c24c',
+          warning: '#fad733',
+          danger: '#f05050',
+          light: '#e8eff0',
+          dark: '#3a3f51',
+          black: '#1c2b36'
+      }
+    }
     // Form data for the login modal
     $scope.ModalData = {};
 
@@ -47,20 +66,21 @@ angular.module('starter.controllers', [])
       general: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx',
     }
   })
-  .controller('LoginCtrl', ['$scope', '$http', function ($scope, $http) {
+  
+  .controller('LoginCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
 
-    //$scope.login = {};
 
+    // Login authentication 
     $scope.doLogin = function () {
       var u = {
         Email: $scope.login.email,
         Password: $scope.login.password
       }
-      console.info('trying to login....', u)
+      console.info('Trying to login....', u)
 
       $http({
         method: "GET",
-        url: $scope.links.general + '/LoginAuth',
+        url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/LoginAuth',
         // headers: {
         //   'Content-Type': 'application/json; charset=utf-8',
         //   'Content-Type': 'application/x-www-form-urlencoded'
@@ -69,36 +89,21 @@ angular.module('starter.controllers', [])
           email: u.Email,
           password: u.Password
         }
-
-      }).then(function (res) {
-        console.info('success', res.data)
-      }),
+      })
+        .then(function (res) {
+          $scope.user = res.data;
+          console.info('Success, new user :', $scope.user)
+          saveToken($scope.user.token);
+          //$state.go('app.home');
+          window.location = '../main.html';
+        }),
         function (err) {
           console.log('Something went wrong');
         }
-
     }
+    // .   / Login authentication 
 
-    //   check authentication  
-    //   $http.post($scope.links.general + 'LoginAuth',{params: {u}} )
-    //     .then(function (response) {
-    //       // var data = response.data.d;
-    //       // $scope.user= {
-    //       //   Fname: data.name,
-    //       //   Lname: '',
-    //       //   type: data.type,
-    //       //   desciption: '',
-    //       //   email: $scope.email,
-    //       //   id: ''
-    //       // }
-    //       // console.info('user: ', $scope.user);
-    //     },
-    //     function (err) {
-    //       console.log('failed to load ');
-    //     })
-    // };
-
-
+    //save token to local storage
     function saveToken(token) {
       if (token) {
         localStorage.setItem('token', token)
@@ -125,4 +130,8 @@ angular.module('starter.controllers', [])
   })
 
   .controller('GeneralCtrl', function ($scope, $stateParams) {
+  })
+
+  .controller('HomeCtrl', function ($scope, $stateParams) {
+  $scope.home = 'home :)'
   });
