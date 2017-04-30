@@ -10,7 +10,11 @@ angular.module('starter.controllers', [])
     //});
 
     //init user
-
+      $scope.getUserDetails = function(){
+        $scope.user = JSON.parse( localStorage.getItem('_user'));
+        console.info('Welcome to Handy 3D', $scope.user);
+        // alert('Welcome '+$scope.user.name);
+      }
     //settings init
     $scope.app = {
       user:{
@@ -71,7 +75,7 @@ angular.module('starter.controllers', [])
 
     //check for existing token --> if exist redirect to home 
     $scope.checkForExistingToken = function(){
-      token = localStorage.getItem('token_s$#@')
+      token = localStorage.getItem('_token_s$#@')
       //if exist redirect to main 
       console.log('token is: ',token);
       if ( token != null ){
@@ -102,7 +106,8 @@ angular.module('starter.controllers', [])
       })
         .then(function (res) {
           $scope.user = res.data;
-          console.info('Success, Hi mr/ms :', $scope.user)
+          console.info('Success, Hi mr/ms :', $scope.user);
+          localStorage.setItem('_user', JSON.stringify($scope.user) );
           saveToken($scope.user.token);
           //$state.go('app.home');
           window.location = 'main.html';
@@ -116,7 +121,7 @@ angular.module('starter.controllers', [])
     //save token to local storage
     function saveToken(token) {
       if (token) {
-        localStorage.setItem('token_s$#@', token)
+        localStorage.setItem('_token_s$#@', token)
       }
     }
 
