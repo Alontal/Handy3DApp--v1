@@ -72,19 +72,15 @@ angular.module('starter.controllers', [])
 
     //check for existing token --> if exist redirect to home 
       
-    //check for existing token in local storage
     $scope.checkForExistingToken = function(){
-      token = localStorage.getItem('token')
-      //if not exist then redirect to login S
+      token = localStorage.getItem('token_s$#@')
+      //if exist redirect to main 
       console.log('token is: ',token);
       if ( token != null ){
         window.location = 'main.html';
       }
-
-        // $urlRouterProvider
-        //  .otherwise('/app/home');
-      
     }
+    // .  /check for existing token in local storage
 
     // Login authentication 
     $scope.doLogin = function () {
@@ -93,14 +89,14 @@ angular.module('starter.controllers', [])
         Password: $scope.login.password
       }
       console.info('Trying to login....', u)
-
+      // http get user by password & email  
       $http({
         method: "GET",
         url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/LoginAuth',
-        // headers: {
-        //   'Content-Type': 'application/json; charset=utf-8',
-        //   'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
         params: {
           email: u.Email,
           password: u.Password
@@ -108,7 +104,7 @@ angular.module('starter.controllers', [])
       })
         .then(function (res) {
           $scope.user = res.data;
-          console.info('Success, new user :', $scope.user)
+          console.info('Success, Hi mr/ms :', $scope.user)
           saveToken($scope.user.token);
           //$state.go('app.home');
           window.location = 'main.html';
@@ -122,9 +118,10 @@ angular.module('starter.controllers', [])
     //save token to local storage
     function saveToken(token) {
       if (token) {
-        localStorage.setItem('token', token)
+        localStorage.setItem('token_s$#@', token)
       }
     }
+
   }])
 
   .controller('PlaylistsCtrl', function ($scope) {
