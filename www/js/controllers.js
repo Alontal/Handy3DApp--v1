@@ -62,7 +62,6 @@ angular.module('starter.controllers', [])
 
 
     //links 
-
     $scope.links = {
       general: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx',
     }
@@ -71,7 +70,6 @@ angular.module('starter.controllers', [])
   .controller('LoginCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
 
     //check for existing token --> if exist redirect to home 
-      
     $scope.checkForExistingToken = function(){
       token = localStorage.getItem('token_s$#@')
       //if exist redirect to main 

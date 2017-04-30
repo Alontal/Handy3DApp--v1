@@ -97,10 +97,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       });
 
     // if none of the above states are matched, use this as the fallback
-    // $urlRouterProvider.otherwise('/app/home');
+     $urlRouterProvider.otherwise('/app/home');
 
     // fall back when insert incorrect address >> fallback to index.html
-    $urlRouterProvider.otherwise(function () {
-      window.location = 'index.html';
-    })
+    //$urlRouterProvider.otherwise(function () {
+     // window.location = 'index.html';
+    //})
   });
