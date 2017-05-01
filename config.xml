@@ -73,4 +73,5 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <plugin name="cordova-plugin-device" spec="~1.1.5" />
+    <plugin name="cordova-plugin-camera" spec="~2.4.0" />
 </widget>
