@@ -1,6 +1,48 @@
 <ion-view view-title="Camera">
-  <ion-content >
-    <h1> {{camera}}</h1>
+    <ion-content >
 
-  </ion-content>
+        <ion-scroll>
+            <div style="height:350px;width:400px; display:block">
+                <img ng-repeat="image in images" ng-src="{{image}}" style="height:350px;width:400px; display:block" />
+            </div>
+
+        </ion-scroll>
+
+        <button class="button button-calm" ng-click="addImage()">Take Photo</button>
+
+        <button class="button button-calm" ng-click="">Upload Photo</button>
+
+        <input type="text" class="item item-input" ng-model="m.title" placeholder="Add a title" />
+
+        <table>
+            <tr>
+                <td>   Patient Name  </td>
+                <td>   Tags </td>
+                <td>   Type</td>
+            </tr>
+            <tr>
+                <td>
+                    <select ng-model="m.pname">
+                        <option selected>Option 1</option>
+                        <option>Option 2</option>
+                    </select>
+                </td>
+                <td>
+                    <select ng-model="m.tags">
+                        <option selected>Option 1</option>
+                        <option>Option 2</option>
+                    </select>
+                </td>
+                <td>
+                    <select ng-model="m.type">
+                        <option selected>Option 1</option>
+                        <option>Option 2</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <input type="text" class="item item-input" ng-model="m.desc" placeholder="Add a title" />
+
+        <button class="button button-calm" ng-click="">Upload Photo</button>
+    </ion-content>
 </ion-view>

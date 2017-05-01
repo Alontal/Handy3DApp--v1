@@ -1,5 +1,23 @@
-<ion-view view-title="Browse">
-  <ion-content>
-    <h1>Browse</h1>
-  </ion-content>
+<ion-view view-title="Browse Gallery" ng-controller="GalleryCtrl" ng-init="getPic()">
+
+    <ion-pane>
+        <ion-header-bar class="bar-stable">
+            <h1 class="title">Devdactic Image Gallery</h1>
+        </ion-header-bar>
+        <ion-content class="has-header padding" >
+            <br><br>
+
+            <div class="item item-divider">
+                <i class="ion-images"></i>
+                All Images
+            </div>
+
+            <a class="item item-list-detail">
+                <ion-scroll direction="x">
+                    <img ng-repeat="image in allImages" ng-src="{{image.URL}}" ng-click="showImages($index)" class="image-list-thumb" />{{image.title}}
+                </ion-scroll>
+            </a>
+
+        </ion-content>
+    </ion-pane>
 </ion-view>
