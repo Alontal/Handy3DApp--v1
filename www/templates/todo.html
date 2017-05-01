@@ -20,32 +20,31 @@
             <div>
 
             </div>
-            <div class="list" ng-show="todos.length">
+            <div class="" ng-show="todos.length"> 
                 <ion-list show-delete="false" can-swipe="true">
                     <ion-item class="item item-toggle" ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
-                        {{todo.title}}
+                        <ion-option-button class="button-light icon ion-heart"></ion-option-button>
+                        <ion-option-button ng-dblclick="editTodo(todo)" class="enable-pointer-events button-light icon ion-edit"></ion-option-button>
+                        <ion-option-button ng-click="removeTodo(todo)" class="enable-pointer-events button-assertive icon ion-trash-a"></ion-option-button>
                         <label class="toggle toggle-balanced">
                             <input type="checkbox" ng-model="todo.completed" ng-change="todoCompleted(todo)">
                             <div class="track">
                                 <div class="handle"></div>
                             </div>
-                            </label>
-                        <ion-option-button class="button-light icon ion-heart"></ion-option-button>
-                        <ion-option-button  ng-dblclick="editTodo(todo)" class="button-light icon ion-edit"></ion-option-button>
-                        <ion-option-button on-touch="removeTodo(todo)" class="button-assertive icon ion-trash-a"></ion-option-button>
-                  
+                        </label> {{todo.title}}
+
                     </ion-item>
 
                 </ion-list>
 
- 
+
             </div>
             <div ng-show="todos.length" class="">
                 <div class="col-6 list">
                     <label class="toggle toggle-balanced">
-        <ion-checkbox class="" type="" ng-model="allChecked" ng-click="markAll(allChecked)">
-        Mark all as complete</ion-checkbox>
-      </label>
+                    <ion-checkbox class="" type="" ng-model="allChecked" ng-click="markAll(allChecked)">
+                    Mark all as complete</ion-checkbox>
+                </label>
                 </div>
                 <div class="col-4">
                     <button class="button button-outline button-positive" ng-click="clearCompletedTodos()" ng-show="remainingCount < todos.length">Clear completed ({{todos.length - remainingCount}})</button>
@@ -75,7 +74,7 @@
     </ion-content>
 </ion-view>
 
-               <!--<ul class="list-group">
+<!--<ul class="list-group">
       <li ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}" class="list-group-item">
         
         <div class="hover-anchor" ng-dblclick="editTodo(todo)" ng-hide="todo.editedTodo">

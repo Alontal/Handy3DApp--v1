@@ -124,7 +124,7 @@ angular.module('starter.controllers', [])
       function saveToken(token) {
           if (token) {
               localStorage.setItem('_token_s$#@', token)
-          }
+            }
       }
 
   }])
@@ -334,7 +334,7 @@ angular.module('starter.controllers', [])
           todos[todos.indexOf(todo)] = $scope.originalTodo;
           $scope.doneEditing($scope.originalTodo);
       };
-
+      
       $scope.removeTodo = function (todo) {
           $scope.remainingCount -= todo.completed ? 0 : 1;
           todos.splice(todos.indexOf(todo), 1);
