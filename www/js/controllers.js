@@ -115,7 +115,7 @@ angular.module('starter.controllers', [])
           window.location = 'main.html';
         }),
         function (err) {
-          console.error('Something went wrong');
+          console.log('Something went wrong');
         }
     }
     // .   / Login authentication 
