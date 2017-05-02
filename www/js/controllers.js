@@ -9,7 +9,12 @@ angular.module('starter.controllers', [])
       // listen for the $ionicView.enter event:
       //$scope.$on('$ionicView.enter', function(e) {
       //});
-
+      
+      // Sign out func
+      $scope.signOut   = function(){
+        localStorage.clear();
+        window.location = 'index.html';
+      }
 
       //init user
       $scope.getUserDetails = function () {
@@ -45,22 +50,22 @@ angular.module('starter.controllers', [])
           $scope.modal = modal;
       });
 
-      // Triggered in the login modal to close it
+      // Triggered in the  modal to close it
       $scope.closeModal = function () {
           $scope.modal.hide();
       };
 
-      // Open the login modal
+      // Open the  modal
       $scope.Modal = function () {
           $scope.modal.show();
       };
 
-      // Perform the login action when the user submits the login form
+      // Perform the  action when the user submits the login form
       $scope.doModalLogic = function () {
           console.log('Doing Modal', $scope.loginData);
 
-          // Simulate a login delay. Remove this and replace with your login
-          // code if using a login system
+          // Simulate a  delay.MODAL  Remove this and replace with your login
+          // code if using a modAL system
           $timeout(function () {
               $scope.closeModal();
           }, 1000);
@@ -85,6 +90,8 @@ angular.module('starter.controllers', [])
           }
       }
       // .  /check for existing token in local storage
+      
+     
 
       // Login authentication 
       $scope.doLogin = function () {

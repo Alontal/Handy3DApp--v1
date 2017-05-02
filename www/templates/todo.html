@@ -20,7 +20,7 @@
             <div>
 
             </div>
-            <div class="" ng-show="todos.length"> 
+            <div class="" ng-show="todos.length">
                 <ion-list show-delete="false" can-swipe="true">
                     <ion-item class="item item-toggle" ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
                         <ion-option-button class="button-light icon ion-heart"></ion-option-button>
@@ -32,7 +32,9 @@
                                 <div class="handle"></div>
                             </div>
                         </label> {{todo.title}}
-
+                        <form ng-submit="doneEditing(todo)" ng-show="todo.editedTodo">
+                            <input class="checkbox enable-pointer-events" ng-trim="false" ng-model="todo.title" ng-blur="doneEditing(todo)" ui-focus="todo.editedTodo">
+                        </form>
                     </ion-item>
 
                 </ion-list>
