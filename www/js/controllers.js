@@ -1,3 +1,4 @@
+
 angular.module('starter.controllers', [])
 
 
@@ -160,6 +161,7 @@ angular.module('starter.controllers', [])
   .controller('PlaylistCtrl', function ($scope, $stateParams) {
   })
 
+<<<<<<< HEAD
   //Camera controller
   .controller('cameraCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaFile', '$ionicBackdrop', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicScrollDelegate',
     function ($scope, $stateParams, $cordovaCamera, $cordovaFile, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
@@ -171,6 +173,118 @@ angular.module('starter.controllers', [])
           console.info(fileUri);
           console.info($scope.images[0])
           localStorage.setItem('images_array', $scope.images);
+=======
+    //Camera controller
+        .controller('cameraCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaFile', '$ionicBackdrop', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicScrollDelegate','$http',
+           
+
+            function ($scope, $stateParams, $cordovaCamera, $cordovaFile, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate, $http) {
+                $scope.images = [];
+                $scope.imageUrl = '';
+                var imgUrl;
+                //Open Camera and dispaly photo
+                $scope.addImage = function () {
+                    navigator.camera.getPicture(function (fileUri) {
+                        $scope.images.push(fileUri);
+                        $scope.imageUrl = fileUri;
+                        imgUrl = fileUri;
+                        console.info(fileUri);
+                        //console.info($scope.images[0])
+                        localStorage.setItem('images_array', imgUrl);
+                    }
+                    )
+                }
+
+                var _URL = window.URL || window.webkitURL;
+                $("#myUploadedImg").on('change', function () {
+                    alert("here 1")
+                    console.log("here")
+                    var file, img;
+                    if ((file = this.files[0])) {
+                        img = new Image();
+                        alert(file)
+                        img.onload = function () {
+                            //sendFile(file);
+                        };
+                        img.onerror = function () {
+                            alert("Not a valid file:" + file.type);
+                        };
+                        $scope.temp_file = file;
+                        alert(file)
+                        img.src = _URL.createObjectURL(file);
+                    }
+                });
+
+
+
+                // function for Uploading Images
+                $scope.UploadImages = function () {
+                    var imgData = document.getElementById('myUploadedImg');
+                    alert("in")
+                    //var file = $('#myUploadedImg')
+                    //alert("here")
+                    //console.log(file)
+                    //console.log($('#myUploadedImg'))
+                    //console.info(imgData)
+                    //console.log("this is img " + imgData)
+                    //var file = $scope.temp_file;
+                    //alert("this is the URL: " + imgData)
+                    
+                    var file = imgData;
+                    console.log(file)
+                    var formData = new FormData();
+                    formData = file;
+                    alert(formData)
+                    console.log(formData)
+                    $.ajax({
+                        type: 'post',
+                        url: 'http://localhost:57943/ModelHandler.ashx',
+                        data: formData,
+                        success: function (status) {
+                            console.log('on success')
+                            if (status != 'error') {
+                                alert(status);
+                                var my_path = "img/" + status;
+                                //$("#myUploadedImg").attr("src", my_path);
+                                alert(my_path)
+
+                                $http.post($scope.links.webservice_general_adrs + "uploadmeadiatodb", { desc: 'sdasda', url: my_path, client: '33333', user: '1' })
+                                    .then(function (response) {
+                                        alert('yes yes');
+                                    }, function (err) {
+                                        console.error("db error: ", err);
+                                        alert('no no');
+                                    })
+
+                            }
+                        },
+                        processData: false,
+                        contentType: false,
+                        error: function () {
+                            alert("Whoops something went wrong!");
+                        }
+                    })}
+                ;
+
+                }
+            ])
+
+
+
+
+
+
+
+
+
+    //Photo Gallery
+.controller('GalleryCtrl', function ($scope, $http, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
+    // http request to get all images in DB
+    $scope.getPic = function () {
+        $http({
+            method: "GET",
+            url: 'http://localhost:57943/GeneralService.asmx/LoadPic'
+>>>>>>> 90797162157946992bfa3a124fdf2b66acfb07f5
         }
         )
       }
