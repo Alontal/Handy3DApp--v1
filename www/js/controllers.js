@@ -161,19 +161,6 @@ angular.module('starter.controllers', [])
   .controller('PlaylistCtrl', function ($scope, $stateParams) {
   })
 
-<<<<<<< HEAD
-  //Camera controller
-  .controller('cameraCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaFile', '$ionicBackdrop', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicScrollDelegate',
-    function ($scope, $stateParams, $cordovaCamera, $cordovaFile, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
-      $scope.images = [];
-      //Open Camera and dispaly photo
-      $scope.addImage = function () {
-        navigator.camera.getPicture(function (fileUri) {
-          $scope.images.push(fileUri);
-          console.info(fileUri);
-          console.info($scope.images[0])
-          localStorage.setItem('images_array', $scope.images);
-=======
     //Camera controller
         .controller('cameraCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaFile', '$ionicBackdrop', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicScrollDelegate','$http',
            
@@ -268,33 +255,6 @@ angular.module('starter.controllers', [])
 
                 }
             ])
-
-
-
-
-
-
-
-
-
-    //Photo Gallery
-.controller('GalleryCtrl', function ($scope, $http, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
-    // http request to get all images in DB
-    $scope.getPic = function () {
-        $http({
-            method: "GET",
-            url: 'http://localhost:57943/GeneralService.asmx/LoadPic'
->>>>>>> 90797162157946992bfa3a124fdf2b66acfb07f5
-        }
-        )
-      }
-      //function for Uploading Images
-      $scope.UploadImages = function () {
-
-      }
-      // function to delete Image Taken from XXX
-
-    }])
 
   //Photo Gallery
   .controller('GalleryCtrl', function ($scope, $http, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
