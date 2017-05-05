@@ -1,6 +1,27 @@
-<ion-view view-title="Notification Detail">
+<ion-view view-title="{{notification.notification.title}} Detail">
   <ion-content>
-    <h1>{{itemsId.notificationId }}</h1>
+    <!--<h1>{{notification.notification.title}}</h1>-->
+    <pre>
+      <code> 
+        id: {{notification.notification.id}}
+        title: {{notification.notification.title}}
+        description: {{notification.notification.description}}
+        createdBy: {{notification.notification.createdBy}}
+        status: {{notification.notification.status}}
+        teamId: {{notification.notification.teamId}}
+        meetingId: {{notification.notification.meetingId}}
+        clientId: {{notification.notification.clientId}}
+        model_Id: {{notification.notification.model_Id}}
+        field1: {{notification.notification.field1}}
+        Client: {{notification.notification.clientId}}
+        User: {{notification.notification.User}}
+        Meeting: {{notification.notification.Meeting}}
+        Model: {{notification.notification.Model}}
+        PrivacyStatus: {{notification.notification.PrivacyStatus}}
+        Team: {{notification.notification.Team}}
+       </code>
+    </pre>
+
   </ion-content>
 
 </ion-view>

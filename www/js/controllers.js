@@ -147,26 +147,62 @@ angular.module('starter.controllers', [])
 
   }])
 
-  .controller('NotificationsCtrl', function ($scope) {
-    $scope.notifications = [
-      { title: 'Reggae', id: 1 },
-      { title: 'Chill', id: 2 },
-      { title: 'Dubstep', id: 3 },
-      { title: 'Indie', id: 4 },
-      { title: 'Rap', id: 5 },
-      { title: 'Cowbell', id: 6 }
-    ];
+  .controller('NotificationsCtrl', function ($scope, $http,$state) {
+    $http({
+      method: "GET",
+      url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getNotificationsById',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      params: {
+        // userId: $scope.user.id
+        userId: 1
+      }
+    })
+      .then(function (res) {
+        $scope.notifications = res.data;
+        console.log('Notifications fetched', JSON.stringify($scope.todos));
+      }),
+      function (err) {
+        console.error('Notifications -get Something went wrong');
+      }
+
+    $scope.storeItem = function (notification) {
+      console.info('item: ', notification);
+      $state.go('app.Notification', {notification} );
+    }
+    // $scope.notifications = [
+    // {
+    //   "id": 1,
+    //   "title": "1",
+    //   "description": "1",
+    //   "createdBy": 3,
+    //   "status": 1,
+    //   "teamId": null,
+    //   "meetingId": 1,
+    //   "clientId": 1,
+    //   "model_Id": null,
+    //   "field1": null,
+    //   "Client": null,
+    //   "User": null,
+    //   "Meeting": null,
+    //   "Model": null,
+    //   "PrivacyStatus": null,
+    //   "Team": null
+    // },
+    // {
+    // }]
+
   })
 
   .controller('NotificationCtrl', function ($scope, $stateParams) {
-
-    $scope.itemsId = $stateParams;
-    console.info('stateparams: ', $scope.itemsId);
+    $scope.notification = $stateParams;
+    console.info('notifications: ',$scope.notification );
   })
 
   //Camera controller
   .controller('cameraCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaFile', '$ionicBackdrop', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$http',
-
 
     function ($scope, $stateParams, $cordovaCamera, $cordovaFile, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate, $http) {
       $scope.images = [];
@@ -366,12 +402,12 @@ angular.module('starter.controllers', [])
             'Content-Type': 'application/x-www-form-urlencoded'
           },
           params: {
-            todos:  todos
+            todos: todos
           }
         })
           .then(function (res) {
 
-            console.info('returned from server: ',res.data);
+            console.info('returned from server: ', res.data);
           }),
           function (err) {
             console.error('Todo -put  Something went wrong');
@@ -397,7 +433,7 @@ angular.module('starter.controllers', [])
     })
       .then(function (res) {
         $scope.todos = res.data;
-        console.log(' recived', JSON.stringify($scope.todos));
+        console.log(' todos fetched', JSON.stringify($scope.todos));
       }),
       function (err) {
         console.error('Todo -get Something went wrong');
@@ -432,11 +468,11 @@ angular.module('starter.controllers', [])
 
       todos.push({
         title: newTodo,
-	    	userID: $scope.user.id,
+        userID: $scope.user.id,
         privacyStatus: 2,
         PrivacyStatus1: null,
         completed: false,
-        User : null
+        User: null
       });
       todoStorage.put(todos);
 

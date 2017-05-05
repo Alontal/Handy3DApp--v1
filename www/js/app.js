@@ -98,16 +98,29 @@ var app = angular.module('starter', ['ionic' ,'starter.controllers','ngCordova']
           }
         }
       })
-
-      .state('app.single', {
-        url: '/notifications/:notificationId',
+       .state('app.Notification', {
+        url: '/notification',
+        params:{
+          notification: null
+        },
         views: {
           'menuContent': {
             templateUrl: 'templates/notification.html',
             controller: 'NotificationCtrl'
           }
         }
-      });
+      })
+
+      // .state('app.single', {
+      //   url: '/notifications/:notificationId',
+      //   views: {
+      //     'menuContent': {
+      //       templateUrl: 'templates/notification.html',
+      //       controller: 'NotificationCtrl'
+      //     }
+      //   }
+      // })
+      ;
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/home');
