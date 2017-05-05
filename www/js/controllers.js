@@ -96,7 +96,7 @@ angular.module('starter.controllers', [])
 
     // Login authentication 
     $scope.doLogin = function () {
-      
+      $scope.degub;
       var u = {
         Email: $scope.login.email,
         Password: $scope.login.password
@@ -117,6 +117,7 @@ angular.module('starter.controllers', [])
       })
         .then(function (res) {
           $scope.user = res.data;
+          $scope.degub= res.data;
           console.log(res.data);
           if ($scope.user == '0') {
             console.error('Wrong user name or password, try again');
