@@ -96,7 +96,6 @@ angular.module('starter.controllers', [])
 
     // Login authentication 
     $scope.doLogin = function () {
-            window.location = 'main.html';
       
       var u = {
         Email: $scope.login.email,
