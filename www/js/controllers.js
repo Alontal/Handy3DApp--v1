@@ -147,7 +147,7 @@ angular.module('starter.controllers', [])
 
   }])
 
-  .controller('NotificationsCtrl', function ($scope, $http,$state) {
+  .controller('NotificationsCtrl', function ($scope, $http, $state) {
     $http({
       method: "GET",
       url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getNotificationsById',
@@ -170,7 +170,7 @@ angular.module('starter.controllers', [])
 
     $scope.storeItem = function (notification) {
       console.info('item: ', notification);
-      $state.go('app.Notification', {notification} );
+      $state.go('app.Notification', { notification });
     }
     // $scope.notifications = [
     // {
@@ -198,11 +198,12 @@ angular.module('starter.controllers', [])
 
   .controller('NotificationCtrl', function ($scope, $stateParams) {
     $scope.notification = $stateParams;
-    console.info('notifications: ',$scope.notification );
+    console.info('notifications: ', $scope.notification);
   })
 
   //Camera controller
   .controller('cameraCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaFile', '$ionicBackdrop', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$http',
+
 
     function ($scope, $stateParams, $cordovaCamera, $cordovaFile, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate, $http) {
       $scope.images = [];
@@ -217,84 +218,38 @@ angular.module('starter.controllers', [])
           console.info(fileUri);
           //console.info($scope.images[0])
           localStorage.setItem('images_array', imgUrl);
+          $('#myImage2').attr("src", fileUri);
         }
         )
       }
 
-      var _URL = window.URL || window.webkitURL;
-      $("#myUploadedImg").on('change', function () {
-        alert("here 1")
-        console.log("here")
-        var file, img;
-        if ((file = this.files[0])) {
-          img = new Image();
-          alert(file)
-          img.onload = function () {
-            //sendFile(file);
-          };
-          img.onerror = function () {
-            alert("Not a valid file:" + file.type);
-          };
-          $scope.temp_file = file;
-          alert(file)
-          img.src = _URL.createObjectURL(file);
-        }
-      });
-
-
-
-      // function for Uploading Images
+      //  function for Uploading Images
       $scope.UploadImages = function () {
-        var imgData = document.getElementById('myUploadedImg');
-        alert("in")
-        //var file = $('#myUploadedImg')
-        //alert("here")
-        //console.log(file)
-        //console.log($('#myUploadedImg'))
-        //console.info(imgData)
-        //console.log("this is img " + imgData)
-        //var file = $scope.temp_file;
-        //alert("this is the URL: " + imgData)
+        alert($scope.imageUrl)
+        //   Load(); // Start the spinning "working" animation
+        var options = new FileUploadOptions(); // PhoneGap object to allow server upload
+        options.fileKey = "file";
+        options.fileName = "pic4"; // file name
+        options.mimeType = "image/jpeg"; // file type
+        var params = {}; // Optional parameters
+        params.value1 = "test";
+        params.value2 = "param";
 
-        var file = imgData;
-        console.log(file)
-        var formData = new FormData();
-        formData = file;
-        alert(formData)
-        console.log(formData)
-        $.ajax({
-          type: 'post',
-          url: 'http://localhost:57943/ModelHandler.ashx',
-          data: formData,
-          success: function (status) {
-            console.log('on success')
-            if (status != 'error') {
-              alert(status);
-              var my_path = "img/" + status;
-              //$("#myUploadedImg").attr("src", my_path);
-              alert(my_path)
+        options.params = params; // add parameters to the FileUploadOptions object
+        var ft = new FileTransfer();
+        ft.upload($scope.imageUrl, encodeURI("http://proj.ruppin.ac.il/bgroup48/prod/MediaAppHandler.ashx"), win, fail, options); // Upload
+      } // Upload Photo
 
-              $http.post($scope.links.webservice_general_adrs + "uploadmeadiatodb", { desc: 'sdasda', url: my_path, client: '33333', user: '1' })
-                .then(function (response) {
-                  alert('yes yes');
-                }, function (err) {
-                  console.error("db error: ", err);
-                  alert('no no');
-                })
-
-            }
-          },
-          processData: false,
-          contentType: false,
-          error: function () {
-            alert("Whoops something went wrong!");
-          }
-        })
+      function win(r) {
+        var path = r.response;
+        alert('Image Uploaded');
       }
-        ;
-
+      function fail(error) {
+        alert("An error has occurred: Code = " + error);
+      }
     }
   ])
+
 
   //Photo Gallery
   .controller('GalleryCtrl', function ($scope, $http, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {

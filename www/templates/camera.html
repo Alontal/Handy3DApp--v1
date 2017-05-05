@@ -3,14 +3,14 @@
 
         <ion-scroll>
             <div style="height:350px;width:400px; display:block">
-                <img id="myUploadedImg" ng-repeat="image in images" ng-src="{{image}}" style="height:350px;width:400px; display:block" />
+                <img id="myImage2"  style="height:350px;width:400px; display:block" />
             </div>
 
         </ion-scroll>
 
-        <input type="file" accept="image/*" capture="camera" class="button button-calm" ng-click="addImage()">Take Photo
+        <button  class="button button-calm" ng-click="addImage()">Take Photo</button>
 
-        <input  id="uploadimg"  class="button button-calm enable-pointer-events" ng-click="UploadImages()">Upload Photo
+        <button  id="uploadimg"  class="button button-calm enable-pointer-events" ng-click="UploadImages()">Upload Photo</button>
 
         <button id="test1" class="button button-calm enable-pointer-events" >test</button>
 
