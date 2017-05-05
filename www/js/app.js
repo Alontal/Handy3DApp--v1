@@ -89,22 +89,22 @@ var app = angular.module('starter', ['ionic' ,'starter.controllers','ngCordova']
           }
         }
       })
-      .state('app.playlists', {
-        url: '/playlists',
+      .state('app.Notifications', {
+        url: '/notifications',
         views: {
           'menuContent': {
-            templateUrl: 'templates/playlists.html',
-            controller: 'PlaylistsCtrl'
+            templateUrl: 'templates/notifications.html',
+            controller: 'NotificationsCtrl'
           }
         }
       })
 
       .state('app.single', {
-        url: '/playlists/:playlistId',
+        url: '/notifications/:notificationId',
         views: {
           'menuContent': {
-            templateUrl: 'templates/playlist.html',
-            controller: 'PlaylistCtrl'
+            templateUrl: 'templates/notification.html',
+            controller: 'NotificationCtrl'
           }
         }
       });
