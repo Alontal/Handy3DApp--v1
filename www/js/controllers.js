@@ -258,7 +258,7 @@ angular.module('starter.controllers', [])
     $scope.getPic = function () {
       $http({
         method: "GET",
-        url: 'http://localhost:57943/GeneralService.asmx/LoadPic'
+        url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/LoadPic'
       }
       )
         .then(function (res) {
