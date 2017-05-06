@@ -10,35 +10,35 @@
 
         <button  class="button button-calm" ng-click="addImage()">Take Photo</button>
 
-        <button  id="uploadimg"  class="button button-calm enable-pointer-events" ng-click="UploadImages()">Upload Photo</button>
+        <button  id="uploadimg"  class="button button-calm enable-pointer-events" ng-click="UploadImages(m)">Upload Photo</button>
 
-        <button id="test1" class="button button-calm enable-pointer-events" >test</button>
+        <button id="test1" class="button button-calm enable-pointer-events"   >test</button>
 
         <input type="text" class="item item-input" ng-model="m.title" placeholder="Add a title" />
 
         <table>
             <tr>
                 <td>   Patient Name  </td>
-                <td>   Tags </td>
+                <!--<td>   Tags </td>-->
                 <td>   Meeting Number</td>
             </tr>
             <tr>
                 <td>
-                    <select ng-model="m.pname">
+                    <select ng-model="m.c_id"  ng-true-value="true" ng-change="getMettings(m.c_id)">
                         <option >Choose Client</option>
-                        <option ng-repeat="c in clientList" value="{{c.id}}" ng-change="getmeetings()" >{{c.name}} </option>
+                        <option ng-repeat="c in clientList" value="{{c.ClientID}}" >{{c.Name}} </option>
                     </select>
                 </td>
-                <td>
+                <!--<td>
                     <select ng-model="m.tags">
                         <option selected>Option 1</option>
                         <option>Option 2</option>
                     </select>
-                </td>
+                </td>-->
                 <td>
                     <select ng-model="m.meetingNum">
                         <option >select meeting number</option>
-                        <option *ngfor=""></option>
+                        <option ng-repeat="c in meetinglist" value="{{c}}">{{c}} </option>
                     </select>
                 </td>
             </tr>
