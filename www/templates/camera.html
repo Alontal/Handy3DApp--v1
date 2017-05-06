@@ -20,13 +20,13 @@
             <tr>
                 <td>   Patient Name  </td>
                 <td>   Tags </td>
-                <td>   Type</td>
+                <td>   Meeting Number</td>
             </tr>
             <tr>
                 <td>
                     <select ng-model="m.pname">
-                        <option selected>Option 1</option>
-                        <option>Option 2</option>
+                        <option >Choose Client</option>
+                        <option ng-repeat="c in clientList" value="{{c.id}}">{{c.name}}</option>
                     </select>
                 </td>
                 <td>
@@ -36,15 +36,14 @@
                     </select>
                 </td>
                 <td>
-                    <select ng-model="m.type">
-                        <option selected>Option 1</option>
+                    <select ng-model="m.meetingNum">
+                        <option >Option 1</option>
                         <option>Option 2</option>
                     </select>
                 </td>
             </tr>
         </table>
-        <input type="text" class="item item-input" ng-model="m.desc" placeholder="Add a title" />
+        <input type="text" class="item item-input" ng-model="m.desc" placeholder="Add a Description" />
 
-        <button class="button button-calm" ng-click="">Upload Photo</button>
     </ion-content>
 </ion-view>
