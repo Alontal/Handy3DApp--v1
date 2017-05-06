@@ -1,5 +1,34 @@
 <ion-view view-title="teams">
-  <ion-content>
-    <h1></h1>
-  </ion-content>
+    <ion-content>
+        <h1></h1>
+        <!--{{my_teams}}-->
+
+
+        <ion-list>
+
+            <div class="list">
+                <ion-item ng-repeat="team in my_teams" ng-click=goToTeamDetails(team) class="item item-thumbnail-left">
+                    <!--href="#/{{team.id}}"-->
+                    <img ng-src="{{ team.image }}">
+                    <h2 class="">{{ team.team_name }}</h2>
+                    <div class="row">
+                        <h4>Teams members:</h4>
+                    </div>
+                    <div class="row">
+                        <p>{{ team.team_leader}} , {{team.physiotherapist}}</p>
+                    </div>
+                    <div class="row">
+                        <p>{{ team.technician}} , {{team.designer}}</p>
+                    </div>
+            </ion-item>
+            </div>
+        </ion-list>
+
+    </ion-content>
 </ion-view>
+<!--"id": "1",
+            "team_name": "ben berech",
+            "team_leader": "Ronen",
+            "physiotherapist": "Alon",
+            "technician": "Alon",
+            "designer": "Ronen"-->
