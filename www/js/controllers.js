@@ -352,7 +352,7 @@ angular.module('starter.controllers', [])
         }
     }
   ])
-ve
+
 
   //Photo Gallery
   .controller('GalleryCtrl', function ($scope, $http, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
