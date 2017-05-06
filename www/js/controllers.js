@@ -216,47 +216,94 @@ angular.module('starter.controllers', [])
 
 
     function ($scope, $stateParams, $cordovaCamera, $cordovaFile, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate, $http) {
-      $scope.images = [];
-      $scope.imageUrl = '';
-      var imgUrl;
-      //Open Camera and dispaly photo
-      $scope.addImage = function () {
-        navigator.camera.getPicture(function (fileUri) {
-          $scope.images.push(fileUri);
-          $scope.imageUrl = fileUri;
-          imgUrl = fileUri;
-          console.info(fileUri);
-          //console.info($scope.images[0])
-          localStorage.setItem('images_array', imgUrl);
-          $('#myImage2').attr("src", fileUri);
+        $scope.images = [];
+        $scope.imageUrl = '';
+        $scope.clientList=[];
+        var imgUrl;
+
+       
+
+        //Open Camera and dispaly photo
+        $scope.addImage = function () {
+            navigator.camera.getPicture(function (fileUri) {
+                $scope.images.push(fileUri);
+                $scope.imageUrl = fileUri;
+                imgUrl = fileUri;
+                console.info(fileUri);
+                //console.info($scope.images[0])
+                localStorage.setItem('images_array', imgUrl);
+                $('#myImage2').attr("src", fileUri);
+            }
+            )
         }
-        )
-      }
 
-      //  function for Uploading Images
-      $scope.UploadImages = function () {
-        alert($scope.imageUrl)
-        //   Load(); // Start the spinning "working" animation
-        var options = new FileUploadOptions(); // PhoneGap object to allow server upload
-        options.fileKey = "file";
-        options.fileName = "pic4"; // file name
-        options.mimeType = "image/jpeg"; // file type
-        var params = {}; // Optional parameters
-        params.value1 = "test";
-        params.value2 = "param";
+        //load client list per teams?!
+        $http({
+            method: "GET",
+            url : 'http://localhost:57943/ApplicationGeneralService.asmx/getUserClients',
+            params:{
+                userId : $scope.user.id
+            }
+        })
+            .then(function (response){
+                $scope.clientList = response;        
+            })
 
-        options.params = params; // add parameters to the FileUploadOptions object
-        var ft = new FileTransfer();
-        ft.upload($scope.imageUrl, encodeURI("http://proj.ruppin.ac.il/bgroup48/prod/MediaAppHandler.ashx"), win, fail, options); // Upload
-      } // Upload Photo
 
-      function win(r) {
-        var path = r.response;
-        alert('Image Uploaded');
-      }
-      function fail(error) {
-        alert("An error has occurred: Code = " + error);
-      }
+        //get meetings number per clients here!
+
+
+
+        //  function for Uploading Images
+        $scope.UploadImages = function () {
+            alert($scope.imageUrl)
+            //   Load(); // Start the spinning "working" animation
+            var options = new FileUploadOptions(); // PhoneGap object to allow server upload
+            options.fileKey = "file";
+            options.fileName = "pic4"; // file name
+            options.mimeType = "image/jpeg"; // file type
+            var params = {}; // Optional parameters
+            params.value1 = "test";
+            params.value2 = "param";
+
+            options.params = params; // add parameters to the FileUploadOptions object
+            var ft = new FileTransfer();
+            ft.upload($scope.imageUrl, encodeURI("http://proj.ruppin.ac.il/bgroup48/prod/MediaAppHandler.ashx"), win, fail, options); // Upload
+        } // Upload Photo
+
+        function win(r) {
+            var path = r.response;
+            var savePath = "http://proj.ruppin.ac.il/bgroup48/prod" + path
+            alert('Image Uploaded and save in :' + savePath);
+
+
+            // save to pic to DB
+            $http({
+                method: "GET",
+                url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SavePicToDB',
+                params: {
+                    title: ,
+                    mediaDesc:,
+                    url:,
+                    meetingNum:,
+                    clientId ,
+                    userId: $scope.user.id,
+
+                }
+            }
+              )
+         .then(function (res) {
+             $scope.allImages = res.data;
+
+             console.info('Success,  :', $scope.allImages[0].URL)
+         }),
+         function (err) {
+             console.log('Something went wrong');
+         }
+        }
+        function fail(error) {
+            alert("An error has occurred: Code = " + error);
+        }
     }
   ])
 
