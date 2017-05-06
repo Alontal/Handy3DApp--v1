@@ -5,7 +5,7 @@
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
-    "src": "../img/small-logo.png",
+    "src": "/img/small-logo.png",
     "sizes": "512x512",
     "type": "image/png"
   }]

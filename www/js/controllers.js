@@ -10,24 +10,7 @@ angular.module('starter.controllers', [])
     // listen for the $ionicView.enter event:
     //$scope.$on('$ionicView.enter', function(e) {
     //});
-    document.addEventListener("deviceready", function () {
 
-      $scope.device = {};
-      $scope.device.device = $cordovaDevice.getDevice();
-
-      $scope.device.cordova = $cordovaDevice.getCordova();
-
-      $scope.device.model = $cordovaDevice.getModel();
-
-      $scope.device.platform = $cordovaDevice.getPlatform();
-
-      $scope.device.uuid = $cordovaDevice.getUUID();
-
-      $scope.device.version = $cordovaDevice.getVersion();
-
-      console.info('device obj: ', $scope.device );
-      //alert(JSON.stringify($scope.device.device));
-    }, false);
 
     // Sign out func
     $scope.signOut = function () {
@@ -40,6 +23,26 @@ angular.module('starter.controllers', [])
       $scope.user = JSON.parse(localStorage.getItem('_user'));
       console.info('Welcome to Handy 3D', $scope.user);
       // alert('Welcome '+$scope.user.name);
+
+      document.addEventListener("deviceready", function () {
+
+        $scope.device = {};
+        $scope.device.device = $cordovaDevice.getDevice();
+
+        $scope.device.cordova = $cordovaDevice.getCordova();
+
+        $scope.device.model = $cordovaDevice.getModel();
+
+        $scope.device.platform = $cordovaDevice.getPlatform();
+
+        $scope.device.uuid = $cordovaDevice.getUUID();
+
+        $scope.device.version = $cordovaDevice.getVersion();
+
+        console.info('device obj: ', $scope.device);
+        //alert(JSON.stringify($scope.device.device));
+      }, false);
+
     }
     //settings init
     $scope.app = {
@@ -141,7 +144,7 @@ angular.module('starter.controllers', [])
     $scope.team = $stateParams.params.team;
     console.log('team is:', $scope.team);
 
-     $http({
+    $http({
       method: 'GET',
       url: 'http://proj.ruppin.ac.il/bgroup48/prod/ClientService.asmx/getFullCustomerDetails',
       headers: {
@@ -160,7 +163,7 @@ angular.module('starter.controllers', [])
       function (err) {
         console.error('Teams -get Something went wrong');
       }
-    
+
   }])
 
   .controller('LoginCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
