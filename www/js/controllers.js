@@ -282,20 +282,20 @@ angular.module('starter.controllers', [])
                 method: "GET",
                 url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SavePicToDB',
                 params: {
-                    title: ,
-                    mediaDesc:,
-                    url:,
-                    meetingNum:,
-                    clientId ,
-                    userId: $scope.user.id,
+                    //title: ,
+                    //mediaDesc:,
+                    //url:,
+                    //meetingNum:,
+                    //clientId ,
+                    //userId: $scope.user.id,
 
                 }
             }
               )
          .then(function (res) {
-             $scope.allImages = res.data;
+             //$scope.allImages = res.data;
 
-             console.info('Success,  :', $scope.allImages[0].URL)
+             //console.info('Success,  :', $scope.allImages[0].URL)
          }),
          function (err) {
              console.log('Something went wrong');
