@@ -69,6 +69,18 @@ var app = angular.module('starter', ['ionic' ,'starter.controllers','ngCordova']
           },
         }
       })
+      .state('app.team', {
+        url: '/team',
+         params:{
+          team: null
+        },
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/team.html',
+            controller: 'TeamCtrl'
+          },
+        }
+      })
       .state('app.todo', {
         url: '/todo',
         views: {
