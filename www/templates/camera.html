@@ -26,7 +26,7 @@
                 <td>
                     <select ng-model="m.pname">
                         <option >Choose Client</option>
-                        <option ng-repeat="c in clientList" value="{{c.id}}">{{c.name}}</option>
+                        <option ng-repeat="c in clientList" value="{{c.id}}" ng-change="getmeetings()" >{{c.name}} </option>
                     </select>
                 </td>
                 <td>
@@ -37,8 +37,8 @@
                 </td>
                 <td>
                     <select ng-model="m.meetingNum">
-                        <option >Option 1</option>
-                        <option>Option 2</option>
+                        <option >select meeting number</option>
+                        <option *ngfor=""></option>
                     </select>
                 </td>
             </tr>

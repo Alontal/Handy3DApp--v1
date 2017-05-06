@@ -1,0 +1,44 @@
+<ion-view view-title="Profile">
+    <ion-content>
+        <div class="list card">
+
+            <div class="item item-avatar">
+                <img src="mcfly.jpg">
+                <h2>{{user.name}} {{user.last_name}}</h2>
+                <p>{{user.date_of_birth}}</p>
+                <p>joined: {{user.joined}}</p>
+            </div>
+
+            <div class="item item-body">
+                <img class="full-image" src="delorean.jpg">
+                <p>
+                    This is a "Facebook" styled Card. The header is created from a Thumbnail List item, the content is from a card-body consisting
+                    of an image and paragraph text. The footer consists of tabs, icons aligned left, within the card-footer.
+                </p>
+         
+            </div>
+
+     
+            <a href="#" class="item item-icon-left">
+                <i class="icon ion-email"></i>
+                {{user.email}}
+            </a>
+
+            <a href="#" class="item item-icon-left">
+                <i class="icon ion-ios-telephone"></i>
+                {{user.phone}}
+            </a>
+
+            <a href="#" class="item item-icon-left">
+                <i class="icon ion-wifi"></i>
+                Enter wireless password
+            </a>
+
+            <a href="#" class="item item-icon-left">
+                <i class="icon ion-card"></i>
+                Enter card information
+            </a>
+
+        </div>
+    </ion-content>
+</ion-view>
