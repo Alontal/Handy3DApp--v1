@@ -63,7 +63,7 @@ angular.module('starter.controllers', [])
 
     // Perform the  action when the user submits the login form
     $scope.doModalLogic = function () {
-      console.log('Doing Modal', $scope.loginData);
+      console.log('Doing Modal', $scope.ModalData);
 
       // Simulate a  delay.MODAL  Remove this and replace with your login
       // code if using a modAL system
@@ -78,6 +78,14 @@ angular.module('starter.controllers', [])
       general: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx',
     }
   })
+
+  .controller('ProfileCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
+
+  }])
+
+   .controller('TeamsCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
+
+  }])
 
   .controller('LoginCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
 
@@ -117,7 +125,7 @@ angular.module('starter.controllers', [])
       })
         .then(function (res) {
           $scope.user = res.data;
-          $scope.degub= res.data;
+          $scope.degub = res.data;
           console.log(res.data);
           if ($scope.user == '0') {
             console.error('Wrong user name or password, try again');
@@ -315,6 +323,6 @@ angular.module('starter.controllers', [])
   })
 
 
- ;
+  ;
 
 

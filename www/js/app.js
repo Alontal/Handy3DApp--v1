@@ -51,6 +51,24 @@ var app = angular.module('starter', ['ionic' ,'starter.controllers','ngCordova']
           },
         }
       })
+       .state('app.profile', {
+        url: '/profile',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/profile.html',
+            controller: 'ProfileCtrl'
+          },
+        }
+      })
+       .state('app.teams', {
+        url: '/teams',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/teams.html',
+            controller: 'TeamsCtrl'
+          },
+        }
+      })
       .state('app.todo', {
         url: '/todo',
         views: {
