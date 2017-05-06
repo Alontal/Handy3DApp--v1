@@ -97,7 +97,6 @@ angular.module('starter.controllers', [])
     }
   })
 
-
   .controller('ProfileCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
 
   }])
@@ -131,10 +130,9 @@ angular.module('starter.controllers', [])
       }
 
     $scope.goToTeamDetails = function (team) {
-      console.log('clicked: ', team);
+      console.log('clicked: ', team.id);
       $state.go('app.team', { team });
     }
-
 
   }])
 
@@ -142,8 +140,28 @@ angular.module('starter.controllers', [])
 
     $scope.team = $stateParams.params.team;
     console.log('team is:', $scope.team);
-  }])
 
+     $http({
+      method: 'GET',
+      url: 'http://proj.ruppin.ac.il/bgroup48/prod/ClientService.asmx/getFullCustomerDetails',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      params: {
+        // userId: $scope.user.id
+        team_id: $scope.team.id
+      }
+    })
+      .then(function (res) {
+        $scope.team = res.data;
+        console.log('Teams fetched', JSON.stringify($scope.team));
+      }),
+      function (err) {
+        console.error('Teams -get Something went wrong');
+      }
+    
+  }])
 
   .controller('LoginCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
 
