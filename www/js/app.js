@@ -76,7 +76,9 @@ var app = angular.module('starter', ['ionic' ,'starter.controllers','ngCordova']
         url: '/search',
         views: {
           'menuContent': {
-            templateUrl: 'templates/search.html'
+            templateUrl: 'templates/search.html',
+            controller: 'CalendarCtrl'
+
           }
         }
       })
