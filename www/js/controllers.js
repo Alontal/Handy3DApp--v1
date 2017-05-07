@@ -394,6 +394,25 @@ angular.module('starter.controllers', [])
   ])
 
 
+    .filter('serchByClient', function () {
+        return function (input, URL) {
+        var output = [];
+        if (isNaN(URL)) {
+
+            output = input;
+        }
+        else {
+            angular.forEach(input, function (item) {
+
+                if (item.URL = URL) {
+                    output.push(item)
+                }
+            });
+        }
+        return output;
+        }
+    })
+
   //Photo Gallery
   .controller('GalleryCtrl', function ($scope, $http, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
     // http request to get all images in DB
