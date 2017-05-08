@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('starter', ['ionic' ,'starter.controllers','ngCordova'])
+var app = angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -51,7 +51,7 @@ var app = angular.module('starter', ['ionic' ,'starter.controllers','ngCordova']
           },
         }
       })
-       .state('app.profile', {
+      .state('app.profile', {
         url: '/profile',
         views: {
           'menuContent': {
@@ -60,7 +60,7 @@ var app = angular.module('starter', ['ionic' ,'starter.controllers','ngCordova']
           },
         }
       })
-       .state('app.teams', {
+      .state('app.teams', {
         url: '/teams',
         views: {
           'menuContent': {
@@ -71,7 +71,7 @@ var app = angular.module('starter', ['ionic' ,'starter.controllers','ngCordova']
       })
       .state('app.team', {
         url: '/team',
-         params:{
+        params: {
           team: null
         },
         views: {
@@ -85,7 +85,7 @@ var app = angular.module('starter', ['ionic' ,'starter.controllers','ngCordova']
         url: '/todo',
         views: {
           'menuContent': {
-            templateUrl: 'templates/todo.html',
+            templateUrl: 'templates/todos.html',
             controller: 'TodoCtrl'
           },
         }
@@ -102,22 +102,21 @@ var app = angular.module('starter', ['ionic' ,'starter.controllers','ngCordova']
           },
         }
       })
-      .state('app.search', {
-        url: '/search',
+      .state('app.push', {
+        url: '/push',
         views: {
           'menuContent': {
-            templateUrl: 'templates/search.html',
-            controller: 'CalendarCtrl'
-
-          }
+            templateUrl: 'templates/push.html',
+            controller: 'PushCtrl'
+          },
         }
       })
       .state('app.browse', {
         url: '/browse',
         views: {
           'menuContent': {
-              templateUrl: 'templates/browse.html',
-              controller: 'GalleryCtrl'
+            templateUrl: 'templates/browse.html',
+            controller: 'GalleryCtrl'
           }
         }
       })
@@ -130,9 +129,9 @@ var app = angular.module('starter', ['ionic' ,'starter.controllers','ngCordova']
           }
         }
       })
-       .state('app.Notification', {
+      .state('app.Notification', {
         url: '/notification',
-        params:{
+        params: {
           notification: null
         },
         views: {

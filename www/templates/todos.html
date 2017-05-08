@@ -1,0 +1,74 @@
+<ion-view view-title="My Tasks">
+  <ion-content ng-controller="TodoCtrl" ng-init="getTodosFrom_db()">
+    <div class="">
+      <div class="list">
+
+        <form id="todo-form" >
+
+          <div class="item item-input-inset">
+            <label class="item-input-wrapper">
+            <input type="text" ng-model="newTodo" autofocus placeholder="What needs to be done?">
+            </label>
+            <button class="button button-small" ng-click="addTodo()">
+            Add New
+            </button>
+            <button class="button button-small" ng-click="getTodosFrom_db()">
+            get tasks
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="" ng-show="todos.length">
+        <ion-list show-delete="false" can-swipe="true">
+          <ion-item class="item item-toggle" ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+            <ion-option-button class="button-light icon ion-heart"></ion-option-button>
+            <ion-option-button ng-dblclick="editTodo(todo)" class="enable-pointer-events button-light icon ion-edit"></ion-option-button>
+            <ion-option-button ng-click="deleteTodo(todo)" class="enable-pointer-events button-assertive icon ion-trash-a"></ion-option-button>
+            <label class="toggle toggle-balanced">
+            <input type="checkbox" ng-model="todo.completed" ng-change="updateTodo(todo)">
+              <div class="track">
+                  <div class="handle"></div>
+              </div>
+            </label> {{todo.title}}
+            <!--<form ng-submit="doneEditing(todo)" ng-show="todo.editedTodo">
+                            <input class="checkbox enable-pointer-events" ng-trim="false" ng-model="todo.title" ng-blur="doneEditing(todo)" ui-focus="todo.editedTodo">
+                        </form>-->
+          </ion-item>
+        </ion-list>
+
+      </div>
+            <div ng-show="todos.length" class="">
+                <div class="col-6 list">
+                    <label class="toggle toggle-balanced">
+                    <ion-checkbox class="" type="" ng-model="allChecked" ng-click="markAll()">
+                    Mark all as complete</ion-checkbox>
+                    
+                    <!--<button class="button button-outline button-positive">markAll</button>-->
+                    
+                </label>
+                </div>
+                <div class="col-4">
+                    <button class="button button-outline button-positive" ng-show="allChecked" ng-click="clearCompletedTodos()" ng-show="remainingCount < todos.length">Clear completed ({{todos.length - remainingCount}})</button>
+                    <strong>{{remainingCount}}</strong>
+                    <ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="bar bar-footer " style="top: 100%">
+            <ul class="tabs">
+                <li class="tab-item" ui-sref-active="active">
+                    <a ui-sref="app.todo.list({fold:''})">All</a>
+                </li>
+                <li class="tab-item" ui-sref-active="active">
+                    <a ui-sref="app.todo.list({fold:'active'})">Active</a>
+                </li>
+                <li class="tab-item" ui-sref-active="active">
+                    <a ui-sref="app.todo.list({fold:'completed'})">Completed</a>
+                </li>
+            </ul>
+        </div>
+
+  </ion-content>
+</ion-view>

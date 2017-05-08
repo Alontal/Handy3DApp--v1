@@ -1,176 +1,137 @@
-
 'use strict';
-
-/* Controllers */
-
-// todos controller
- app.factory('todoStorage', ['$http', function ($http) {
-    var STORAGE_ID = 'todos';
-    var u = JSON.parse(localStorage.getItem('_user') || '[]');
-    var userid = u.id
-    console.log(userid);
-    return {
-
-      get: function () {
-        var todo;
-        $http({
-          method: "GET",
-          url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getTodosByUid',
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          params: {
-            userId: userid
-          }
-        })
-          .then(function (res) {
-            //todo = res.data;
-            //console.log(' recived', JSON.stringify(todo));
-          }),
-          function (err) {
-            console.error('Todo -get Something went wrong');
-          }
-        return JSON.parse(todo || '[]');
-
-        //return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
-      },
-
-      put: function (todos) {
-        console.log('userid is:', userid);
-        //var todos = todos;
-
-        $http({
-          method: "GET",
-          url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/insertTodo',
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          params: {
-            todos: todos
-          }
-        })
-          .then(function (res) {
-
-            console.info('returned from server: ', res.data);
-          }),
-          function (err) {
-            console.error('Todo -put  Something went wrong');
-          }
-
-        localStorage.setItem(STORAGE_ID, JSON.stringify(todos));
-      }
-    };
-  }])
-
-  app.controller('TodoCtrl', ['$scope', '$location', '$filter', 'todoStorage', '$http', function ($scope, $location, $filter, todoStorage, $http) {
-    //  get todos from db on loading
-    $http({
-      method: "GET",
-      url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getTodosByUid',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params: {
-        userId: 1
-      }
-    })
-      .then(function (res) {
-        $scope.todos = res.data;
-        console.log(' todos fetched', JSON.stringify($scope.todos));
-      }),
-      function (err) {
-        console.error('Todo -get Something went wrong');
-      }
-
-    var todos = $scope.todos = todoStorage.get();
-
+// Todos controller
+app.controller('TodoCtrl', ['$scope', '$location', '$filter', '$http', '$state', function ($scope, $location, $filter, $http, $state) {
+    console.log('todo ctrl loaded');
+    $scope.todos = [];
     $scope.newTodo = '';
+    var todos = $scope.todos;
+    // get todos from db 
+    $scope.getTodosFrom_db = function () {
+        $scope.todos = null;
+        $http({
+            method: "GET",
+            url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getTodosByUid',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            params: {
+                userId: $scope.user.id
+            }
+        })
+            .then(function (res) {
+                $scope.todos = res.data;
+                console.log('Task -get Success:', $scope.todos);
+            }),
+            function (err) {
+                console.error('Task -get Something went wrong');
+            }
+    };
     $scope.remainingCount = $filter('filter')(todos, { completed: false }).length;
 
-
     if ($location.path() === '') {
-      $location.path('/');
+        $location.path('/');
     }
-
     $scope.location = $location;
 
     $scope.$watch('location.path()', function (path) {
-      console.log(path);
-      $scope.statusFilter = { '/app/todo/active': { completed: false }, '/app/todo/completed': { completed: true } }[path];
+        console.log(path);
+        $scope.statusFilter = { '/app/todo/active': { completed: false }, '/app/todo/completed': { completed: true } }[path];
     });
 
     $scope.$watch('remainingCount == 0', function (val) {
-      $scope.allChecked = val;
+        $scope.allChecked = val;
     });
 
+    //add new todo
     $scope.addTodo = function () {
-      var newTodo = $scope.newTodo.trim();
-      if (newTodo.length === 0) {
-        return;
-      }
+        // if empty return
+        var newTodo = $scope.newTodo.trim();
+        if (newTodo.length === 0) {
+            return;
+        }
+        //generate new todo item
+        var todo = {
+            //id: $scope.user.name,
+            userID: $scope.user.id,
+            title: $scope.newTodo,
+            owner: $scope.user.name,
+            //XXX Alon:  if this user == admin need to set function for privacy, when admin assign new task
+            privacyStatus: '2',  //need to set input in ui to choose privacy 
+            completed: false,
+        }
+        $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/insertTodo', { todo })
+            .then(function (response) {
+                //localStorage.removeItem("user");
+                console.log('%c Todo -insert Success', 'background: yellow; color: green');
+                $scope.getTodosFrom_db();
+            },
+            function (err) {
+                console.error('Failed -insert failed,');
+                alert('Error please try again');
+            })
+    }
 
-      todos.push({
-        title: newTodo,
-        userID: $scope.user.id,
-        privacyStatus: 2,
-        PrivacyStatus1: null,
-        completed: false,
-        User: null
-      });
-      todoStorage.put(todos);
+    // delete todo by id 
+    $scope.deleteTodo = function (todo) {
+        console.info('clicked', todo);
 
-      $scope.newTodo = '';
-      $scope.remainingCount++;
-    };
+        $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/deleteTodo', { todoId: todo.todoID })
+            .then(function () {
+                console.log('%c  Todo -delete Success', 'background: yellow; color: green');
+                $scope.remainingCount -= todo.completed ? 0 : 1;
+                //reload new list after insert
+                $scope.getTodosFrom_db();
+            }),
+            function (err) {
+                console.error('Todo -delete Something went wrong', err);
+                alert('Error. try again');
+            }
+    }
+    // mark todo as completed 
+    $scope.updateTodo = function (todo) {
+        console.info('clicked', todo);
 
-    $scope.editTodo = function (todo) {
-      todo.editedTodo = true;
-      // Clone the original todo to restore it on demand.
-      $scope.originalTodo = angular.extend({}, todo);
-    };
-
-    $scope.doneEditing = function (todo) {
-      todo.editedTodo = false;
-      todo.title = todo.title.trim();
-
-      if (!todo.title) {
-        $scope.removeTodo(todo);
-      }
-
-      todoStorage.put(todos);
-    };
-
-    $scope.revertEditing = function (todo) {
-      todos[todos.indexOf(todo)] = $scope.originalTodo;
-      $scope.doneEditing($scope.originalTodo);
-    };
-
-    $scope.removeTodo = function (todo) {
-      $scope.remainingCount -= todo.completed ? 0 : 1;
-      todos.splice(todos.indexOf(todo), 1);
-      todoStorage.put(todos);
-    };
-
-    $scope.todoCompleted = function (todo) {
-      $scope.remainingCount += todo.completed ? -1 : 1;
-      todoStorage.put(todos);
-    };
-
+        $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/updateTodo', { todo })
+            .then(function () {
+                console.log('%c  Todo -update Success', 'background: yellow; color: green');
+                //reload new list after insert
+                $scope.getTodosFrom_db();
+            }),
+            function (err) {
+                console.error('Todo -update Something went wrong', err);
+                alert('Error. try again');
+            }
+    }
     $scope.clearCompletedTodos = function () {
-      $scope.todos = todos = todos.filter(function (val) {
-        return !val.completed;
-      });
-      todoStorage.put(todos);
+        console.info('-delete all ! ! ');
+        var id = $scope.user.id;
+        $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/deleteAllTodos', { id })
+            .then(function () {
+                console.log('%c  Todo -delete all ! Success', 'background: yellow; color: green');
+                //reload new list after insert
+                $scope.getTodosFrom_db();
+                $state.reload();
+            }),
+            function (err) {
+                console.error('Todo -delete all Something went wrong', err);
+                alert('Error. try again');
+            }
     };
 
-    $scope.markAll = function (completed) {
-      todos.forEach(function (todo) {
-        todo.completed = completed;
-      });
-      $scope.remainingCount = !completed ? todos.length : 0;
-      todoStorage.put(todos);
+    $scope.markAll = function () {
+
+        console.info('-mark all');
+        var id = $scope.user.id;
+        $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/markAllTodo', { id })
+            .then(function () {
+                console.log('%c  Todo -mark all Success', 'background: yellow; color: green');
+                //reload new list after insert
+                $scope.getTodosFrom_db();
+            }),
+            function (err) {
+                console.error('Todo -mark all Something went wrong', err);
+                alert('Error. try again');
+            }
     };
-  }])
+}])
