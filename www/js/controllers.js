@@ -394,33 +394,70 @@ angular.module('starter.controllers', [])
   ])
 
 
-    .filter('serchByClient', function () {
-        return function (input, URL) {
+    .filter('serchMyMedia', function () {
+        return function (input, User) {
         var output = [];
-        if (isNaN(URL)) {
 
-            output = input;
-        }
-        else {
             angular.forEach(input, function (item) {
 
-                if (item.URL = URL) {
+                if (item.UserID === $scope.user.id) {
                     output.push(item)
                 }
             });
-        }
+        
         return output;
         }
     })
 
   //Photo Gallery
   .controller('GalleryCtrl', function ($scope, $http, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
-    // http request to get all images in DB
+      $scope.clientList = [];
+      $scope.clientTeam_list = [];
+      $scope.me = $scope.user.id;
+
+      //get User Clients
+      $http({
+          method: "GET",
+          url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getUserClients',
+          params: {
+              userId: $scope.user.id
+          }
+      })
+       .then(function (response) {
+           $scope.clientList = response.data;
+       })
+
+      //get User Teams Only
+
+      $http({
+          method: "GET",
+          url: 'http://proj.ruppin.ac.il/bgroup48/prod/VolunteerService.asmx/getUserTeams',
+          params: {
+              user_id: $scope.user.id
+          }
+      })
+     .then(function (response) {
+         console.log($scope.user.id)
+         console.log("sucsses")
+         $scope.clientTeam_list = response.data;
+         console.log($scope.clientTeam_list)
+     })
+
+      $scope.selectedDist = {};
+      $scope.filterExpression = function (thana) {
+          return (thana.dId === $scope.selectedDist.id);
+      };
+
+      // http request to get all images in DB
     $scope.getPic = function () {
       $http({
         method: "GET",
-        url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/LoadPic'
-      }
+        url: 'http://localhost:57943/ApplicationGeneralService.asmx/LoadPic',
+        params: {
+            userID: $scope.user.id,
+            type : $scope.user.type
+        }
+          }
       )
         .then(function (res) {
           $scope.allImages = res.data;

@@ -8,42 +8,102 @@
             <br><br>
 
             <!--<div class="item item-divider">
-            <i class="ion-images"></i>
-            All Images
-        </div>
+                <i class="ion-images"></i>
+                All Images
+            </div>
 
-        <a class="item item-list-detail">
-            <ion-scroll direction="x">
-                <img ng-repeat="image in allImages" ng-src="{{image.URL}}" ng-click="showImages($index)" class="image-list-thumb" />{{image.title}}
-            </ion-scroll>
-        </a>-->
-        <!--</ion-content>-->
-          
-            <input type="number" class="form-control" placeholder="Search here"  />
-            <select >
+            <a class="item item-list-detail">
+                <ion-scroll direction="x">
+                    <img ng-repeat="image in allImages" ng-src="{{image.URL}}" ng-click="showImages($index)" class="image-list-thumb" />{{image.title}}
+                </ion-scroll>
+            </a>-->
+            <!--</ion-content>-->
+            <!--<input type="number" class="form-control" placeholder="Search here" />
+            <select>
                 <option ng-model="priceterm" ng-repeat="c in allImages">{{c.clientID}}</option>
-            </select>
-
+            </select>-->
             <!--<div>
             <table class="table">
                 <tr ng-repeat="a in allImages|filter:priceterm">
                     <td><img src="{{a.URL}}" />{{a.UserID}}</td>
-               
+
                 </tr>
             </table>
             </div>-->
-      
+
+            <p>Filter media by: </p>
+            <table>
+                <tr>
+                    <td>My Media Only</td>
+                    <td>Clients</td>
+                    <td>My Teams</td>
+                </tr>
+                <tr>
+                    <td>
+                        <select ng-model="search.UserID">
+                            <option value="">no</option>
+                            <option value="{{me}}">yes! </option>
+                        </select>
+                    </td>
+                    <td>
+                        <select ng-model="search.clientID">
+                            <option value="">Choose Client</option>
+                            <option ng-repeat="c in clientList" value="{{c.ClientID}}">{{c.Name}} </option>
+                        </select>
+                    </td>
+                    <td>
+                        <select ng-model="search.TeamID">
+                            <option value="">Choose Client</option>
+                            <option ng-repeat="c in clientTeam_list" value="{{c.team_id}}">{{c.team_number}} </option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
 
 
-           
+            <div class="gallery" ng-repeat="c in allImages | filter:search">
+                <a target="_blank" href="{{c.URL}}">
+                    <img src="{{c.URL}}" alt="Fjords" ng-click="showImages($index)" width="300" height="200">
+                </a>
+                <div class="desc">{{c.MediaTitle}}</div>
+            </div>
 
-          
 
 
-        
+
+            <!--<div>
+                <table class="table">
+                    <tr ng-repeat="c in allImages | filter:search">
+                        <td><img src="{{c.URL}}"  style="height:150px" ng-click="showImages($index)" class="image-list-thumb" /> {{c.MediaTitle}}</td>
+                    </tr>
+                </table>
+            </div>-->
+
+
+
     </ion-pane>
 </ion-view>
 <style>
 
+    
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 45%;
+}
 
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: 100px;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
 </style>
