@@ -91,7 +91,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
         $.ajax({
 
             type: "POST",
-            url: "http://localhost:57672/ApplicationGeneralService.asmx/sendMsg",
+            url: "http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/sendMsg",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ platform: "android", not_id: nott, msg: "TEST!", user: $scope.user.name }),
             dataType: "json",
