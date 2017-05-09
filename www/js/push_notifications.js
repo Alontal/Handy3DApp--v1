@@ -110,8 +110,8 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
         window.scrollTo(0, document.body.scrollHeight);
     }
 
-    $scope.register_notID = function() {
-        alert($scope.user.name);
+        $scope.register_notID = function() {
+        alert($scope.user.id);
         alert(notification_id);
         alert(user_platform);
 
@@ -119,7 +119,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
         var not = notification_id;
         var plat =user_platform
 
-        $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SetUserNotIdAndPlatform', { user_name: $scope.user.name, not_id: notification_id, platform: user_platform })
+            $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SetUserNotIdAndPlatform', { user_id: $scope.user.id, not_id: notification_id, platform: user_platform })
            .then(function (response) {
                //localStorage.removeItem("user");
                console.log('%c Todo -insert Success', 'background: yellow; color: green');
