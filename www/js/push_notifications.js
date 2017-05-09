@@ -87,13 +87,13 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
 
         var user_platform;
         var notification_id;
-        var nott = "f6IMVrOP4ig:APA91bE_NlNNHNFASpQJYWxaJLEX2hdghsgx14hDTz356xLjxkpEvftwsJsbNNAAwn1MhAfDBnnl5ijsWJQIhA-uz0YbYte9LgKuw7VOBfPmsn_0Axihrdl408cXwB6xPxKe3eobij94";
+        var nott = "ecn0JWF3M7o:APA91bHt4VRuVa0IEfNmmeKK1dYxnm824spdyHds8u-qBgpu7uSEDSkvzI4I6xXgFjglULzo2ToTPgB8WlfJeUZfhmT2y3_NS8V_GlCalkkMlooWfTXN2vl2agTZMdETiomL2iz3nukJ";
         $.ajax({
 
             type: "POST",
             url: "http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/sendMsg",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ platform: user_platform, not_id: notification_id, msg: "TEST!", user: $scope.user.name }),
+            data: JSON.stringify({ platform: "android", not_id: nott, msg: "TEST!", user: $scope.user.name }),
             dataType: "json",
             success: function (data) {
 
