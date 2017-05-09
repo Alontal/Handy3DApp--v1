@@ -42,7 +42,6 @@ app.controller('TodoCtrl', ['$scope', '$location', '$filter', '$http', '$state',
     $scope.$watch('remainingCount == 0', function (val) {
         $scope.allChecked = val;
     });
-
     //add new todo
     $scope.addTodo = function () {
         // if empty return
@@ -71,7 +70,6 @@ app.controller('TodoCtrl', ['$scope', '$location', '$filter', '$http', '$state',
                 alert('Error please try again');
             })
     }
-
     // delete todo by id 
     $scope.deleteTodo = function (todo) {
         console.info('clicked', todo);

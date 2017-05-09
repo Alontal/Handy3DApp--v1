@@ -48,7 +48,7 @@
                 </label>
                 </div>
                 <div class="col-4">
-                    <button class="button button-outline button-positive" ng-show="allChecked" ng-click="clearCompletedTodos()" ng-show="remainingCount < todos.length">Clear completed ({{todos.length - remainingCount}})</button>
+                    <button class="button button-outline  button-dark" ng-show="allChecked" ng-click="clearCompletedTodos()" ng-show="remainingCount < todos.length">Clear completed ({{todos.length - remainingCount}})</button>
                     <strong>{{remainingCount}}</strong>
                     <ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
                 </div>

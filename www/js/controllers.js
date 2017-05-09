@@ -22,23 +22,16 @@ angular.module('starter.controllers', [])
     $scope.getUserDetails = function () {
       $scope.user = JSON.parse(localStorage.getItem('_user'));
       console.info('Welcome to Handy 3D', $scope.user);
-       //alert('Welcome '+$scope.user.name);
-
+      //remove coment below to show alert with device details > use in dev only !
+      // alert('Welcome '+$scope.user.name);  
       document.addEventListener("deviceready", function () {
-
         $scope.device = {};
         $scope.device.device = $cordovaDevice.getDevice();
-
         $scope.device.cordova = $cordovaDevice.getCordova();
-
         $scope.device.model = $cordovaDevice.getModel();
-
         $scope.device.platform = $cordovaDevice.getPlatform();
-
         $scope.device.uuid = $cordovaDevice.getUUID();
-
         $scope.device.version = $cordovaDevice.getVersion();
-
         console.info('device obj: ', $scope.device);
         //alert(JSON.stringify($scope.device.device));
       }, false);
