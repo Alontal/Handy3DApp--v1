@@ -116,14 +116,13 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
         alert(user_platform);
 
         var user = $scope.user.name
-        var not = notification_id;
-        var plat =user_platform
 
-            $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SetUserNotIdAndPlatform', { user_id: $scope.user.id, not_id: notification_id, platform: user_platform })
+        
+            $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SetUserNotIdAndPlatform',
+                        { user_id: $scope.user.id, not_id: notification_id, platform: user_platform })
            .then(function (response) {
                //localStorage.removeItem("user");
-               console.log('%c Todo -insert Success', 'background: yellow; color: green');
-               $scope.getTodosFrom_db();
+               console.log('%c Push d -insert Success', 'background: yellow; color: green');
            },
            function (err) {
                console.error('Failed -insert failed,');
