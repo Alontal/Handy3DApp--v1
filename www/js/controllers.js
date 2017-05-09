@@ -22,7 +22,7 @@ angular.module('starter.controllers', [])
     $scope.getUserDetails = function () {
       $scope.user = JSON.parse(localStorage.getItem('_user'));
       console.info('Welcome to Handy 3D', $scope.user);
-      // alert('Welcome '+$scope.user.name);
+       //alert('Welcome '+$scope.user.name);
 
       document.addEventListener("deviceready", function () {
 
