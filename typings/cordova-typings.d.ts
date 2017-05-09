@@ -20,3 +20,4 @@
 /// <reference path="../.vscode/typings/cordova/plugins/Vibration.d.ts"/>
 /// <reference path="../.vscode/typings/cordova/plugins/Dialogs.d.ts"/>
 /// <reference path="../.vscode/typings/cordova/plugins/Globalization.d.ts"/>
+/// <reference path="../.vscode/typings/cordova/plugins/Push.d.ts"/>
