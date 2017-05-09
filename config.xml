@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ionicframework.handyapp02123622" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.helloworld" version="1.0.0">
   <name>HandyApp0.2</name>
   <description>
     Handy3D Application
@@ -101,9 +101,9 @@
     <param name="ios-package" value="CDVLocation" />
   </feature>
   <preference name="android-build-tool" value="gradle" />
-  <plugin name="phonegap-plugin-push" source="npm" spec="1.7.2">
+  <gap:plugin name="phonegap-plugin-push" source="npm" spec="1.7.2">
     <param name="SENDER_ID" value="256793245079" />
-  </plugin>
+  </gap:plugin>
   <feature name="Geolocation">
     <param name="android-package" value="org.apache.cordova.geolocation.GeoBroker" />
   </feature>
