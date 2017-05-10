@@ -1,5 +1,5 @@
 <ion-view view-title="Profile">
-    <ion-content>
+    <ion-content class="home-bg">
         <div class="list card">
 
             <div class="item item-avatar">
@@ -19,24 +19,24 @@
             </div>
 
      
-            <a href="#" class="item item-icon-left">
+            <a class="item item-icon-left">
                 <i class="icon ion-email"></i>
                 {{user.email}}
             </a>
 
-            <a href="#" class="item item-icon-left">
+            <a  class="item item-icon-left">
                 <i class="icon ion-ios-telephone"></i>
                 {{user.phone}}
             </a>
 
-            <a href="#" class="item item-icon-left">
-                <i class="icon ion-wifi"></i>
-                Enter wireless password
+            <a  class="item item-icon-left">
+                <i class="icon ion-information-circled"></i>
+                {{user.type}}
             </a>
 
-            <a href="#" class="item item-icon-left">
-                <i class="icon ion-card"></i>
-                Enter card information
+            <a  class="item item-icon-left">
+                <i class="icon ion-settings"></i>
+                {{user.skills}}
             </a>
 
         </div>
