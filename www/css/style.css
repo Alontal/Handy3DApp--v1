@@ -51,11 +51,22 @@
     background-size:contain;
     background-repeat:no-repeat; 
 }
+.menu-logo{
+      background-image: url(../img/white_logo_no_text.png) !important;
+    height: 4vh !important;
+    background-position: center !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    width: 19vw !important;
 
+}
 
 /*colors*/
 .dark{
     background-color: #4a4a4a;
+}
+.home-bg{
+    background-color: #f0f3f4;
 }
 
 /*text-colors*/

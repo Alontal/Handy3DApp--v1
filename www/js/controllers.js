@@ -2,7 +2,7 @@
 angular.module('starter.controllers', [])
 
 
-  .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $cordovaDevice) {
+  .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $cordovaDevice, $state, $ionicListDelegate) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -10,22 +10,30 @@ angular.module('starter.controllers', [])
     // listen for the $ionicView.enter event:
     //$scope.$on('$ionicView.enter', function(e) {
     //});
- $scope.show1 = false;
-  $scope.show2 = false;
-  $scope.click1 = function($event) { 
-    $event.stopPropagation();
-    $scope.show1 = !$scope.show1;
-    $scope.show2 = false;
-    $ionicListDelegate.closeOptionButtons(); }
-  $scope.click2 = function($event) {
-    $event.stopPropagation();
-    $scope.show2 = !$scope.show2;
-    $scope.show1 = false;
-    $ionicListDelegate.closeOptionButtons(); }
-  $scope.hideAll = function() { 
-    $scope.show2 = false;
-    $scope.show1 = false;
-    $ionicListDelegate.closeOptionButtons(); }
+      $scope.goto=function(url){
+        $state.go(url);
+      }
+    //disapear buttons when click outside box
+      $scope.show1 = false;
+      $scope.show2 = false;
+      $scope.click1 = function ($event) {
+      $event.stopPropagation();
+      $scope.show1 = !$scope.show1;
+      $scope.show2 = false;
+      $ionicListDelegate.closeOptionButtons();
+    }
+    $scope.click2 = function ($event) {
+      $event.stopPropagation();
+      $scope.show2 = !$scope.show2;
+      $scope.show1 = false;
+      $ionicListDelegate.closeOptionButtons();
+    }
+    $scope.hideAll = function () {
+      $scope.show2 = false;
+      $scope.show1 = false;
+      $ionicListDelegate.closeOptionButtons();
+    }
+
 
     // Sign out func
     $scope.signOut = function () {
@@ -70,7 +78,7 @@ angular.module('starter.controllers', [])
         black: '#1c2b36'
       }
     }
-  
+
     // Form data for the login modal
     $scope.ModalData = {};
 

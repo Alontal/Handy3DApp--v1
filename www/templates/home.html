@@ -1,20 +1,20 @@
-<ion-view view-title="{{user.name}} Hi">
-  <ion-content ng-click="hideAll()">
+<ion-view view-title="Hi {{user.name}}">
+  <ion-content ng-click="hideAll()" class="home-bg">
 
     <div class="row text center margin-top-20">
-      <button class="col button button-large  btn-home margin-1">
+      <button ng-click="goto('app.browse')"  class="col button button-large  btn-home margin-1">
         Media
       </button>
-      <button class="col button button-large  btn-home margin-1">
+      <button ng-click="goto('app.todo')" class="col button button-large  btn-home margin-1">
         TO DO
       </button>
     </div>
 
     <div class="row text center">
-      <button class="col button button-large  btn-home margin-1">
-        Social and meetings
+      <button  ng-click="goto('app.camera')"  class="col button button-large  btn-home margin-1">
+        Camera
       </button>
-      <button class="col button button-large  btn-home margin-1">
+      <button ng-click="goto('app.Notifications')"  class="col button button-large  btn-home margin-1">
         Notifications
       </button>
     </div>
@@ -31,7 +31,7 @@
 
       <div class="round-button hidden-button-left margin-left-11" >
         <div class="round-button-circle">
-          <a  class=" button-icon icon ion-paperclip"></a>
+          <a class=" button-icon icon ion-paperclip"></a>
         </div>
       </div>
 
