@@ -1,6 +1,6 @@
 <ion-view view-title="Camera">
     <ion-content >
-
+        <script src="jquery.camera_capture.js"></script>
         <ion-scroll>
             <div style="height:350px;width:400px; display:block">
                 <img id="myImage2"  style="height:350px;width:400px; display:block" />
@@ -11,6 +11,10 @@
         <button  class="button button-calm" ng-click="addImage()">Take Photo</button>
 
         <button  id="uploadimg"  class="button button-calm enable-pointer-events" ng-click="UploadImages(m)">Upload Photo</button>
+
+        <button id="uploadimg" class="button button-calm enable-pointer-events" ng-click="TakeVideo()">Take Video</button>
+
+        <button id="uploadimg" class="button button-calm enable-pointer-events" ng-click="uploadVideo()">Upload Video</button>
 
         <button id="test1" class="button button-calm enable-pointer-events"   >test</button>
 
