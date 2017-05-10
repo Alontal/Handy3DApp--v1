@@ -8,13 +8,8 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
     var user_platform;
     var notification_id;
     var SENDER_ID = "256793245079";
-    //var webServerAddress = "../";
-    var webServerAddress = "http://proj.ruppin.ac.il/igroup77/prod/";
 
     document.addEventListener("deviceready", onCordovaReady, false);
-
-
-
     function onCordovaReady() {
         var push = PushNotification.init({
             "android": {
@@ -29,22 +24,17 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             },
             "windows": {}
         });
-
         push.on('registration', function (data) {
             notification_id = data.registrationId;
             console.log(data);
-            alert(data.registrationId);
-
             if (IsIphone()) {
                 user_platform = "ios";
             }
             else {
                 user_platform = "android";
             }
-
-            alert(user_platform)
+            $scope.register_notID();
         });
-
         push.on('notification', function (data) {
             console.log("notification event");
 
@@ -76,10 +66,9 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
         }
     }
 
-    $scope.sendMsg =  function () {
+       $scope.sendMsg = function () {
         var user_platform;
         var notification_id;
-        var nott = "ecn0JWF3M7o:APA91bHt4VRuVa0IEfNmmeKK1dYxnm824spdyHds8u-qBgpu7uSEDSkvzI4I6xXgFjglULzo2ToTPgB8WlfJeUZfhmT2y3_NS8V_GlCalkkMlooWfTXN2vl2agTZMdETiomL2iz3nukJ";
         $.ajax({
             type: "POST",
             url: "http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/sendMsg",
@@ -87,16 +76,11 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             data: JSON.stringify({ platform: "android", not_id: nott, msg: "TEST!", user: $scope.user.name }),
             dataType: "json",
             success: function (data) {
-
-                alert('yes')
             },
             error: function () {
-                alert('fail')
             }
-
         })
     }
-
         $scope.register_notID = function() {
         alert($scope.user.id);
         alert(notification_id);
@@ -106,13 +90,11 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SetUserNotIdAndPlatform',
                         { user_id: $scope.user.id, not_id: notification_id, platform: user_platform })
            .then(function (response) {
-               //localStorage.removeItem("user");
                console.log('%c Push d -insert Success', 'background: yellow; color: green');
            },
            function (err) {
                console.error('Failed -insert failed,');
                alert('Error please try again');
            })
-      
     }
 }])
