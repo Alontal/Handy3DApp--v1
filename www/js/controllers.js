@@ -125,46 +125,7 @@ angular.module('starter.controllers', [])
       }
 
     }
-
-    // Form data for the login modal
-    $scope.ModalData = {};
-
-    // Create the  modal that we will use later
-    $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
-      scope: $scope
-    }).then(function (modal) {
-      $scope.modal = modal;
-    });
-
-    // Triggered in the  modal to close it
-    $scope.closeModal = function () {
-      $scope.modal.hide();
-    };
-
-    // Open the  modal
-    $scope.Modal = function () {
-      $scope.modal.show();
-    };
-
-    // Perform the  action when the user submits the login form
-    $scope.doModalLogic = function () {
-      console.log('Doing Modal', $scope.ModalData);
-
-      // Simulate a  delay.MODAL  Remove this and replace with your login
-      // code if using a modAL system
-      $timeout(function () {
-        $scope.closeModal();
-      }, 1000);
-    };
-
-
-    //links 
-    $scope.links = {
-      general: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx',
-    }
-
-  })
-
+    )
   .controller('ProfileCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
 
   }])
@@ -245,7 +206,6 @@ angular.module('starter.controllers', [])
       // .  /check for existing token in local storage
 
 
-
       // Login authentication 
       $scope.doLogin = function () {
           $scope.degub;
@@ -269,13 +229,14 @@ angular.module('starter.controllers', [])
           })
             .then(function (res) {
                 $scope.user = res.data;
-                $scope.degub = res.data;
                 console.log(res.data);
                 if ($scope.user == '0') {
                     console.error('Wrong user name or password, try again');
+                    $scope.loginAlert = 'Wrong user name or password, try again';
                 }
                 else if ($scope.user == '-1') {
                     console.error('user not active. please contact admin');
+                    $scope.loginAlert = 'user not active. please contact admin';
                 }
                 else if ($scope.user.name != undefined) {
                     console.info('Success, Hi mr/ms :', $scope.user);
@@ -375,7 +336,7 @@ angular.module('starter.controllers', [])
       console.info('notifications: ', $scope.notification);
   })
 
-  //Camera controller
+//Camera controller
   .controller('cameraCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaFile', '$ionicBackdrop', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$http', '$cordovaCapture',
 
 
@@ -516,10 +477,24 @@ angular.module('starter.controllers', [])
   ])
 
 
+    .filter('serchMyMedia', function () {
+        return function (input, User) {
+            var output = [];
 
-  .filter('serchMyMedia', function () {
-    return function (input, User) {
-      var output = [];
+            angular.forEach(input, function (item) {
+
+                if (item.UserID === $scope.user.id) {
+                    output.push(item)
+                }
+            });
+
+            return output;
+        }
+
+
+    })
+
+
     .filter('serchMyMedia', function () {
         return function (input, User) {
             var output = [];
@@ -535,69 +510,36 @@ angular.module('starter.controllers', [])
       return output;
     }
   })
-                if (item.UserID === $scope.user.id) {
-                    output.push(item)
-                }
-            });
 
-            return output;
-        }
+    
 
-
-    })
-
-  //Photo Gallery
+//Photo Gallery
   .controller('GalleryCtrl', function ($scope, $http, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
-    $scope.clientList = [];
-    $scope.clientTeam_list = [];
-    $scope.me = $scope.user.id;
+      $scope.clientList = [];
+      $scope.clientTeam_list = [];
+      $scope.me = $scope.user.id;
 
-    //get User Clients
-    $http({
-      method: "GET",
-      url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getUserClients',
-      params: {
-        userId: $scope.user.id
-      }
-    })
-      .then(function (response) {
-        $scope.clientList = response.data;
-      })
-
-    //get User Teams Only
-
-    $http({
-      method: "GET",
-      url: 'http://proj.ruppin.ac.il/bgroup48/prod/VolunteerService.asmx/getUserTeams',
-      params: {
-        user_id: $scope.user.id
-      }
-    })
-      .then(function (response) {
-        console.log($scope.user.id)
-        console.log("sucsses")
-        $scope.clientTeam_list = response.data;
-        console.log($scope.clientTeam_list)
-      })
-
-    $scope.selectedDist = {};
-    $scope.filterExpression = function (thana) {
-      return (thana.dId === $scope.selectedDist.id);
-    };
-
-    // http request to get all images in DB
-    $scope.getPic = function () {
+      //get User Clients
       $http({
-        method: "GET",
-        url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/LoadPic',
-        params: {
-          userID: $scope.user.id,
-          type: $scope.user.type
-        }
-      }
-      )
-        .then(function (res) {
-          $scope.allImages = res.data;
+          method: "GET",
+          url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getUserClients',
+          params: {
+              userId: $scope.user.id
+          }
+      })
+       .then(function (response) {
+           $scope.clientList = response.data;
+       })
+
+      //get User Teams Only
+
+      $http({
+          method: "GET",
+          url: 'http://proj.ruppin.ac.il/bgroup48/prod/VolunteerService.asmx/getUserTeams',
+          params: {
+              user_id: $scope.user.id
+          }
+      })
      .then(function (response) {
          console.log($scope.user.id)
          console.log("sucsses")
@@ -614,9 +556,9 @@ angular.module('starter.controllers', [])
       $scope.getPic = function () {
           $http({
               method: "GET",
-          
+
               url: ' http://localhost:57672/ApplicationGeneralService.asmx/LoadPic',
-             
+
               params: {
                   userID: $scope.user.id,
                   type: $scope.user.type
