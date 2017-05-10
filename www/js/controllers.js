@@ -10,7 +10,22 @@ angular.module('starter.controllers', [])
     // listen for the $ionicView.enter event:
     //$scope.$on('$ionicView.enter', function(e) {
     //});
-
+ $scope.show1 = false;
+  $scope.show2 = false;
+  $scope.click1 = function($event) { 
+    $event.stopPropagation();
+    $scope.show1 = !$scope.show1;
+    $scope.show2 = false;
+    $ionicListDelegate.closeOptionButtons(); }
+  $scope.click2 = function($event) {
+    $event.stopPropagation();
+    $scope.show2 = !$scope.show2;
+    $scope.show1 = false;
+    $ionicListDelegate.closeOptionButtons(); }
+  $scope.hideAll = function() { 
+    $scope.show2 = false;
+    $scope.show1 = false;
+    $ionicListDelegate.closeOptionButtons(); }
 
     // Sign out func
     $scope.signOut = function () {
