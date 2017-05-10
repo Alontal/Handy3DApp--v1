@@ -16,7 +16,6 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
 
 
     function onCordovaReady() {
-
         var push = PushNotification.init({
             "android": {
                 "senderID": SENDER_ID
@@ -30,7 +29,6 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             },
             "windows": {}
         });
-
 
         push.on('registration', function (data) {
             notification_id = data.registrationId;
@@ -57,18 +55,14 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             else {
 
             }
-
-
             push.finish(function () {
                 console.log('finish successfully called');
             });
         });
-
         push.on('error', function (e) {
             console.log("push error");
         });
     }
-
 
     function IsIphone() {
         var userAgent = navigator.userAgent;
@@ -83,13 +77,10 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
     }
 
     $scope.sendMsg =  function () {
-
-
         var user_platform;
         var notification_id;
         var nott = "ecn0JWF3M7o:APA91bHt4VRuVa0IEfNmmeKK1dYxnm824spdyHds8u-qBgpu7uSEDSkvzI4I6xXgFjglULzo2ToTPgB8WlfJeUZfhmT2y3_NS8V_GlCalkkMlooWfTXN2vl2agTZMdETiomL2iz3nukJ";
         $.ajax({
-
             type: "POST",
             url: "http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/sendMsg",
             contentType: "application/json; charset=utf-8",
@@ -104,10 +95,6 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             }
 
         })
-   
-        addMessageToChat(localStorage.user_name, $("#msg").val());
-        $("#msg").val('');
-        window.scrollTo(0, document.body.scrollHeight);
     }
 
         $scope.register_notID = function() {
@@ -115,9 +102,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
         alert(notification_id);
         alert(user_platform);
 
-        var user = $scope.user.name
-
-        
+        var user = $scope.user.name; 
             $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SetUserNotIdAndPlatform',
                         { user_id: $scope.user.id, not_id: notification_id, platform: user_platform })
            .then(function (response) {
@@ -129,23 +114,5 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
                alert('Error please try again');
            })
       
-
-
-
     }
-
-    function addMessageToChat(name, messageContent) {
-        var d = new Date();
-
-        var $d = $("<div>").addClass("msgContainer");
-        var $p = $("<p>").text(messageContent).addClass("msgContent");
-        var $s = $("<span>").text(name).addClass("sender");
-        var $t = $("<span>").text(d.getHours() + ":" + d.getMinutes()).addClass("time");
-
-        $("#content").append($d.append($s, $t, $p));
-
-    }
-
-
-
 }])
