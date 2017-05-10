@@ -55,6 +55,7 @@ angular.module('starter.controllers', [])
         black: '#1c2b36'
       }
     }
+  
     // Form data for the login modal
     $scope.ModalData = {};
 
@@ -387,70 +388,70 @@ angular.module('starter.controllers', [])
   ])
 
 
-    .filter('serchMyMedia', function () {
-        return function (input, User) {
-        var output = [];
+  .filter('serchMyMedia', function () {
+    return function (input, User) {
+      var output = [];
 
-            angular.forEach(input, function (item) {
+      angular.forEach(input, function (item) {
 
-                if (item.UserID === $scope.user.id) {
-                    output.push(item)
-                }
-            });
-        
-        return output;
+        if (item.UserID === $scope.user.id) {
+          output.push(item)
         }
-    })
+      });
+
+      return output;
+    }
+  })
 
   //Photo Gallery
   .controller('GalleryCtrl', function ($scope, $http, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
-      $scope.clientList = [];
-      $scope.clientTeam_list = [];
-      $scope.me = $scope.user.id;
+    $scope.clientList = [];
+    $scope.clientTeam_list = [];
+    $scope.me = $scope.user.id;
 
-      //get User Clients
-      $http({
-          method: "GET",
-          url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getUserClients',
-          params: {
-              userId: $scope.user.id
-          }
+    //get User Clients
+    $http({
+      method: "GET",
+      url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getUserClients',
+      params: {
+        userId: $scope.user.id
+      }
+    })
+      .then(function (response) {
+        $scope.clientList = response.data;
       })
-       .then(function (response) {
-           $scope.clientList = response.data;
-       })
 
-      //get User Teams Only
+    //get User Teams Only
 
-      $http({
-          method: "GET",
-          url: 'http://proj.ruppin.ac.il/bgroup48/prod/VolunteerService.asmx/getUserTeams',
-          params: {
-              user_id: $scope.user.id
-          }
+    $http({
+      method: "GET",
+      url: 'http://proj.ruppin.ac.il/bgroup48/prod/VolunteerService.asmx/getUserTeams',
+      params: {
+        user_id: $scope.user.id
+      }
+    })
+      .then(function (response) {
+        console.log($scope.user.id)
+        console.log("sucsses")
+        $scope.clientTeam_list = response.data;
+        console.log($scope.clientTeam_list)
       })
-     .then(function (response) {
-         console.log($scope.user.id)
-         console.log("sucsses")
-         $scope.clientTeam_list = response.data;
-         console.log($scope.clientTeam_list)
-     })
 
-      $scope.selectedDist = {};
-      $scope.filterExpression = function (thana) {
-          return (thana.dId === $scope.selectedDist.id);
-      };
+    $scope.selectedDist = {};
+    $scope.filterExpression = function (thana) {
+      return (thana.dId === $scope.selectedDist.id);
+    };
 
-      // http request to get all images in DB
+    // http request to get all images in DB
     $scope.getPic = function () {
       $http({
         method: "GET",
         url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/LoadPic',
         params: {
-            userID: $scope.user.id,
-            type : $scope.user.type
+          userID: $scope.user.id,
+          type: $scope.user.type
         }
-          }
+      }
       )
         .then(function (res) {
           $scope.allImages = res.data;
