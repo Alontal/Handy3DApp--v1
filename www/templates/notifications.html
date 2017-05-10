@@ -1,18 +1,20 @@
 <ion-view view-title="Notifications">
-  <ion-content>
-    <ion-list>
+  <ion-content  class="home-bg">
+    <ion-list >
+      <div class="list">
        <!--href="#/app/notifications/{{notification.id}}"-->
-      <ion-item ng-repeat="notification in notifications" ng-click="storeItem(notification)">
-         id: {{notification.id}}
-         title: {{notification.title}}
+      <ion-item class="card item-text-wrap" ng-repeat="notification in notifications" ng-click="storeItem(notification)">
+         {{notification.id}}) {{notification.title}}
+            <ion-option-button class="button-balanced">More</ion-option-button>
+            <ion-option-button class="button-energized">+2</ion-option-button>
+            <ion-option-button class="button-assertive">+1</ion-option-button>
+      </div>
       </ion-item>
     </ion-list>
-  </ion-content>
-</ion-view>
 
 <!--example for list that open on click -->
-<!--
-    <ion-list>
+
+    <!--<ion-list>
         <div class="list">
           <ion-item class="card item-text-wrap" ng-click="click1($event)">
             Menu One
@@ -39,3 +41,7 @@
           </div>
         </div>
       </ion-list>-->
+
+
+        </ion-content>
+</ion-view>
