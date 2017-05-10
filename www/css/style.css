@@ -307,3 +307,15 @@
 }
 
 
+/*camera*/
+.preview{
+    height:300px;
+    width:400px;
+     display:block
+}
+.preview img{
+    height:inherit;
+    width:400px; 
+    display:block
+}
+
