@@ -69,7 +69,7 @@
 .align-bottom
 {
     position: absolute;
-    bottom: 0px; 
+    bottom: -20px; 
     width: 100%
 }
 /*margin*/
@@ -294,6 +294,5 @@
 .hidden-button-top{
     bottom:180px;
 }
-
 
 
