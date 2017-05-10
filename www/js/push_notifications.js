@@ -16,7 +16,6 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
 
 
     function onCordovaReady() {
-
         var push = PushNotification.init({
             "android": {
                 "senderID": SENDER_ID
@@ -30,7 +29,6 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             },
             "windows": {}
         });
-
 
         push.on('registration', function (data) {
             notification_id = data.registrationId;
@@ -57,18 +55,14 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             else {
 
             }
-
-
             push.finish(function () {
                 console.log('finish successfully called');
             });
         });
-
         push.on('error', function (e) {
             console.log("push error");
         });
     }
-
 
     function IsIphone() {
         var userAgent = navigator.userAgent;
@@ -83,17 +77,14 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
     }
 
     $scope.sendMsg =  function () {
-
-
         var user_platform;
         var notification_id;
-        var nott = "f6IMVrOP4ig:APA91bE_NlNNHNFASpQJYWxaJLEX2hdghsgx14hDTz356xLjxkpEvftwsJsbNNAAwn1MhAfDBnnl5ijsWJQIhA-uz0YbYte9LgKuw7VOBfPmsn_0Axihrdl408cXwB6xPxKe3eobij94";
+        var nott = "ecn0JWF3M7o:APA91bHt4VRuVa0IEfNmmeKK1dYxnm824spdyHds8u-qBgpu7uSEDSkvzI4I6xXgFjglULzo2ToTPgB8WlfJeUZfhmT2y3_NS8V_GlCalkkMlooWfTXN2vl2agTZMdETiomL2iz3nukJ";
         $.ajax({
-
             type: "POST",
             url: "http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/sendMsg",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ platform: user_platform, not_id: notification_id, msg: "TEST!", user: $scope.user.name }),
+            data: JSON.stringify({ platform: "android", not_id: nott, msg: "TEST!", user: $scope.user.name }),
             dataType: "json",
             success: function (data) {
 
@@ -104,49 +95,24 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             }
 
         })
-   
-        addMessageToChat(localStorage.user_name, $("#msg").val());
-        $("#msg").val('');
-        window.scrollTo(0, document.body.scrollHeight);
     }
 
-    $scope.register_notID = function() {
-        alert($scope.user.name);
+        $scope.register_notID = function() {
+        alert($scope.user.id);
         alert(notification_id);
         alert(user_platform);
 
-        var user = $scope.user.name
-        var not = notification_id;
-        var plat =user_platform
-
-        $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SetUserNotIdAndPlatform', { user_name: $scope.user.name, not_id: notification_id, platform: user_platform })
+        var user = $scope.user.name; 
+            $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SetUserNotIdAndPlatform',
+                        { user_id: $scope.user.id, not_id: notification_id, platform: user_platform })
            .then(function (response) {
                //localStorage.removeItem("user");
-               console.log('%c Todo -insert Success', 'background: yellow; color: green');
-               $scope.getTodosFrom_db();
+               console.log('%c Push d -insert Success', 'background: yellow; color: green');
            },
            function (err) {
                console.error('Failed -insert failed,');
                alert('Error please try again');
            })
       
-
-
-
     }
-
-    function addMessageToChat(name, messageContent) {
-        var d = new Date();
-
-        var $d = $("<div>").addClass("msgContainer");
-        var $p = $("<p>").text(messageContent).addClass("msgContent");
-        var $s = $("<span>").text(name).addClass("sender");
-        var $t = $("<span>").text(d.getHours() + ":" + d.getMinutes()).addClass("time");
-
-        $("#content").append($d.append($s, $t, $p));
-
-    }
-
-
-
 }])

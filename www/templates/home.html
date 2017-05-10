@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <ion-view view-title="{{user.name}} Hi">
   <ion-content >
 
@@ -40,7 +41,6 @@
           <a  class=" button-icon icon ion-plus-round"></a>
         </div>
       </div>
-
       <div class="round-button hidden-button-top text-center" ng-click="show !=show">
         <div class="round-button-circle">
           <a class=" button-icon icon ion-plus-round"></a>
@@ -51,5 +51,11 @@
     <!--end of hidden-->
 
 
+=======
+<ion-view view-title="Hi {{user.name}}" ng-controller="PushCtrl">
+  <ion-content>
+    <h1>{{user}}</h1>
+      <button class="button button-block button-positive" ng-click="register_notID()" type="submit">Save to DB</button>
+>>>>>>> 567e16ac0bb54a3acf65ea2c1c8d9d8e6e6bdada
   </ion-content>
 </ion-view>
