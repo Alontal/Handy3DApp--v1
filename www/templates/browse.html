@@ -34,18 +34,13 @@
                     </td>
                 </tr>
             </table>
-
-
             <div class="gallery" ng-repeat="c in allImages | filter:search">
                 <a target="_blank" href="{{c.URL}}">
-                    <img src="{{c.URL}}" alt="Fjords" ng-click="showImages($index)" width="300" height="200">
+                    <img src="{{c.URL}}" id="{{c.MediaID}}" ng-model="imgID" alt="Fjords" on-hold="deletePhoto({{c.MediaID}})" width="300" height="200" ng->
                 </a>
                 <div class="desc">{{c.MediaTitle}}</div>
+                <p>{{c.MediaDescription}}</p>
             </div>
-
-
-
-
             <!--<div>
                 <table class="table">
                     <tr ng-repeat="c in allImages | filter:search">
@@ -53,9 +48,6 @@
                     </tr>
                 </table>
             </div>-->
-
-
-
     </ion-pane>
 </ion-view>
 <style>

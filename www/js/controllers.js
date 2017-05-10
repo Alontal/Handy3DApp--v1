@@ -395,9 +395,9 @@ angular.module('starter.controllers', [])
 
             $cordovaCapture.captureVideo(options)
                 .then(function (videoData) {
-                $scope.videoFile = videoData[0].fullPath;
-                alert(file_path);
-            });
+                    $scope.videoFile = videoData[0].fullPath;
+                    alert(file_path);
+                });
 
 
 
@@ -484,7 +484,9 @@ angular.module('starter.controllers', [])
       $scope.getPic = function () {
           $http({
               method: "GET",
-              url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/LoadPic',
+          
+              url: ' http://localhost:57672/ApplicationGeneralService.asmx/LoadPic',
+             
               params: {
                   userID: $scope.user.id,
                   type: $scope.user.type
@@ -510,6 +512,7 @@ angular.module('starter.controllers', [])
       $scope.zoomMin = 1;
 
       $scope.showImages = function (index) {
+          alert("in")
           $scope.activeSlide = index;
           $scope.showModal('templates/gallery-zoomview.html');
       };
@@ -536,6 +539,31 @@ angular.module('starter.controllers', [])
               $ionicSlideBoxDelegate.enableSlide(false);
           }
       };
+
+      $scope.deletePhoto = function (n) {
+          if (confirm("Press a button!") == true) {
+              $http({
+                  method: "GET",
+                  url: 'http://localhost:57672/ApplicationGeneralService.asmx/SetUnActive',
+                  params: {
+                      MediaID: n,
+                  }
+              }
+          )
+            .then(function (res) {
+                alert('in')
+                console.info('Success,  :')
+            }),
+            function (err) {
+                console.log('Something went wrong');
+            }
+
+
+          } else {
+              return;
+          }
+      }
+
   })
 
   .controller('HomeCtrl', function ($scope, $stateParams) {
