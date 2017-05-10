@@ -16,14 +16,10 @@
           .catch(err => console.log('Error', err));
       }
     </script>-->
-
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
-    -->
+    <link href="css/style.css" rel="stylesheet">
+    <!--<link href="css/bootstrap.css" rel="stylesheet">-->
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
@@ -37,14 +33,14 @@
 
 </head>
 
-<body ng-app="starter" class="dark">
-    <h1 class="light text-center light margin-top-30 ">Handy 3D App </h1>
-    <div class="handy-logo text-center light margin-top-30"></div>
+<body ng-app="starter" class="dark" ng-controller="LoginCtrl"> 
+    <h1 class="light text-center light margin-top-20 ">Handy 3D App </h1>
+    <div class="handy-logo text-center light margin-top-20"></div>
     <h2 class="text-center light margin-top-30">Making the world a better place,<br />
      one hand at a time.
     </h2>
-
-    <form ng-controller="LoginCtrl" name="login" ng-init="checkForExistingToken()"
+    <h4 class="text-center assertive">{{loginAlert}}</h4>
+    <form  name="login" ng-init="checkForExistingToken()"
     class="">
 
         <div class="list align-bottom">

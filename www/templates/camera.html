@@ -1,54 +1,48 @@
 <ion-view view-title="Camera">
-    <ion-content >
-        <script src="jquery.camera_capture.js"></script>
+    <ion-content class="home-bg" ng-init="addImage()">
+
         <ion-scroll>
-            <div style="height:350px;width:400px; display:block">
-                <img id="myImage2"  style="height:350px;width:400px; display:block" />
+            <div class="preview">
+                <img id="myImage2" />
             </div>
 
         </ion-scroll>
 
-        <button  class="button button-calm" ng-click="addImage()">Take Photo</button>
+        <div class="row">
+        <button class="col button button-outline icon-right ion-camera button-balanced enable-pointer-events" ng-click="addImage()">Take Photo</button>
+        <button id="uploadimg" class="col button button-outline icon-right ion-upload button-balanced enable-pointer-events" ng-click="UploadImages(m)">Upload Photo</button>
+        </div>
+        <!--<button id="uploadimg" class="button button-calm enable-pointer-events" ng-click="UploadImages(m)">Upload Photo</button>-->
 
-        <button  id="uploadimg"  class="button button-calm enable-pointer-events" ng-click="UploadImages(m)">Upload Photo</button>
-
-        <button id="uploadimg" class="button button-calm enable-pointer-events" ng-click="TakeVideo()">Take Video</button>
-
-        <button id="uploadimg" class="button button-calm enable-pointer-events" ng-click="uploadVideo()">Upload Video</button>
-
-        <button id="test1" class="button button-calm enable-pointer-events"   >test</button>
-
-        <input type="text" class="item item-input" ng-model="m.title" placeholder="Add a title" />
-
-        <table>
-            <tr>
-                <td>   Patient Name  </td>
-                <!--<td>   Tags </td>-->
-                <td>   Meeting Number</td>
-            </tr>
-            <tr>
-                <td>
-                    <select ng-model="m.c_id"  ng-true-value="true" ng-change="getMettings(m.c_id)">
+        <div class="list">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input type="text" ng-model="m.title"  placeholder="Picture title">
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model="m.desc" placeholder="Picture description">
+                </label>
+            </div>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                Patient
+                </div>
+                <select ng-model="m.c_id" ng-true-value="true" ng-change="getMettings(m.c_id)">
                         <option >Choose Client</option>
                         <option ng-repeat="c in clientList" value="{{c.ClientID}}" >{{c.Name}} </option>
-                    </select>
-                </td>
-                <!--<td>
-                    <select ng-model="m.tags">
-                        <option selected>Option 1</option>
-                        <option>Option 2</option>
-                    </select>
-                </td>-->
+                 </select>
+            </label>
 
-                <td>
-                    <select ng-model="m.meetingNum">
-                        <option >select meeting number</option>
-                        <option ng-repeat="c in meetinglist" value="{{c}}">{{c}} </option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-        <input type="text" class="item item-input" ng-model="m.desc" placeholder="Add a Description" />
+            <label class="item item-input item-select">
+                <div class="input-label">
+                Meeting number
+                </div>
+                <select ng-model="m.meetingNum">
+                                <option >select meeting number</option>
+                                <option ng-repeat="c in meetinglist" value="{{c}}">{{c}} </option>
+                </select>
+            </label>
+        </div>
 
     </ion-content>
 </ion-view>

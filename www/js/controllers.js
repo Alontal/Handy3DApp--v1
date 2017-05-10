@@ -2,14 +2,46 @@
 angular.module('starter.controllers', [])
 
 
-  .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $cordovaDevice) {
+  .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $cordovaDevice, $state, $ionicListDelegate) {
 
-      // With the new view caching in Ionic, Controllers are only called
-      // when they are recreated or on app start, instead of every page change.
-      // To listen for when this page is active (for example, to refresh data),
-      // listen for the $ionicView.enter event:
-      //$scope.$on('$ionicView.enter', function(e) {
-      //});
+
+    // With the new view caching in Ionic, Controllers are only called
+    // when they are recreated or on app start, instead of every page change.
+    // To listen for when this page is active (for example, to refresh data),
+    // listen for the $ionicView.enter event:
+    //$scope.$on('$ionicView.enter', function(e) {
+    //});
+      $scope.goto=function(url){
+        $state.go(url);
+      }
+    //disapear buttons when click outside box
+      $scope.show1 = false;
+      $scope.show2 = false;
+      $scope.click1 = function ($event) {
+      $event.stopPropagation();
+      $scope.show1 = !$scope.show1;
+      $scope.show2 = false;
+      $ionicListDelegate.closeOptionButtons();
+    }
+    $scope.click2 = function ($event) {
+      $event.stopPropagation();
+      $scope.show2 = !$scope.show2;
+      $scope.show1 = false;
+      $ionicListDelegate.closeOptionButtons();
+    }
+    $scope.hideAll = function () {
+      $scope.show2 = false;
+      $scope.show1 = false;
+      $ionicListDelegate.closeOptionButtons();
+    }
+
+
+    // Sign out func
+    $scope.signOut = function () {
+      localStorage.clear();
+      window.location = 'index.html';
+    }
+
 
 
       // Sign out func
@@ -91,6 +123,46 @@ angular.module('starter.controllers', [])
       $scope.links = {
           general: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx',
       }
+
+    }
+
+    // Form data for the login modal
+    $scope.ModalData = {};
+
+    // Create the  modal that we will use later
+    $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
+      scope: $scope
+    }).then(function (modal) {
+      $scope.modal = modal;
+    });
+
+    // Triggered in the  modal to close it
+    $scope.closeModal = function () {
+      $scope.modal.hide();
+    };
+
+    // Open the  modal
+    $scope.Modal = function () {
+      $scope.modal.show();
+    };
+
+    // Perform the  action when the user submits the login form
+    $scope.doModalLogic = function () {
+      console.log('Doing Modal', $scope.ModalData);
+
+      // Simulate a  delay.MODAL  Remove this and replace with your login
+      // code if using a modAL system
+      $timeout(function () {
+        $scope.closeModal();
+      }, 1000);
+    };
+
+
+    //links 
+    $scope.links = {
+      general: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx',
+    }
+
   })
 
   .controller('ProfileCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
@@ -243,8 +315,28 @@ angular.module('starter.controllers', [])
           }
       })
         .then(function (res) {
+
+          $scope.user = res.data;
+          console.log(res.data);
+          if ($scope.user == '0') {
+            console.error('Wrong user name or password, try again');
+            $scope.loginAlert = 'Wrong user name or password, try again';
+          }
+          else if ($scope.user == '-1') {
+            console.error('user not active. please contact admin');
+             $scope.loginAlert = 'user not active. please contact admin';
+          }
+          else if ($scope.user.name != undefined) {
+            console.info('Success, Hi mr/ms :', $scope.user);
+            localStorage.setItem('_user', JSON.stringify($scope.user));
+            saveToken($scope.user.token);
+            //$state.go('app.home');
+            window.location = 'main.html';
+          }
+
             $scope.notifications = res.data;
             console.log('Notifications fetched', JSON.stringify($scope.notifications));
+
         }),
         function (err) {
             console.error('Notifications -get Something went wrong');
@@ -424,12 +516,25 @@ angular.module('starter.controllers', [])
   ])
 
 
+
+  .filter('serchMyMedia', function () {
+    return function (input, User) {
+      var output = [];
     .filter('serchMyMedia', function () {
         return function (input, User) {
             var output = [];
 
-            angular.forEach(input, function (item) {
+      angular.forEach(input, function (item) {
 
+
+        if (item.UserID === $scope.user.id) {
+          output.push(item)
+        }
+      });
+
+      return output;
+    }
+  })
                 if (item.UserID === $scope.user.id) {
                     output.push(item)
                 }
@@ -443,31 +548,56 @@ angular.module('starter.controllers', [])
 
   //Photo Gallery
   .controller('GalleryCtrl', function ($scope, $http, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
-      $scope.clientList = [];
-      $scope.clientTeam_list = [];
-      $scope.me = $scope.user.id;
+    $scope.clientList = [];
+    $scope.clientTeam_list = [];
+    $scope.me = $scope.user.id;
 
-      //get User Clients
-      $http({
-          method: "GET",
-          url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getUserClients',
-          params: {
-              userId: $scope.user.id
-          }
+    //get User Clients
+    $http({
+      method: "GET",
+      url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getUserClients',
+      params: {
+        userId: $scope.user.id
+      }
+    })
+      .then(function (response) {
+        $scope.clientList = response.data;
       })
-       .then(function (response) {
-           $scope.clientList = response.data;
-       })
 
-      //get User Teams Only
+    //get User Teams Only
 
-      $http({
-          method: "GET",
-          url: 'http://proj.ruppin.ac.il/bgroup48/prod/VolunteerService.asmx/getUserTeams',
-          params: {
-              user_id: $scope.user.id
-          }
+    $http({
+      method: "GET",
+      url: 'http://proj.ruppin.ac.il/bgroup48/prod/VolunteerService.asmx/getUserTeams',
+      params: {
+        user_id: $scope.user.id
+      }
+    })
+      .then(function (response) {
+        console.log($scope.user.id)
+        console.log("sucsses")
+        $scope.clientTeam_list = response.data;
+        console.log($scope.clientTeam_list)
       })
+
+    $scope.selectedDist = {};
+    $scope.filterExpression = function (thana) {
+      return (thana.dId === $scope.selectedDist.id);
+    };
+
+    // http request to get all images in DB
+    $scope.getPic = function () {
+      $http({
+        method: "GET",
+        url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/LoadPic',
+        params: {
+          userID: $scope.user.id,
+          type: $scope.user.type
+        }
+      }
+      )
+        .then(function (res) {
+          $scope.allImages = res.data;
      .then(function (response) {
          console.log($scope.user.id)
          console.log("sucsses")

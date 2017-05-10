@@ -1,5 +1,12 @@
 <ion-view view-title="My Tasks">
-  <ion-content ng-controller="TodoCtrl" ng-init="getTodosFrom_db()">
+
+      
+      <ion-nav-buttons side="right">
+        <button id="menu" class="button button-clear button-icon ion-refresh button-light" ng-click="getTodosFrom_db()">
+        </button>
+      </ion-nav-buttons>
+
+  <ion-content ng-controller="TodoCtrl" ng-init="getTodosFrom_db()" class="home-bg">
     <div class="">
       <div class="list">
 
@@ -9,12 +16,10 @@
             <label class="item-input-wrapper">
             <input type="text" ng-model="newTodo" autofocus placeholder="What needs to be done?">
             </label>
-            <button class="button button-small" ng-click="addTodo()">
+            <button ng-show="newTodo" class="button button-small" ng-click="addTodo()">
             Add New
             </button>
-            <button class="button button-small" ng-click="getTodosFrom_db()">
-            get tasks
-            </button>
+     
           </div>
         </form>
       </div>
@@ -37,26 +42,23 @@
         </ion-list>
 
       </div>
-            <div ng-show="todos.length" class="">
-                <div class="col-6 list">
+            <div ng-show="todos.length" class="row">
+                <div class="col list">
                     <label class="toggle toggle-balanced">
-                    <ion-checkbox class="" type="" ng-model="allChecked" ng-click="markAll()">
-                    Mark all as complete</ion-checkbox>
-                    
-                    <!--<button class="button button-outline button-positive">markAll</button>-->
-                    
+                    <button class="button button-outline  button-dark" type="" ng-model="allChecked" ng-click="markAll()">
+                    Mark all as complete</button>
                 </label>
                 </div>
-                <div class="col-4">
-                    <button class="button button-outline  button-dark" ng-show="allChecked" ng-click="clearCompletedTodos()" ng-show="remainingCount < todos.length">Clear completed ({{todos.length - remainingCount}})</button>
+                <div class="col">
+                    <button class="button button-outline  button-dark" ng-show="allChecked" ng-click="clearCompletedTodos()" 
+                            ng-show="remainingCount < todos.length">Clear completed ({{todos.length - remainingCount}})</button>
                     <strong>{{remainingCount}}</strong>
                     <ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
                 </div>
             </div>
         </div>
 
-
-        <div class="bar bar-footer " style="top: 100%">
+        <div class="bar bar-footer">
             <ul class="tabs">
                 <li class="tab-item" ui-sref-active="active">
                     <a ui-sref="app.todo.list({fold:''})">All</a>

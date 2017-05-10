@@ -64,6 +64,7 @@ app.controller('TodoCtrl', ['$scope', '$location', '$filter', '$http', '$state',
                 //localStorage.removeItem("user");
                 console.log('%c Todo -insert Success', 'background: yellow; color: green');
                 $scope.getTodosFrom_db();
+                $scope.newTodo='';
             },
             function (err) {
                 console.error('Failed -insert failed,');

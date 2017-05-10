@@ -1,13 +1,10 @@
-<ion-view view-title="Browse Gallery" ng-controller="GalleryCtrl" ng-init="getPic()">
+<ion-view view-title="Browse Gallery">
 
-    <ion-pane>
-        <ion-header-bar class="bar-stable">
-            <h1 class="title">Devdactic Image Gallery</h1>
-        </ion-header-bar>
-        <ion-content class="has-header padding">
+       
+        <ion-content class="home-bg" ng-controller="GalleryCtrl" ng-init="getPic()">
             <br><br>
-            <p>Filter media by: </p>
-            <table>
+            <h3>Filter media by: </h3>
+            <table >
                 <tr>
                     <td>My Media Only</td>
                     <td>Clients</td>
@@ -41,6 +38,7 @@
                 <div class="desc">{{c.MediaTitle}}</div>
                 <p>{{c.MediaDescription}}</p>
             </div>
+
             <!--<div>
                 <table class="table">
                     <tr ng-repeat="c in allImages | filter:search">
@@ -48,7 +46,8 @@
                     </tr>
                 </table>
             </div>-->
-    </ion-pane>
+
+        </ion-content>
 </ion-view>
 <style>
 

@@ -1,6 +1,53 @@
-<ion-view view-title="Hi {{user.name}}" ng-controller="PushCtrl">
-  <ion-content >
-    <h1>{{user}}</h1>
-     
+<ion-view view-title="Hi {{user.name}}">
+  <ion-content ng-click="hideAll()" class="home-bg">
+
+    <div class="row text center margin-top-20">
+      <button ng-click="goto('app.browse')"  class="col button button-large  btn-home margin-1">
+        Media
+      </button>
+      <button ng-click="goto('app.todo')" class="col button button-large  btn-home margin-1">
+        TO DO
+      </button>
+    </div>
+
+    <div class="row text center">
+      <button  ng-click="goto('app.camera')"  class="col button button-large  btn-home margin-1">
+        Camera
+      </button>
+      <button ng-click="goto('app.Notifications')"  class="col button button-large  btn-home margin-1">
+        Notifications
+      </button>
+    </div>
+    
+
+    <div class="round-button text-center  align-bottom" ng-click="click1($event)">
+      <div class="round-button-circle" >
+        <a  class=" button-icon icon ion-plus-round"></a>
+      </div>
+    </div>
+
+        <!--Hidden buttons-->
+    <div class="hidden-buttons-box align-bottom broder"  ng-show="show1">
+
+      <div class="round-button hidden-button-left margin-left-11" >
+        <div class="round-button-circle">
+          <a class=" button-icon icon ion-paperclip"></a>
+        </div>
+      </div>
+
+      <div class="round-button hidden-button-right margin-sides-11" >
+        <div class="round-button-circle">
+          <a  class=" button-icon icon ion-alert"></a>
+        </div>
+      </div>
+      <div class="round-button hidden-button-top text-center">
+        <div class="round-button-circle">
+          <a class=" button-icon icon ion-camera"></a>
+        </div>
+      </div>
+
+    </div>
+        <!--/Hidden buttons-->
+
   </ion-content>
 </ion-view>
