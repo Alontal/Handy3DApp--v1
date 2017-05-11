@@ -206,7 +206,6 @@ angular.module('starter.controllers', [])
           })
       }
       $scope.regisPush = function () {
-          alert("in");
           document.getElementById('clickPush').click();
       }
 
