@@ -140,7 +140,7 @@ angular.module('starter.controllers', [])
       // designer}
       $http({
           method: 'GET',
-          url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getUserTeams',
+          url: $scope.links.general+'ApplicationGeneralService.asmx/getUserTeams',
           headers: {
               'Content-Type': 'application/json; charset=utf-8',
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -172,7 +172,7 @@ angular.module('starter.controllers', [])
 
       $http({
           method: 'GET',
-          url: 'http://proj.ruppin.ac.il/bgroup48/prod/ClientService.asmx/getFullCustomerDetails',
+          url: $scope.links.general+'ClientService.asmx/getFullCustomerDetails',
           headers: {
               'Content-Type': 'application/json; charset=utf-8',
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -265,7 +265,7 @@ angular.module('starter.controllers', [])
   .controller('NotificationsCtrl', function ($scope, $http, $state) {
       $http({
           method: "GET",
-          url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getNotificationsById',
+          url: $scope.links.general+'ApplicationGeneralService.asmx/getNotificationsById',
           headers: {
               'Content-Type': 'application/json; charset=utf-8',
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -352,11 +352,9 @@ angular.module('starter.controllers', [])
         $scope.addImage = function () {
             navigator.camera.getPicture(function (fileUri) {
                 $scope.images.push(fileUri);
-                alert(file)
+                alert(fileUri)
                 $scope.imageUrl = fileUri;
                 imgUrl = fileUri;
-                console.info(fileUri);
-                //console.info($scope.images[0])
                 localStorage.setItem('images_array', imgUrl);
                 $('#myImage2').attr("src", fileUri);
             }
@@ -366,7 +364,7 @@ angular.module('starter.controllers', [])
         //load client list per teams?!
         $http({
             method: "GET",
-            url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getUserClients',
+            url: $scope.links.general+'ApplicationGeneralService.asmx/getUserClients',
             params: {
                 userId: $scope.user.id
             }
@@ -380,7 +378,7 @@ angular.module('starter.controllers', [])
             clientID = this.m.c_id;
             $http({
                 method: "GET",
-                url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getclientMeetings',
+                url: $scope.links.general+'ApplicationGeneralService.asmx/getclientMeetings',
                 params: {
                     c_id: clientID
                 }
@@ -417,7 +415,7 @@ angular.module('starter.controllers', [])
             // save to pic to DB
             $http({
                 method: "GET",
-                url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SavePicToDB',
+                url: $scope.links.general+'ApplicationGeneralService.asmx/SavePicToDB',
                 params: {
                     title: $scope.m.title,
                     mediaDesc: $scope.m.desc,
@@ -522,7 +520,7 @@ angular.module('starter.controllers', [])
       //get User Clients
       $http({
           method: "GET",
-          url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/getUserClients',
+          url: $scope.links.general+'ApplicationGeneralService.asmx/getUserClients',
           params: {
               userId: $scope.user.id
           }
@@ -535,7 +533,7 @@ angular.module('starter.controllers', [])
 
       $http({
           method: "GET",
-          url: 'http://proj.ruppin.ac.il/bgroup48/prod/VolunteerService.asmx/getUserTeams',
+          url: $scope.links.general+'VolunteerService.asmx/getUserTeams',
           params: {
               user_id: $scope.user.id
           }
@@ -557,7 +555,7 @@ angular.module('starter.controllers', [])
           $http({
               method: "GET",
 
-              url: ' http://localhost:57672/ApplicationGeneralService.asmx/LoadPic',
+              url: ' http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/LoadPic',
 
               params: {
                   userID: $scope.user.id,
