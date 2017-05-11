@@ -2,7 +2,7 @@
   <ion-content>
 
     <div class="list">
-      <form name=push_form>
+      <form name=push>
 
         <label class="item item-input item-select">
           <div class="input-label">
@@ -19,9 +19,9 @@
           <div class="input-label">
           Users 
           </div>
-          <select ng-model="id" ng-init="getAllUsers()" >
+          <select ng-model="push.id" ng-init="getAllUsers()" >
               <option selected>select User</option>
-              <option ng-repeat="u in user_list" value="{{u.UserId}}">{{u.Name}}</option>
+              <option  ng-repeat="u in user_list" value="{{u.UserID}}">{{u.Name}}</option>
     
           </select>
       </label>
@@ -30,7 +30,7 @@
           <div class="input-label">
           Teams 
           </div>
-          <select ng-model="_push.teams" ng-init="getAllTeams()">
+          <select ng-model="push.team" ng-init="getAllTeams()">
               <option ng-repeat=" t in team_list" value=" {{t.TeamID}}" >{{t.TeamNumber}}</option>
           </select>
       </label>
@@ -39,10 +39,10 @@
 
       <span class="input-label">Message</span>
       
-      <input type="text" placeholder="Message (40 char max)" maxlength="40" ng-model="pushMsg" required>
+      <input type="text" placeholder="Message (40 char max)" maxlength="40" ng-model="push.pushMsg" required>
   </form>
   </div>
-    <button class="button button-block button-positive" ng-disabled="push_form.$invalid" ng-click="sendPush()">
+    <button class="button button-block button-positive" ng-disabled="push.$invalid" ng-click="sendPush()">
   Send
   </button>
 

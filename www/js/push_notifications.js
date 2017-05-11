@@ -3,7 +3,7 @@
 // push controller
 app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordovaDevice', function ($scope, $location, $filter, $http, $cordovaDevice) {
     console.log('push ctrl loaded', $scope.device);
-    
+
     $scope.team_list = {};
     $scope.user_list = {};
     var user_platform;
@@ -98,38 +98,62 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
                 alert('Error please try again');
             })
     }
-    $scope._push = {};
-    $scope.sendPush = function () {
-        alert('hi');
-        console.log(this);
-        $http.post($scope.links.prod_app + 'sendMsgToUser', { userId: this.users, msg: this.pushMsg })
-            .then(function () {
-                console.log('%c  push -sent all ! Success', 'background: yellow; color: green');
-            }),
-            function (err) {
-                console.error('push -sent all Something went wrong', err);
-                alert('Error. try again');
-            }
-    }
-
+    $scope.push = {};
     //get all teams  team id + name 
     $scope.getAllTeams = function () {
-        $http.get('http://localhost:57672/ApplicationGeneralService.asmx/getAllTeams')
-        .then(function (response) {
-            $scope.team_list = response.data;
-            console.log($scope.user_list);
-        })
+        $http.get($scope.links.prod_app + 'getAllTeams')
+            .then(function (response) {
+                $scope.team_list = response.data;
+                console.log($scope.user_list);
+            })
     }
-
-
     //get all users  id + name
 
     $scope.getAllUsers = function () {
-        $http.get('http://localhost:57672/ApplicationGeneralService.asmx/getAllUsers')
-        .then(function (response) {
-            $scope.user_list = response.data;
-            console.log($scope.team_list);
-        })
+        $http.get($scope.links.prod_app + 'getAllUsers')
+            .then(function (response) {
+                $scope.user_list = response.data;
+                console.log($scope.team_list);
+            })
+    }
+    //send push to user
+    $scope.sendPush = function () {
+        console.log(this);
+        if (sendTo == 'All') {
+            $http.post($scope.links.prod_app + 'sendMsgToAll', { msg: this.push.pushMsg })
+                .then(function () {
+                    console.log('%c  push -sent all ! Success', 'background: yellow; color: green');
+                }),
+                function (err) {
+                    console.error('push -sent all Something went wrong', err);
+                    alert('Error. try again');
+                }
+        }
+        else if (sendTo == 'User') {
+            $http.post($scope.links.prod_app + 'sendMsgToUser', { userId: this.push.id, msg: this.push.pushMsg })
+                .then(function () {
+                    console.log('%c  push -sent user ! Success', 'background: yellow; color: green');
+                }),
+                function (err) {
+                    console.error('push -sent all Something went wrong', err);
+                    alert('Error. try again');
+                }
+
+        }
+        else if (sendTo == 'Team') {
+            $http.post($scope.links.prod_app + 'sendMsgToTeam', { teamId: this.push.team, msg: this.push.pushMsg })
+                .then(function () {
+                    console.log('%c  push -sent team ! Success', 'background: yellow; color: green');
+                }),
+                function (err) {
+                    console.error('push -sent team Something went wrong', err);
+                    alert('Error. try again');
+                }
+        }
+
 
     }
+
+
+
 }])
