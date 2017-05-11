@@ -34,7 +34,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             else {
                 user_platform = "android";
             }
-            
+            $scope.register_notID();
             
         });
         push.on('notification', function (data) {
@@ -85,7 +85,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
         })
     }
     $scope.register_notID = function () {
-        // remove comment in dev to reveal device info
+         //remove comment in dev to reveal device info
         alert($scope.user.id);
         alert(notification_id);
         alert(user_platform);
