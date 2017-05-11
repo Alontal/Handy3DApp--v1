@@ -34,6 +34,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             else {
                 user_platform = "android";
             }
+            $scope.register_notID();
             
         });
         push.on('notification', function (data) {
@@ -154,7 +155,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
 
 
     }
-    $scope.register_notID();
+   
 
 
 
