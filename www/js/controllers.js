@@ -218,7 +218,7 @@ angular.module('starter.controllers', [])
           // http get user by password & email  
           $http({
               method: "GET",
-              url: $scope.links.prod_app + 'LoginAuth',
+              url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/LoginAuth',
               headers: {
                   'Content-Type': 'application/json; charset=utf-8',
                   'Content-Type': 'application/x-www-form-urlencoded'
