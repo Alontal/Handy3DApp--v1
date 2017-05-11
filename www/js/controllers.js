@@ -5,42 +5,42 @@ angular.module('starter.controllers', [])
   .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $cordovaDevice, $state, $ionicListDelegate) {
 
 
-    // With the new view caching in Ionic, Controllers are only called
-    // when they are recreated or on app start, instead of every page change.
-    // To listen for when this page is active (for example, to refresh data),
-    // listen for the $ionicView.enter event:
-    //$scope.$on('$ionicView.enter', function(e) {
-    //});
-      $scope.goto=function(url){
-        $state.go(url);
+      // With the new view caching in Ionic, Controllers are only called
+      // when they are recreated or on app start, instead of every page change.
+      // To listen for when this page is active (for example, to refresh data),
+      // listen for the $ionicView.enter event:
+      //$scope.$on('$ionicView.enter', function(e) {
+      //});
+      $scope.goto = function (url) {
+          $state.go(url);
       }
-    //disapear buttons when click outside box
+      //disapear buttons when click outside box
       $scope.show1 = false;
       $scope.show2 = false;
       $scope.click1 = function ($event) {
-      $event.stopPropagation();
-      $scope.show1 = !$scope.show1;
-      $scope.show2 = false;
-      $ionicListDelegate.closeOptionButtons();
-    }
-    $scope.click2 = function ($event) {
-      $event.stopPropagation();
-      $scope.show2 = !$scope.show2;
-      $scope.show1 = false;
-      $ionicListDelegate.closeOptionButtons();
-    }
-    $scope.hideAll = function () {
-      $scope.show2 = false;
-      $scope.show1 = false;
-      $ionicListDelegate.closeOptionButtons();
-    }
+          $event.stopPropagation();
+          $scope.show1 = !$scope.show1;
+          $scope.show2 = false;
+          $ionicListDelegate.closeOptionButtons();
+      }
+      $scope.click2 = function ($event) {
+          $event.stopPropagation();
+          $scope.show2 = !$scope.show2;
+          $scope.show1 = false;
+          $ionicListDelegate.closeOptionButtons();
+      }
+      $scope.hideAll = function () {
+          $scope.show2 = false;
+          $scope.show1 = false;
+          $ionicListDelegate.closeOptionButtons();
+      }
 
 
-    // Sign out func
-    $scope.signOut = function () {
-      localStorage.clear();
-      window.location = 'index.html';
-    }
+      // Sign out func
+      $scope.signOut = function () {
+          localStorage.clear();
+          window.location = 'index.html';
+      }
 
 
 
@@ -88,31 +88,31 @@ angular.module('starter.controllers', [])
           }
       }
 
-$ionicModal.fromTemplateUrl('templates/modals/modal.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-  $scope.openModal = function() {
-    $scope.modal.show();
-  };
-  $scope.closeModal = function() {
-    $scope.modal.hide();
-  };
-  // Cleanup the modal when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.modal.remove();
-  });
-  // Execute action on hide modal
-  $scope.$on('modal.hidden', function() {
-    // Execute action
-  });
-  // Execute action on remove modal
-  $scope.$on('modal.removed', function() {
-    // Execute action
-  }); 
- 
+      $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
+          scope: $scope,
+          animation: 'slide-in-up'
+      }).then(function (modal) {
+          $scope.modal = modal;
+      });
+      $scope.openModal = function () {
+          $scope.modal.show();
+      };
+      $scope.closeModal = function () {
+          $scope.modal.hide();
+      };
+      // Cleanup the modal when we're done with it!
+      $scope.$on('$destroy', function () {
+          $scope.modal.remove();
+      });
+      // Execute action on hide modal
+      $scope.$on('modal.hidden', function () {
+          // Execute action
+      });
+      // Execute action on remove modal
+      $scope.$on('modal.removed', function () {
+          // Execute action
+      });
+
 
 
       //links 
@@ -121,10 +121,9 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
           prod_app: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/',
       }
 
-    
 
-    }
-    )
+  })
+
   .controller('ProfileCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
 
   }])
@@ -338,8 +337,7 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
                 imgUrl = fileUri;
                 localStorage.setItem('images_array', imgUrl);
                 $('#myImage2').attr("src", fileUri);
-            }
-            )
+            })
         }
 
         //load client list per teams?!
@@ -368,7 +366,6 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
                   $scope.meetinglist = response.data;
               })
         }
-
         //  function for Uploading Images
         $scope.UploadImages = function () {
             //alert($scope.imageUrl)
@@ -392,7 +389,6 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
             var savePath = $scope.links.prod + 'Client/src/' + path
             alert('Image Uploaded and save in :' + savePath);
 
-
             // save to pic to DB
             $http({
                 method: "GET",
@@ -405,8 +401,7 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
                     clientId: $scope.m.c_id,
                     userId: $scope.user.id,
                 }
-            }
-            )
+            })
               .then(function (res) {
                   alert("Image uploaded")
               }),
@@ -418,21 +413,16 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
             alert("An error has occurred: Code = " + error);
         }
 
-
         $scope.TakeVideo = function () {
             var options = {
                 limit: 1,
                 duration: 10
             };
-
             $cordovaCapture.captureVideo(options)
                 .then(function (videoData) {
                     $scope.videoFile = videoData[0].fullPath;
                     alert(file_path);
                 });
-
-
-
         }
         // viedo upload -dev
         $scope.uploadVideo = function () {
@@ -452,25 +442,24 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
             ft.upload($scope.videoFile, encodeURI($scope.links.prod_app + 'VideoHandler.ashx'), win, fail, options); // Upload
         }
     }
-
   ])
 
     .filter('serchMyMedia', function () {
         return function (input, User) {
             var output = [];
 
-      angular.forEach(input, function (item) {
+            angular.forEach(input, function (item) {
 
-        if (item.UserID === $scope.user.id) {
-          output.push(item)
+                if (item.UserID === $scope.user.id) {
+                    output.push(item)
+                }
+            });
+
+            return output;
         }
-      });
+    })
 
-      return output;
-    }
-  })
 
-    
 
 //Photo Gallery
   .controller('GalleryCtrl', function ($scope, $http, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
@@ -516,7 +505,7 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
           $http({
               method: "GET",
 
-              url:  $scope.links.prod_app + 'LoadPic',
+              url: $scope.links.prod_app + 'LoadPic',
 
               params: {
                   userID: $scope.user.id,
@@ -596,10 +585,165 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
 
   })
 
-  .controller('HomeCtrl', function ($scope, $stateParams) {
+  .controller('HomeCtrl',  ['$scope', '$location', '$filter', '$http', '$cordovaDevice', '$stateParams', function ($scope, $location, $filter, $http, $cordovaDevice ,$stateParams) {
       $scope.home = 'home :)';
 
-  })
+      $scope.team_list = {};
+      $scope.user_list = {};
+      var user_platform;
+      var notification_id;
+      var SENDER_ID = "256793245079";
+
+      document.addEventListener("deviceready", onCordovaReady, false);
+      function onCordovaReady() {
+          var push = PushNotification.init({
+              "android": {
+                  "senderID": SENDER_ID
+              },
+              "ios": {
+                  "alert": "true",
+                  "badge": "true",
+                  "sound": "true",
+                  "senderID": SENDER_ID,
+                  "gcmSandbox": true
+              },
+              "windows": {}
+          });
+          push.on('registration', function (data) {
+              notification_id = data.registrationId;
+              console.log("this is data device: " + data);
+              if (IsIphone()) {
+                  user_platform = "ios";
+              }
+              else {
+                  user_platform = "android";
+              }
+              $scope.register_notID();
+
+          });
+          push.on('notification', function (data) {
+              console.log("notification event");
+
+              if (data.additionalData.foreground && data.additionalData.sender != localStorage.user_name) {
+
+                  addMessageToChat(data.additionalData.sender, data.message);
+              }
+              else {
+
+              }
+              push.finish(function () {
+                  console.log('finish successfully called');
+              });
+          });
+          push.on('error', function (e) {
+              console.log("push error");
+          });
+      }
+
+
+      function IsIphone() {
+          var userAgent = navigator.userAgent;
+
+          if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+              return true;
+          }
+          else {
+
+              return false;
+          }
+      }
+
+      $scope.sendMsg = function () {
+          var user_platform;
+          var notification_id;
+          $.ajax({
+              type: "POST",
+              url: "http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/sendMsg",
+              contentType: "application/json; charset=utf-8",
+              data: JSON.stringify({ platform: "android", not_id: nott, msg: "TEST!", user: $scope.user.name }),
+              dataType: "json",
+              success: function (data) {
+              },
+              error: function () {
+              }
+          })
+      }
+      $scope.regisPush = function () {
+          alert("in");
+          document.getElementById('clickPush').click();
+      }
+
+      $scope.register_notID = function () {
+          //remove comment in dev to reveal device info
+          alert($scope.user.id);
+          alert(notification_id);
+          alert(user_platform);
+          var user = $scope.user.name;
+          $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SetUserNotIdAndPlatform',
+              { user_id: $scope.user.id, not_id: notification_id, platform: user_platform })
+              .then(function (response) {
+                  console.log('%c Push d -insert Success', 'background: yellow; color: green');
+              },
+              function (err) {
+                  console.error('Failed -insert failed,');
+                  alert('Error please try again');
+              })
+      }
+      $scope.push = {};
+      //get all teams  team id + name 
+      $scope.getAllTeams = function () {
+          $http.get($scope.links.prod_app + 'getAllTeams')
+              .then(function (response) {
+                  $scope.team_list = response.data;
+                  console.log($scope.user_list);
+              })
+      }
+      //get all users  id + name
+
+      $scope.getAllUsers = function () {
+          $http.get($scope.links.prod_app + 'getAllUsers')
+              .then(function (response) {
+                  $scope.user_list = response.data;
+                  console.log($scope.team_list);
+              })
+      }
+      //send push to user
+      $scope.sendPush = function () {
+          console.log(this);
+          if (this.push.sendTo == 'All') {
+              $http.post($scope.links.prod_app + 'sendMsgToAll', { msg: this.push.pushMsg })
+                  .then(function () {
+                      console.log('%c  push -sent all ! Success', 'background: yellow; color: green');
+                  }),
+                  function (err) {
+                      console.error('push -sent all Something went wrong', err);
+                      alert('Error. try again');
+                  }
+          }
+          else if (this.push.sendTo == 'User') {
+              $http.post($scope.links.prod_app + 'sendMsgToUser', { userId: this.push.id, msg: this.push.pushMsg })
+                  .then(function () {
+                      console.log('%c  push -sent user ! Success', 'background: yellow; color: green');
+                  }),
+                  function (err) {
+                      console.error('push -sent all Something went wrong', err);
+                      alert('Error. try again');
+                  }
+
+          }
+          else if (this.push.sendTo == 'Team') {
+              $http.post($scope.links.prod_app + 'sendMsgToTeam', { TeamId: this.push.team, msg: this.push.pushMsg })
+                  .then(function () {
+                      console.log('%c  push -sent team ! Success', 'background: yellow; color: green');
+                  }),
+                  function (err) {
+                      console.error('push -sent team Something went wrong', err);
+                      alert('Error. try again');
+                  }
+          }
+      }
+
+  }])
 
 
 ;

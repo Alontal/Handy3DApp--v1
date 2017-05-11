@@ -36,10 +36,10 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'
       .state('app.home', {
         url: '/home',
         views: {
-          'menuContent': {
-            templateUrl: 'templates/home.html',
-            controller: 'HomeCtrl' 
-          },
+            'menuContent': {
+                templateUrl: 'templates/home.html',
+                controller: 'HomeCtrl'
+                },
         }
       })
       .state('app.login', {
@@ -102,15 +102,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'
           },
         }
       })
-      .state('app.push', {
-        url: '/push',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/push.html',
-            controller: 'PushCtrl'
-          },
-        }
-      })
+  
       .state('app.browse', {
         url: '/browse',
         views: {
@@ -141,6 +133,15 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'
           }
         }
       })
+        .state('app.push', {
+            url: '/push',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/push.html',
+                    controller: 'HomeCtrl'
+                },
+            }
+        })
 
       // .state('app.single', {
       //   url: '/notifications/:notificationId',
