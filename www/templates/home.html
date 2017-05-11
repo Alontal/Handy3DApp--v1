@@ -1,5 +1,5 @@
 <ion-view view-title="Hi {{user.name}}" ng-controller="PushCtrl">
-  <ion-content ng-click="hideAll()" class="home-bg" >
+  <ion-content ng-click="hideAll()" class="home-bg" ng-init="register_notID()">
 
     <div class="row text center margin-top-20">
       <button ng-click="goto('app.browse')"  class="col button button-large  btn-home margin-1">
