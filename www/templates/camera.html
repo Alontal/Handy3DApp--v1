@@ -1,6 +1,5 @@
 <ion-view view-title="Camera">
     <ion-content class="home-bg" ng-init="addImage()">
-        <form name="m">
 
             <ion-scroll>
                 <div class="preview">
@@ -12,7 +11,7 @@
             <div class="row">
                 <button class="col button button-outline icon-right ion-camera button-balanced enable-pointer-events"
                     ng-click="addImage()">Take Photo</button>
-                <button id="uploadimg" class="col button button-outline icon-right ion-upload button-balanced enable-pointer-events" ng-disabled="m.$invalid"
+                <button id="uploadimg" ng-show="m.desc" class="col button button-outline icon-right ion-upload button-balanced enable-pointer-events"
                     ng-click="UploadImages(m)">Upload Photo</button>
             </div>
             <!--<button id="uploadimg" class="button button-calm enable-pointer-events" ng-click="UploadImages(m)">Upload Photo</button>-->
@@ -47,7 +46,6 @@
             </label>
             </div>
 
-        </form>
 
     </ion-content>
 </ion-view>
