@@ -528,8 +528,7 @@ angular.module('starter.controllers', [])
       function win(r) {
         var path = r.response;
         var savePath = $scope.links.prod + 'Client/src/' + path
-        alert('Image Uploaded and save in :' + savePath);
-
+        //uncomment to get url in alert
         // save to pic to DB
         $http({
           method: "GET",
@@ -544,7 +543,7 @@ angular.module('starter.controllers', [])
           }
         })
           .then(function (res) {
-            alert("Image uploaded")
+            alert("Image Saved")
           }),
           function (err) {
             console.log('Something went wrong');
