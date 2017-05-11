@@ -1,5 +1,5 @@
-<ion-view view-title="Hi {{user.name}}" ng-controller="PushCtrl">
-  <ion-content ng-click="hideAll()" class="home-bg" >
+<ion-view view-title="Hi {{user.name}}" >
+  <ion-content ng-click="hideAll()" class="home-bg"  >
 
     <div class="row text center margin-top-20">
       <button ng-click="goto('app.browse')"  class="col button button-large  btn-home margin-1">
@@ -27,26 +27,26 @@
     </div>
 
         <!--Hidden buttons-->
-    <div class="hidden-buttons-box align-bottom broder"  ng-show="show1">
+      <div class="hidden-buttons-box align-bottom broder" ng-show="show1">
 
-      <div class="round-button hidden-button-left margin-left-11" >
-        <div class="round-button-circle">
-          <a class=" button-icon icon ion-paperclip"></a>
-        </div>
-      </div>
+          <div class="round-button hidden-button-left margin-left-11">
+              <div class="round-button-circle">
+                  <a class=" button-icon icon ion-paperclip"></a>
+              </div>
+          </div>
 
-      <div class="round-button hidden-button-right margin-sides-11" >
-        <div class="round-button-circle">
-          <a  class=" button-icon icon ion-alert"></a>
-        </div>
-      </div>
-      <div class="round-button hidden-button-top text-center">
-        <div class="round-button-circle">
-          <a class=" button-icon icon ion-camera"></a>
-        </div>
-      </div>
+          <div class="round-button hidden-button-right margin-sides-11">
+              <div class="round-button-circle">
+                  <a class=" button-icon icon ion-alert"></a>
+              </div>
+          </div>
+          <div class="round-button hidden-button-top text-center" >
+              <div class="round-button-circle">
+                  <a class=" button-icon icon ion-camera"></a>
+              </div>
+          </div>
 
-    </div>
+      </div>
         <!--/Hidden buttons-->
 
   </ion-content>

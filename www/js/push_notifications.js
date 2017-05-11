@@ -27,14 +27,14 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
         });
         push.on('registration', function (data) {
             notification_id = data.registrationId;
-            console.log(data);
+            console.log("this is data device: "+data);
             if (IsIphone()) {
                 user_platform = "ios";
             }
             else {
                 user_platform = "android";
             }
-            $scope.register_notID();
+            
             
         });
         push.on('notification', function (data) {

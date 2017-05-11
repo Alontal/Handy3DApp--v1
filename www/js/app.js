@@ -38,7 +38,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'
         views: {
           'menuContent': {
             templateUrl: 'templates/home.html',
-            controller: 'HomeCtrl'
+            controller: 'HomeCtrl' 
           },
         }
       })
