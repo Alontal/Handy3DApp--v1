@@ -137,8 +137,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'
             url: '/push',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/push.html',
-                    controller: 'HomeCtrl'
+                    templateUrl: 'templates/push.html'
                 },
             }
         })
