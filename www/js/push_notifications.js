@@ -3,7 +3,7 @@
 // push controller
 app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordovaDevice', function ($scope, $location, $filter, $http, $cordovaDevice) {
     console.log('push ctrl loaded', $scope.device);
-
+    
     $scope.team_list = {};
     $scope.user_list = {};
     var user_platform;
@@ -155,6 +155,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
 
 
     }
+
    
 
 
