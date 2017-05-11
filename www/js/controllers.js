@@ -414,8 +414,8 @@ angular.module('starter.controllers', [])
               'Content-Type': 'application/x-www-form-urlencoded'
           },
           params: {
-              // userId: $scope.user.id
-              userId: 1,
+              userId: $scope.user.id
+            //   userId: 1,
           }
       })
         .then(function (res) {
