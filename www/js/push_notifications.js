@@ -3,7 +3,7 @@
 // push controller
 app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordovaDevice', function ($scope, $location, $filter, $http, $cordovaDevice) {
     console.log('push ctrl loaded', $scope.device);
-    
+
     $scope.team_list = {};
     $scope.user_list = {};
     var user_platform;
@@ -27,7 +27,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
         });
         push.on('registration', function (data) {
             notification_id = data.registrationId;
-            console.log("this is data device: "+data);
+            console.log("this is data device: " + data);
             if (IsIphone()) {
                 user_platform = "ios";
             }
@@ -35,7 +35,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
                 user_platform = "android";
             }
             $scope.register_notID();
-            
+
         });
         push.on('notification', function (data) {
             console.log("notification event");
@@ -55,7 +55,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             console.log("push error");
         });
     }
- 
+
 
     function IsIphone() {
         var userAgent = navigator.userAgent;
@@ -84,8 +84,13 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             }
         })
     }
+    $scope.regisPush = function () {
+        alert("in");
+        document.getElementById('clickPush').click();
+    }
+
     $scope.register_notID = function () {
-         //remove comment in dev to reveal device info
+        //remove comment in dev to reveal device info
         alert($scope.user.id);
         alert(notification_id);
         alert(user_platform);
@@ -156,7 +161,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
 
     }
 
-   
+
 
 
 

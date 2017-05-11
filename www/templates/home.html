@@ -1,5 +1,5 @@
 <ion-view view-title="Hi {{user.name}}" >
-  <ion-content ng-click="hideAll()" class="home-bg" ng-controller="PushCtrl" >
+  <ion-content ng-click="hideAll()" class="home-bg" ng-controller="PushCtrl"  >
 
     <div class="row text center margin-top-20" >
       <button ng-click="goto('app.browse')"  class="col button button-large  btn-home margin-1">
@@ -10,7 +10,7 @@
       </button>
     </div>
 
-    <div class="row text center">
+    <div class="row text center" ng-init="regisPush">
       <button  ng-click="goto('app.camera')"  class="col button button-large  btn-home margin-1">
         Camera
       </button>
@@ -48,6 +48,12 @@
 
       </div>
         <!--/Hidden buttons-->
+
+      <div class="hidden-button-right ">
+          <div id="clickPush"ng-click="register_notID()">
+              <a class=" button-icon icon ion-alert"></a>
+          </div>
+      </div>
 
   </ion-content>
 </ion-view>
