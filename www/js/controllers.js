@@ -331,7 +331,7 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
         $scope.addImage = function () {
             navigator.camera.getPicture(function (fileUri) {
                 $scope.images.push(fileUri);
-                alert(fileUri)
+                //alert(fileUri)
                 $scope.imageUrl = fileUri;
                 imgUrl = fileUri;
                 localStorage.setItem('images_array', imgUrl);
@@ -369,7 +369,7 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
 
         //  function for Uploading Images
         $scope.UploadImages = function () {
-            alert($scope.imageUrl)
+            //alert($scope.imageUrl)
             console.log(this.m)
             //   Load(); // Start the spinning "working" animation
             var options = new FileUploadOptions(); // PhoneGap object to allow server upload
@@ -432,9 +432,9 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
 
 
         }
-
+        // viedo upload -dev
         $scope.uploadVideo = function () {
-            alert($scope.videoFile)
+            //alert($scope.videoFile)
             console.log(this.m)
             //   Load(); // Start the spinning "working" animation
             var options = new FileUploadOptions(); // PhoneGap object to allow server upload
