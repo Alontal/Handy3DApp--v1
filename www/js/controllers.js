@@ -471,31 +471,11 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
 
   ])
 
-
-    .filter('serchMyMedia', function () {
-        return function (input, User) {
-            var output = [];
-
-            angular.forEach(input, function (item) {
-
-                if (item.UserID === $scope.user.id) {
-                    output.push(item)
-                }
-            });
-
-            return output;
-        }
-
-
-    })
-
-
     .filter('serchMyMedia', function () {
         return function (input, User) {
             var output = [];
 
       angular.forEach(input, function (item) {
-
 
         if (item.UserID === $scope.user.id) {
           output.push(item)
@@ -608,24 +588,23 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
       };
 
       $scope.deletePhoto = function (n) {
-          if (confirm("Press a button!") == true) {
+          var id = n;
+          if (confirm("You sure you want to delete this photo?") == true) {
               $http({
                   method: "GET",
                   url: $scope.links.prod_app + 'SetUnActive',
                   params: {
-                      MediaID: n,
+                      MediaID: id
                   }
               }
           )
             .then(function (res) {
-                alert('in')
+                $scope.getPic();//refresh image list
                 console.info('Success,  :')
             }),
             function (err) {
                 console.log('Something went wrong');
             }
-
-
           } else {
               return;
           }
