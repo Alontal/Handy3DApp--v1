@@ -3,8 +3,9 @@
 // push controller
 app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordovaDevice', function ($scope, $location, $filter, $http, $cordovaDevice) {
     console.log('push ctrl loaded', $scope.device);
-
-
+    
+    $scope.team_list = {};
+    $scope.user_list = {};
     var user_platform;
     var notification_id;
     var SENDER_ID = "256793245079";
@@ -97,10 +98,11 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
                 alert('Error please try again');
             })
     }
-
+    $scope._push = {};
     $scope.sendPush = function () {
         alert('hi');
-        $http.post($scope.links.prod_app + 'sendMsgToUser', { userId: $scope.users, msg: $scope.pushMsg })
+        console.log(this);
+        $http.post($scope.links.prod_app + 'sendMsgToUser', { userId: this.users, msg: this.pushMsg })
             .then(function () {
                 console.log('%c  push -sent all ! Success', 'background: yellow; color: green');
             }),
@@ -111,9 +113,23 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
     }
 
     //get all teams  team id + name 
-
+    $scope.getAllTeams = function () {
+        $http.get('http://localhost:57672/ApplicationGeneralService.asmx/getAllTeams')
+        .then(function (response) {
+            $scope.team_list = response.data;
+            console.log($scope.user_list);
+        })
+    }
 
 
     //get all users  id + name
 
+    $scope.getAllUsers = function () {
+        $http.get('http://localhost:57672/ApplicationGeneralService.asmx/getAllUsers')
+        .then(function (response) {
+            $scope.user_list = response.data;
+            console.log($scope.team_list);
+        })
+
+    }
 }])
