@@ -121,6 +121,8 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
           prod_app: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/',
       }
 
+    
+
     }
     )
   .controller('ProfileCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {

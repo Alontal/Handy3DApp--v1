@@ -34,7 +34,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             else {
                 user_platform = "android";
             }
-            $scope.register_notID();
+            
         });
         push.on('notification', function (data) {
             console.log("notification event");
@@ -54,6 +54,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             console.log("push error");
         });
     }
+ 
 
     function IsIphone() {
         var userAgent = navigator.userAgent;
@@ -153,6 +154,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
 
 
     }
+    $scope.register_notID();
 
 
 
