@@ -12,10 +12,9 @@
       </ion-item>
     </ion-list>
 
-
-    <div class="round-button text-center  align-bottom" ng-click="goto('app.push')">
+    <div class="round-button text-center  align-bottom" ng-if="user.type === 'Admin' " >
       <div class="round-button-circle" >
-        <a  class=" button-icon icon ion-plus-round"></a>
+        <a  class=" button-icon icon ion-plus-round" href="#app/push"></a>
       </div>
     </div>
 <!--example for list that open on click -->

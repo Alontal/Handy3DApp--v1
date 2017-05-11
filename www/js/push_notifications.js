@@ -4,7 +4,7 @@
 app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordovaDevice', function ($scope, $location, $filter, $http, $cordovaDevice) {
     console.log('push ctrl loaded', $scope.device);
 
-
+  
     var user_platform;
     var notification_id;
     var SENDER_ID = "256793245079";
@@ -81,12 +81,14 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             }
         })
     }
+    $scope.type = $scope.user.type;
     $scope.register_notID = function () {
         alert($scope.user.id);
         alert(notification_id);
         alert(user_platform);
 
         var user = $scope.user.name;
+        
         $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SetUserNotIdAndPlatform',
             { user_id: $scope.user.id, not_id: notification_id, platform: user_platform })
             .then(function (response) {
