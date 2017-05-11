@@ -121,7 +121,8 @@ angular.module('starter.controllers', [])
 
       //links 
       $scope.links = {
-          general: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx',
+          prod: 'http://proj.ruppin.ac.il/bgroup48/prod/',
+          prod_app: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/',
       }
 
     }
@@ -140,7 +141,7 @@ angular.module('starter.controllers', [])
       // designer}
       $http({
           method: 'GET',
-          url: $scope.links.general+'ApplicationGeneralService.asmx/getUserTeams',
+          url: $scope.links.prod_app + 'getUserTeams',
           headers: {
               'Content-Type': 'application/json; charset=utf-8',
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -172,7 +173,7 @@ angular.module('starter.controllers', [])
 
       $http({
           method: 'GET',
-          url: $scope.links.general+'ClientService.asmx/getFullCustomerDetails',
+          url: $scope.links.prod + 'ClientService.asmx/getFullCustomerDetails',
           headers: {
               'Content-Type': 'application/json; charset=utf-8',
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -217,7 +218,7 @@ angular.module('starter.controllers', [])
           // http get user by password & email  
           $http({
               method: "GET",
-              url: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/LoginAuth',
+              url: $scope.links.prod_app + 'LoginAuth',
               headers: {
                   'Content-Type': 'application/json; charset=utf-8',
                   'Content-Type': 'application/x-www-form-urlencoded'
@@ -265,7 +266,7 @@ angular.module('starter.controllers', [])
   .controller('NotificationsCtrl', function ($scope, $http, $state) {
       $http({
           method: "GET",
-          url: $scope.links.general+'ApplicationGeneralService.asmx/getNotificationsById',
+          url: $scope.links.prod_app + 'getNotificationsById',
           headers: {
               'Content-Type': 'application/json; charset=utf-8',
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -364,7 +365,7 @@ angular.module('starter.controllers', [])
         //load client list per teams?!
         $http({
             method: "GET",
-            url: $scope.links.general+'ApplicationGeneralService.asmx/getUserClients',
+            url: $scope.links.prod_app + 'getUserClients',
             params: {
                 userId: $scope.user.id
             }
@@ -378,7 +379,7 @@ angular.module('starter.controllers', [])
             clientID = this.m.c_id;
             $http({
                 method: "GET",
-                url: $scope.links.general+'ApplicationGeneralService.asmx/getclientMeetings',
+                url: $scope.links.prod_app + 'getclientMeetings',
                 params: {
                     c_id: clientID
                 }
@@ -403,19 +404,19 @@ angular.module('starter.controllers', [])
 
             options.params = params; // add parameters to the FileUploadOptions object
             var ft = new FileTransfer();
-            ft.upload($scope.imageUrl, encodeURI("http://proj.ruppin.ac.il/bgroup48/prod/MediaAppHandler.ashx"), win, fail, options); // Upload
+            ft.upload($scope.imageUrl, encodeURI($scope.links.prod + 'MediaAppHandler.ashx'), win, fail, options); // Upload
         } // Upload Photo
 
         function win(r) {
             var path = r.response;
-            var savePath = "http://proj.ruppin.ac.il/bgroup48/prod/Client/src/" + path
+            var savePath = $scope.links.prod + 'Client/src/' + path
             alert('Image Uploaded and save in :' + savePath);
 
 
             // save to pic to DB
             $http({
                 method: "GET",
-                url: $scope.links.general+'ApplicationGeneralService.asmx/SavePicToDB',
+                url: $scope.links.prod_app + 'SavePicToDB',
                 params: {
                     title: $scope.m.title,
                     mediaDesc: $scope.m.desc,
@@ -468,7 +469,7 @@ angular.module('starter.controllers', [])
 
             options.params = params; // add parameters to the FileUploadOptions object
             var ft = new FileTransfer();
-            ft.upload($scope.videoFile, encodeURI("http://proj.ruppin.ac.il/bgroup48/prod/VideoHandler.ashx"), win, fail, options); // Upload
+            ft.upload($scope.videoFile, encodeURI($scope.links.prod_app + 'VideoHandler.ashx'), win, fail, options); // Upload
         }
     }
 
@@ -520,7 +521,7 @@ angular.module('starter.controllers', [])
       //get User Clients
       $http({
           method: "GET",
-          url: $scope.links.general+'ApplicationGeneralService.asmx/getUserClients',
+          url: $scope.links.prod_app + 'getUserClients',
           params: {
               userId: $scope.user.id
           }
@@ -533,7 +534,7 @@ angular.module('starter.controllers', [])
 
       $http({
           method: "GET",
-          url: $scope.links.general+'VolunteerService.asmx/getUserTeams',
+          url: $scope.links.prod_app + 'getUserTeams',
           params: {
               user_id: $scope.user.id
           }
@@ -555,7 +556,7 @@ angular.module('starter.controllers', [])
           $http({
               method: "GET",
 
-              url: ' http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/LoadPic',
+              url:  $scope.links.prod_app + 'LoadPic',
 
               params: {
                   userID: $scope.user.id,
@@ -614,7 +615,7 @@ angular.module('starter.controllers', [])
           if (confirm("Press a button!") == true) {
               $http({
                   method: "GET",
-                  url: 'http://localhost:57672/ApplicationGeneralService.asmx/SetUnActive',
+                  url: $scope.links.prod_app + 'SetUnActive',
                   params: {
                       MediaID: n,
                   }
