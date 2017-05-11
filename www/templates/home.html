@@ -1,5 +1,5 @@
 <ion-view view-title="Hi {{user.name}}" >
-  <ion-content ng-click="hideAll()" class="home-bg" ng-controller="PushCtrl"  >
+  <ion-content ng-click="hideAll()" class="home-bg"  >
 
     <div class="row text center margin-top-20" >
       <button ng-click="goto('app.browse')"  class="col button button-large  btn-home margin-1">
@@ -50,7 +50,7 @@
         <!--/Hidden buttons-->
 
       <div class="hidden-button-right ">
-          <div id="clickPush"ng-click="register_notID()">
+          <div id="clickPush" ng-controller="PushCtrl"  ng-click="register_notID()">
               <a class=" button-icon icon ion-alert"></a>
           </div>
       </div>
