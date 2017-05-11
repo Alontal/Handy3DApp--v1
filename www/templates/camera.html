@@ -3,7 +3,7 @@
 
             <ion-scroll>
                 <div class="preview">
-                    <img id="myImage2" />
+                    <img id="myImage2"  />
                 </div>
 
             </ion-scroll>
@@ -11,7 +11,7 @@
             <div class="row">
                 <button class="col button button-outline icon-right ion-camera button-balanced enable-pointer-events"
                     ng-click="addImage()">Take Photo</button>
-                <button id="uploadimg" ng-show="m.desc" class="col button button-outline icon-right ion-upload button-balanced enable-pointer-events"
+                <button id="uploadimg" ng-show="m.c_id && m.desc && m.title" class="col button button-outline icon-right ion-upload button-balanced enable-pointer-events"
                     ng-click="UploadImages(m)">Upload Photo</button>
             </div>
             <!--<button id="uploadimg" class="button button-calm enable-pointer-events" ng-click="UploadImages(m)">Upload Photo</button>-->
@@ -27,10 +27,9 @@
                 </div>
                 <label class="item item-input item-select">
                 <div class="input-label">
-                Patient
+                Client
                 </div>
-                <select ng-model="m.c_id" ng-true-value="true" ng-change="getMettings(m.c_id)">
-                        <option >Choose Client</option>
+                <select ng-model="m.c_id" ng-true-value="true" ng-change="getMettings(m.c_id)" required>
                         <option ng-repeat="c in clientList" value="{{c.ClientID}}" >{{c.Name}} </option>
                  </select>
             </label>
@@ -40,7 +39,7 @@
                 Meeting number
                 </div>
                 <select ng-model="m.meetingNum">
-                                <option >select meeting number</option>
+                                <option value="0">select meeting number</option>
                                 <option ng-repeat="c in meetinglist" value="{{c}}">{{c}} </option>
                 </select>
             </label>

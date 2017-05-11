@@ -214,7 +214,7 @@ angular.module('starter.controllers', [])
             },
             function (err) {
                 console.error('Failed -insert failed,');
-                alert('Error please try again');
+                // alert('Error please try again');
             })
       }
       $scope.push = {};
@@ -531,7 +531,7 @@ angular.module('starter.controllers', [])
             var savePath = $scope.links.prod + 'Client/src/' + path
             alert('Image Uploaded and save in :' + savePath);
 
-            var me= {
+            var me = {
                 MediaTitle: $scope.m.title,
                 MediaDescription: $scope.m.desc,
                 URL: savePath,
@@ -544,6 +544,8 @@ angular.module('starter.controllers', [])
             .then(function (response) {
                 console.log('%c Media -insert Success', 'background: yellow; color: green');
                 alert("Image Saved");
+                $('#myImage2').attr("src", null);
+                $scope.m = null;
             },
             function (err) {
                 console.error('Failed -insert failed,');
@@ -719,14 +721,10 @@ angular.module('starter.controllers', [])
 
       // image preview functions
       $scope.zoomMin = 1;
-      $scope.test = function () {
-          alert("in in");
-      }
 
       $scope.zoomMin = 1;
 
       $scope.showImages = function (index) {
-          alert("in")
           $scope.activeSlide = index;
           $scope.showModal('templates/gallery-zoomview.html');
       };
