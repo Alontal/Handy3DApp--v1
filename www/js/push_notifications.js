@@ -2,7 +2,7 @@
 
 // push controller
 app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordovaDevice', function ($scope, $location, $filter, $http, $cordovaDevice) {
-    console.log('push ctrl loaded',$scope.device);
+    console.log('push ctrl loaded', $scope.device);
 
 
     var user_platform;
@@ -66,7 +66,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
         }
     }
 
-       $scope.sendMsg = function () {
+    $scope.sendMsg = function () {
         var user_platform;
         var notification_id;
         $.ajax({
@@ -81,20 +81,39 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
             }
         })
     }
-        $scope.register_notID = function() {
+    $scope.register_notID = function () {
         alert($scope.user.id);
         alert(notification_id);
         alert(user_platform);
 
-        var user = $scope.user.name; 
-            $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SetUserNotIdAndPlatform',
-                        { user_id: $scope.user.id, not_id: notification_id, platform: user_platform })
-           .then(function (response) {
-               console.log('%c Push d -insert Success', 'background: yellow; color: green');
-           },
-           function (err) {
-               console.error('Failed -insert failed,');
-               alert('Error please try again');
-           })
+        var user = $scope.user.name;
+        $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SetUserNotIdAndPlatform',
+            { user_id: $scope.user.id, not_id: notification_id, platform: user_platform })
+            .then(function (response) {
+                console.log('%c Push d -insert Success', 'background: yellow; color: green');
+            },
+            function (err) {
+                console.error('Failed -insert failed,');
+                alert('Error please try again');
+            })
     }
+
+    $scope.sendPush = function () {
+        alert('hi');
+        $http.post($scope.links.prod_app + 'sendMsgToUser', { userId: $scope.users, msg: $scope.pushMsg })
+            .then(function () {
+                console.log('%c  push -sent all ! Success', 'background: yellow; color: green');
+            }),
+            function (err) {
+                console.error('push -sent all Something went wrong', err);
+                alert('Error. try again');
+            }
+    }
+
+    //get all teams  team id + name 
+
+
+
+    //get all users  id + name
+
 }])

@@ -87,36 +87,32 @@ angular.module('starter.controllers', [])
               black: '#1c2b36'
           }
       }
-      // Form data for the login modal
-      $scope.ModalData = {};
 
-      // Create the  modal that we will use later
-      $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
-          scope: $scope
-      }).then(function (modal) {
-          $scope.modal = modal;
-      });
-
-      // Triggered in the  modal to close it
-      $scope.closeModal = function () {
-          $scope.modal.hide();
-      };
-
-      // Open the  modal
-      $scope.Modal = function () {
-          $scope.modal.show();
-      };
-
-      // Perform the  action when the user submits the login form
-      $scope.doModalLogic = function () {
-          console.log('Doing Modal', $scope.ModalData);
-
-          // Simulate a  delay.MODAL  Remove this and replace with your login
-          // code if using a modAL system
-          $timeout(function () {
-              $scope.closeModal();
-          }, 1000);
-      };
+$ionicModal.fromTemplateUrl('templates/modals/modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  // Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  }); 
+ 
 
 
       //links 

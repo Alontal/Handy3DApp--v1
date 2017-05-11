@@ -1,0 +1,64 @@
+<!--<script id="templates/modals/modal.html" type="text/ng-template">
+    <ion-modal-view>
+
+        <ion-header-bar class="bar-dark">
+            <h1 class="title">Send Alerts to User / Team / All users</h1>
+
+        </ion-header-bar>
+
+
+
+        <ion-content>
+
+
+
+            <div class="list">
+                <form name="notifications_form">
+
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                        Send to: 
+                        </div>
+                        <select ng-model="sendTo">
+                            <option selected>User</option>
+                            <option >Team</option>
+                            <option>All</option>
+                        </select>
+                    </label>
+
+                     <label class="item item-input item-select" ng-if="sendTo =='User' ">
+                        <div class="input-label">
+                        Users 
+                        </div>
+                        <select ng-model="users">
+                            <option selected>alon</option>
+                            <option >ben</option>
+                            <option>ronit</option>
+                        </select>
+                    </label>
+
+                    <label class="item item-input item-select" ng-if="sendTo =='Team' ">
+                        <div class="input-label">
+                        Teams 
+                        </div>
+                        <select ng-model="teams">
+                            <option selected>alon</option>
+                            <option >ben</option>
+                            <option>ronit</option>
+                        </select>
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+    
+                    <span class="input-label">Message</span>
+                   
+                    <input type="text" placeholder="Message (40 char max)" maxlength="40" ng-model="pushMsg" required>
+
+            <button class="button button-block button-positive" ng-disabled="notifications_form.$invalid" ng-click="sendPush()">
+                Send
+                </button>
+            </form>
+            </div>
+        </ion-content>
+    </ion-modal-view>
+</script>-->

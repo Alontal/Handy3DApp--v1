@@ -1,9 +1,58 @@
-﻿<ion-view view-title="Push Notifications" ng-controller="PushCtrl" >
+﻿<ion-view view-title="Push Notifications" ng-controller="PushCtrl">
   <ion-content>
 
+    <div class="list">
+      <form name=push_form>
 
-      <button class="button button-block button-positive"  ng-click="register_notID()" type="submit">Save my phone details to DB</button>
+        <label class="item item-input item-select">
+          <div class="input-label">
+          Send to: 
+          </div>
+          <select ng-model="sendTo">
+              <option selected>User</option>
+              <option >Team</option>
+              <option>All</option>
+          </select>
+      </label>
 
-      <button class="button button-block button-positive"  ng-click="sendMsg()" type="submit">send push</button>
-  </ion-content>
+        <label class="item item-input item-select" ng-if="sendTo =='User' ">
+          <div class="input-label">
+          Users 
+          </div>
+          <select ng-model="users">
+              <option selected>alon</option>
+              <option >ben</option>
+              <option>ronit</option>
+          </select>
+      </label>
+
+        <label class="item item-input item-select" ng-if="sendTo =='Team' ">
+          <div class="input-label">
+          Teams 
+          </div>
+          <select ng-model="teams">
+              <option selected>alon</option>
+              <option >ben</option>
+              <option>ronit</option>
+          </select>
+      </label>
+
+        <label class="item item-input item-stacked-label">
+
+      <span class="input-label">Message</span>
+      
+      <input type="text" placeholder="Message (40 char max)" maxlength="40" ng-model="pushMsg" required>
+  </form>
+  </div>
+    <button class="button button-block button-positive" ng-disabled="push_form.$invalid" type="submit" ng-click="sendPush()">
+  Send
+  </button>
+
+<!--
+  <button class="button button-block button-positive"  ng-click="register_notID()" type="submit">Save my phone details to DB</button>
+
+  <button class="button button-block button-positive"  ng-click="sendMsg()" type="submit">send push</button>-->
+
+
+</ion-content>
 </ion-view>
