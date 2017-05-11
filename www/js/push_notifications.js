@@ -119,7 +119,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
     //send push to user
     $scope.sendPush = function () {
         console.log(this);
-        if (sendTo == 'All') {
+        if (this.push.sendTo == 'All') {
             $http.post($scope.links.prod_app + 'sendMsgToAll', { msg: this.push.pushMsg })
                 .then(function () {
                     console.log('%c  push -sent all ! Success', 'background: yellow; color: green');
@@ -129,7 +129,7 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
                     alert('Error. try again');
                 }
         }
-        else if (sendTo == 'User') {
+        else if (this.push.sendTo == 'User') {
             $http.post($scope.links.prod_app + 'sendMsgToUser', { userId: this.push.id, msg: this.push.pushMsg })
                 .then(function () {
                     console.log('%c  push -sent user ! Success', 'background: yellow; color: green');
@@ -140,8 +140,8 @@ app.controller('PushCtrl', ['$scope', '$location', '$filter', '$http', '$cordova
                 }
 
         }
-        else if (sendTo == 'Team') {
-            $http.post($scope.links.prod_app + 'sendMsgToTeam', { teamId: this.push.team, msg: this.push.pushMsg })
+        else if (this.push.sendTo == 'Team') {
+            $http.post($scope.links.prod_app + 'sendMsgToTeam', { TeamId: this.push.team, msg: this.push.pushMsg })
                 .then(function () {
                     console.log('%c  push -sent team ! Success', 'background: yellow; color: green');
                 }),

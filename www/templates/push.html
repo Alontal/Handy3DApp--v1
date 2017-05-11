@@ -1,21 +1,21 @@
 ﻿<ion-view view-title="Push Notifications" >
-  <ion-content>
+  <ion-content class="home-bg">
 
-    <div class="list">
+    <div class="list card">
       <form name=push>
 
         <label class="item item-input item-select">
           <div class="input-label">
           Send to: 
           </div>
-          <select ng-model="sendTo">
+          <select ng-model="push.sendTo">
               <option selected>User</option>
               <option >Team</option>
               <option>All</option>
           </select>
       </label>
 
-        <label class="item item-input item-select" ng-if="sendTo =='User' " >
+        <label class="item item-input item-select" ng-if="push.sendTo =='User' " >
           <div class="input-label">
           Users 
           </div>
@@ -26,7 +26,7 @@
           </select>
       </label>
 
-        <label class="item item-input item-select" ng-if="sendTo =='Team' ">
+        <label class="item item-input item-select" ng-if="push.sendTo =='Team' ">
           <div class="input-label">
           Teams 
           </div>
@@ -39,10 +39,10 @@
 
       <span class="input-label">Message</span>
       
-      <input type="text" placeholder="Message (40 char max)" maxlength="40" ng-model="push.pushMsg" required>
+      <input type="text" placeholder="Message (50 char max)" maxlength="50" ng-model="push.pushMsg" required>
   </form>
   </div>
-    <button class="button button-block button-positive" ng-disabled="push.$invalid" ng-click="sendPush()">
+    <button class="button button-block button-royal" ng-disabled="push.$invalid" ng-click="sendPush()">
   Send
   </button>
 
