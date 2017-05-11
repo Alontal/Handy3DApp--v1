@@ -269,28 +269,10 @@ $ionicModal.fromTemplateUrl('templates/modals/modal.html', {
           },
           params: {
               // userId: $scope.user.id
-              userId: 1
+              userId: 1,
           }
       })
         .then(function (res) {
-
-          $scope.user = res.data;
-          console.log(res.data);
-          if ($scope.user == '0') {
-            console.error('Wrong user name or password, try again');
-            $scope.loginAlert = 'Wrong user name or password, try again';
-          }
-          else if ($scope.user == '-1') {
-            console.error('user not active. please contact admin');
-             $scope.loginAlert = 'user not active. please contact admin';
-          }
-          else if ($scope.user.name != undefined) {
-            console.info('Success, Hi mr/ms :', $scope.user);
-            localStorage.setItem('_user', JSON.stringify($scope.user));
-            saveToken($scope.user.token);
-            //$state.go('app.home');
-            window.location = 'main.html';
-          }
 
             $scope.notifications = res.data;
             console.log('Notifications fetched', JSON.stringify($scope.notifications));
