@@ -212,9 +212,9 @@ angular.module('starter.controllers', [])
 
       $scope.register_notID = function () {
           //remove comment in dev to reveal device info
-          alert($scope.user.id);
-          alert(notification_id);
-          alert(user_platform);
+          // alert($scope.user.id);
+          // alert(notification_id);
+          // alert(user_platform);
           var user = $scope.user.name;
           $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SetUserNotIdAndPlatform',
               { user_id: $scope.user.id, not_id: notification_id, platform: user_platform })
