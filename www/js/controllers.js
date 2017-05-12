@@ -549,6 +549,7 @@ angular.module('starter.controllers', [])
             },
             function (err) {
                 console.error('Failed -insert failed,');
+                alert('Error please try again');
                 alert('Error please try again'+JSON.stringify(err.data));
             })
         }
@@ -600,8 +601,8 @@ angular.module('starter.controllers', [])
                 alert('get picture failed');
             }, {
                 quality: 100,
-                destinationType: navigator.camera.DestinationType.FILE_URI,
-                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+                destinationType: Camera.DestinationType.FILE_URI,
+                sourceType: Camera.PictureSourceType.PHOTOLIBRARY
             });
         }
 
