@@ -600,6 +600,7 @@ angular.module('starter.controllers', [])
             navigator.camera.getPicture(uploadPhoto, function (message) {
                 alert('get picture failed');
             }, {
+                //XXX ronen: check this syntex
                 quality: 100,
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY
