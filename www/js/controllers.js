@@ -550,7 +550,7 @@ angular.module('starter.controllers', [])
             function (err) {
                 console.error('Failed -insert failed,');
                 alert('Error please try again');
-                alert('Error please try again'+JSON.stringify(err.data));
+                alert('Error please try again' + JSON.stringify(err.data));
             })
         }
         function fail(error) {
@@ -585,19 +585,9 @@ angular.module('starter.controllers', [])
             var ft = new FileTransfer();
             ft.upload($scope.videoFile, encodeURI($scope.links.prod_app + 'VideoHandler.ashx'), win, fail, options); // Upload
         }
-
-        //  //media from gallery
-        ////document.addEventListener("deviceready", onDeviceReady, false);
-
-        ////  // PhoneGap is ready
-        ////function onDeviceReady() {
-        ////    // Do cool things here...
-        ////}
-
-
         $scope.getImage = function () {
             alert("in");
-            navigator.camera.getPicture(uploadPhoto, function (message) {
+            navigator.camera.getPicture(ShowIMG, function (message) {
                 alert('get picture failed');
             }, {
                 //XXX ronen: check this syntex
@@ -607,41 +597,36 @@ angular.module('starter.controllers', [])
             });
         }
 
-        function uploadPhoto(imageURI) {
-            var options = new FileUploadOptions();
-            options.fileKey = "file";
-            options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
-            options.mimeType = "image/jpeg";
-            console.log(options.fileName);
-            var params = new Object();
-            params.value1 = "test";
-            params.value2 = "param";
-            options.params = params;
-            options.chunkedMode = false;
+        function ShowIMG(fileUri) {
+            $scope.images.push(fileUri);
+            //alert(fileUri)
+            $scope.imageUrl = fileUri;
+            imgUrl = fileUri;
+            localStorage.setItem('images_array', imgUrl);
+            $('#myImage2').attr("src", fileUri);
 
-            var ft = new FileTransfer();
-            ft.upload(imageURI, "http://192.168.1.4/phonegap/upload/upload.php", function (result) {
-                console.log(JSON.stringify(result));
-            }, function (error) {
-                console.log(JSON.stringify(error));
-            }, options);
+
+            //function uploadPhoto(imageURI) {
+            //    alert("upload pic")
+            //    var options = new FileUploadOptions();
+            //    options.fileKey = "file";
+            //    options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+            //    options.mimeType = "image/jpeg";
+            //    console.log(options.fileName);
+            //    var params = new Object();
+            //    params.value1 = "test";
+            //    params.value2 = "param";
+            //    options.params = params;
+            //    options.chunkedMode = false;
+
+            //    var ft = new FileTransfer();
+            //    ft.upload($scope.imageUrl, encodeURI($scope.links.prod + 'MediaAppHandler.ashx'), win, fail, options) 
+            //}
+            //}
+
+
         }
-
-        $scope.getPhoto = function(){
-        //function getPhoto(source) {
-        alert(this);
-        alert("in")
-        navigator.camera.getPicture(onPhotoURISuccess, onFail, {
-            quality: 50,
-            destinationType: destinationType.FILE_URI,
-            sourceType: source
-        });
     }
-
-  }
-
-
-
 ]
 
 )
