@@ -1,31 +1,35 @@
 <ion-view view-title="Camera">
     <ion-content class="home-bg" ng-init="addImage()">
 
-            <ion-scroll>
-                <div class="preview">
-                    <img id="myImage2"  />
-                </div>
-
-            </ion-scroll>
-
-            <div class="row">
-                <button class="col button button-outline icon-right ion-camera button-balanced enable-pointer-events"
-                    ng-click="addImage()">Take Photo</button>
-                <button id="uploadimg" ng-show="m.c_id && m.desc && m.title" class="col button button-outline icon-right ion-upload button-balanced enable-pointer-events"
-                    ng-click="UploadImages(m)">Upload Photo</button>
+        <ion-scroll>
+            <div class="preview">
+                <img id="myImage2" />
             </div>
-            <button id="uploadimg" class="button button-calm enable-pointer-events" ng-click="getImage()">From Gallery</button>
 
-            <div class="list">
-                <div class="list list-inset">
-                    <label class="item item-input">
+        </ion-scroll>
+
+        <div class="row">
+            <button class="col button button-outline icon-right ion-camera button-balanced enable-pointer-events" 
+                     ng-click="addImage()">Open Camera</button>
+            <button id="uploadimg" class="col button button-outline icon-right ion-folder button-balanced enable-pointer-events" 
+                    ng-click="getImage()">Open Gallery</button>
+        </div>
+        <div class="row">
+            <button id="uploadimg" ng-show="m.c_id && m.desc && m.title" class="col button button-outline icon-right ion-upload button-balanced enable-pointer-events"
+                      ng-click="UploadImages(m)">Upload Photo</button>
+
+        </div>
+
+        <div class="list">
+            <div class="list list-inset">
+                <label class="item item-input">
                     <input type="text" ng-model="m.title"  placeholder="Picture title" required>
                 </label>
-                    <label class="item item-input">
+                <label class="item item-input">
                     <input type="text" ng-model="m.desc" placeholder="Picture description" required>
                 </label>
-                </div>
-                <label class="item item-input item-select">
+            </div>
+            <label class="item item-input item-select">
                 <div class="input-label">
                 Client
                 </div>
@@ -34,7 +38,7 @@
                  </select>
             </label>
 
-                <label class="item item-input item-select">
+            <label class="item item-input item-select">
                 <div class="input-label">
                 Meeting number
                 </div>
@@ -43,7 +47,7 @@
                                 <option ng-repeat="c in meetinglist" value="{{c}}">{{c}} </option>
                 </select>
             </label>
-            </div>
+        </div>
 
 
     </ion-content>
