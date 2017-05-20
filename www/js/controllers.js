@@ -285,6 +285,13 @@ angular.module('starter.controllers', [])
       // physiotherapist
       // technician
       // designer}
+      var temp;
+      if($scope.user.type=='Admin'){
+          temp = 0
+      }
+      else{
+          temp =$scope.user.id
+      }
       $http({
           method: 'GET',
           url: $scope.links.prod_app + 'getUserTeams',
@@ -294,7 +301,7 @@ angular.module('starter.controllers', [])
           },
           params: {
               // userId: $scope.user.id
-              user_id: $scope.user.id
+              user_id: temp
           }
       })
         .then(function (res) {
