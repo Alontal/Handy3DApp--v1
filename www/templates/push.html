@@ -19,9 +19,9 @@
           <div class="input-label">
           Users 
           </div>
-          <select ng-model="push.id" ng-init="getAllUsers()" >
+          <select  ng-model="push.id" ng-init="getAllUsers()" >
               <option selected>select User</option>
-              <option  ng-repeat="u in user_list" value="{{u.UserID}}">{{u.Name}}</option>
+              <option id="pickedName" ng-repeat="u in user_list" value="{{u.UserID}}">{{u.Name}}</option>
     
           </select>
       </label>
@@ -31,7 +31,7 @@
           Teams 
           </div>
           <select ng-model="push.team" ng-init="getAllTeams()">
-              <option ng-repeat=" t in team_list" value=" {{t.TeamID}}" >{{t.TeamNumber}}</option>
+              <option id="pickedTeam" ng-repeat=" t in team_list" value=" {{t.TeamID}}" >{{t.TeamNumber}}</option>
           </select>
       </label>
 

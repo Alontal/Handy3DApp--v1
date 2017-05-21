@@ -242,6 +242,7 @@ angular.module('starter.controllers', [])
               $http.post($scope.links.prod_app + 'sendMsgToAll', { msg: this.push.pushMsg })
                 .then(function () {
                     console.log('%c  push -sent all ! Success', 'background: yellow; color: green');
+                    alert('Push sent to All users in system');
                 }),
                 function (err) {
                     console.error('push -sent all Something went wrong', err);
@@ -251,7 +252,8 @@ angular.module('starter.controllers', [])
           else if (this.push.sendTo == 'User') {
               $http.post($scope.links.prod_app + 'sendMsgToUser', { userId: this.push.id, msg: this.push.pushMsg })
                 .then(function () {
-                    console.log('%c  push -sent user ! Success', 'background: yellow; color: green');
+                    console.log('%c  push -sent to '+$('#pickedName').text()+ '! Success', 'background: yellow; color: green',);
+                    alert('Push sent to '+$('#pickedName').text());
                 }),
                 function (err) {
                     console.error('push -sent all Something went wrong', err);
@@ -262,7 +264,8 @@ angular.module('starter.controllers', [])
           else if (this.push.sendTo == 'Team') {
               $http.post($scope.links.prod_app + 'sendMsgToTeam', { TeamId: this.push.team, msg: this.push.pushMsg })
                 .then(function () {
-                    console.log('%c  push -sent team ! Success', 'background: yellow; color: green');
+                    console.log('%c  push -sent to :'+$('#pickedTeam').text()+' ! Success', 'background: yellow; color: green');
+                    alert('Push sent to all users in team '+$('#pickedTeam').text());
                 }),
                 function (err) {
                     console.error('push -sent team Something went wrong', err);
