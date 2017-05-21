@@ -662,17 +662,24 @@ angular.module('starter.controllers', [])
       $scope.me = $scope.user.id;
 
       //get User Clients
+      var tempUid;
+      if($scope.user.type=='Admin'){
+        tempUid = 0
+      }
+      else{
+        tempUid = $scope.user.id
+      }
       $http({
           method: "GET",
           url: $scope.links.prod_app + 'getUserClients',
           params: {
-              userId: $scope.user.id
+              userId: tempUid
           }
       })
         .then(function (response) {
             $scope.clientList = response.data;
         })
-
+     
       //get User Teams Only
 
       $http({
