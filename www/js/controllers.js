@@ -124,6 +124,7 @@ angular.module('starter.controllers', [])
       var notification_id;
       var SENDER_ID = "256793245079";
 
+      
       document.addEventListener("deviceready", onCordovaReady, false);
       function onCordovaReady() {
           var push = PushNotification.init({
@@ -278,6 +279,10 @@ angular.module('starter.controllers', [])
 
   .controller('ProfileCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
 
+
+      $scope.updateProfilePic= function(){
+          $state.go('app.profile_image');
+      }
   }])
 
   .controller('TeamsCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
@@ -521,7 +526,6 @@ angular.module('starter.controllers', [])
         //  function for Uploading Images
         $scope.UploadImages = function () {
             //alert($scope.imageUrl)
-            console.log(this.m)
             //   Load(); // Start the spinning "working" animation
             var options = new FileUploadOptions(); // PhoneGap object to allow server upload
             options.fileKey = "file";
