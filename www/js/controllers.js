@@ -280,6 +280,13 @@ angular.module('starter.controllers', [])
   .controller('ProfileCtrl', ['$scope', '$http', '$state', function ($scope, $http, $state) {
 
 
+      $scope.profileUpdate = function () {
+              if (confirm("Are You sure you want to change your profile pic?") == true) {
+                  $scope.updateProfilePic();
+          } else {
+              return;
+          }
+      }
       $scope.updateProfilePic= function(){
           $state.go('app.profile_image');
       }
@@ -430,7 +437,7 @@ angular.module('starter.controllers', [])
           },
           params: {
               userId: $scope.user.id
-            //   userId: 1,
+              //   userId: 1,
           }
       })
         .then(function (res) {
@@ -544,6 +551,13 @@ angular.module('starter.controllers', [])
             var path = r.response;
             var savePath = $scope.links.prod + 'Client/src/' + path
             alert('Image Uploaded and save in :' + savePath);
+            //check if the image is a profile image
+            if ($scope.m.profile!=1) {
+                $scope.m.profile=false;
+            }
+            else {
+                $scope.m.profile=true;
+            }
 
             var me = {
                 MediaTitle: $scope.m.title,
@@ -552,7 +566,9 @@ angular.module('starter.controllers', [])
                 MeetingID: $scope.m.meetingNum,
                 clientID: $scope.m.c_id,
                 UserID: $scope.user.id,
+                Profile: $scope.m.profile 
             }
+            alert($scope.m.profile );
             // save to pic to DB
             $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SavePicToDB', { me })
             .then(function (response) {
@@ -641,7 +657,7 @@ angular.module('starter.controllers', [])
 
         }
     }
-]
+  ]
 
 )
   .filter('serchMyMedia', function () {
@@ -668,10 +684,10 @@ angular.module('starter.controllers', [])
       //get User Clients
       var tempUid;
       if($scope.user.type=='Admin'){
-        tempUid = 0
+          tempUid = 0
       }
       else{
-        tempUid = $scope.user.id
+          tempUid = $scope.user.id
       }
       $http({
           method: "GET",

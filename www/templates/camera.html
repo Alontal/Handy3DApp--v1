@@ -37,17 +37,26 @@
                         <option ng-repeat="c in clientList" value="{{c.ClientID}}" >{{c.Name}} </option>
                  </select>
             </label>
-
             <label class="item item-input item-select">
                 <div class="input-label">
-                Meeting number
+                    Profile Picture?
                 </div>
-                <select ng-model="m.meetingNum">
-                                <option value="0">select meeting number</option>
-                                <option ng-repeat="c in meetinglist" value="{{c}}">{{c}} </option>
+                <select ng-model="m.profile">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
                 </select>
             </label>
-        </div>
+
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Meeting number
+                    </div>
+                    <select ng-model="m.meetingNum">
+                        <option value="0">select meeting number</option>
+                        <option ng-repeat="c in meetinglist" value="{{c}}">{{c}} </option>
+                    </select>
+                </label>
+</div>
 
 
     </ion-content>

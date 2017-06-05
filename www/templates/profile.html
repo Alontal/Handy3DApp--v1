@@ -3,11 +3,11 @@
         <div class="list card">
 
             <div class="item item-avatar">
-                <img src="{{user.img}}">
+                <img src="{{user.img}}" on-hold="profileUpdate()">
                 <h2>{{user.name}} {{user.last_name}}</h2>
                 <p>{{user.date_of_birth}}</p>
                 <p>joined: {{user.joined}}</p>
-                <button class="button button-block button-royal" ng-click="updateProfilePic()">Update Profile Pic</button>
+              <!--  <button class="button button-block button-royal" ng-click="updateProfilePic()">Update Profile Pic</button>-->
             </div>
 
             <div class="item item-body">
