@@ -7,6 +7,7 @@
   <author email="alon.tal@icloud.com , ronen.albagli@gmail.com" href="http://example.com/">
     Alon Tal  Ronen Albagli
   </author>
+  <icon height="57" src="resources/icon.png" width="57" />
   <content src="index.html" />
   <access origin="*" />
   <preference name="webviewbounce" value="false" />
