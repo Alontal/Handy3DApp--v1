@@ -79,8 +79,9 @@
 
 .align-bottom
 {
-    position: absolute;
-    bottom: -20px; 
+    /*need to find fix for login this is temp*/
+    /*position: absolute;*/
+    /*bottom: -20px; */
     width: 100%
 }
 /*margin*/

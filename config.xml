@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.helloworld" version="1.0.0">
-  <name>HandyApp0.3</name>
+  <name>HandyApp</name>
   <description>
     Handy3D Application
+    Version: 0.0.4
   </description>
   <author email="alon.tal@icloud.com , ronen.albagli@gmail.com" href="http://example.com/">
     Alon Tal  Ronen Albagli
