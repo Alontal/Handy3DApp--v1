@@ -112,11 +112,16 @@ angular.module('starter.controllers', [])
           // Execute action
       });
 
-      //links 
+      //links -prod 
       $scope.links = {
           prod: 'http://proj.ruppin.ac.il/bgroup48/prod/',
           prod_app: 'http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/',
       }
+      //test2
+      //$scope.links = {
+      //    prod: 'http://proj.ruppin.ac.il/bgroup48/test2/',
+      //    prod_app: 'http://proj.ruppin.ac.il/bgroup48/test2/ApplicationGeneralService.asmx/',
+      //}
       //  push handling 
       $scope.team_list = {};
       $scope.user_list = {};
@@ -489,7 +494,7 @@ angular.module('starter.controllers', [])
         $scope.images = [];
         $scope.imageUrl = '';
         $scope.videoFile = '';
-        $scope.clientList = [];
+        $scope.clientLists = [];
         $scope.meetinglist = [];
         $scope.m = {};
         var imgUrl;
@@ -504,7 +509,6 @@ angular.module('starter.controllers', [])
                 $('#myImage2').attr("src", fileUri);
             })
         }
-
         //load client list per teams?!
         $http({
             method: "GET",
@@ -514,7 +518,7 @@ angular.module('starter.controllers', [])
             }
         })
           .then(function (response) {
-              $scope.clientList = response.data;
+              $scope.clientLists = response.data;
           })
         //get meetings number per clients here!
         $scope.getMettings = function () {
@@ -549,8 +553,8 @@ angular.module('starter.controllers', [])
 
         function win(r) {
             var path = r.response;
-            var savePath = $scope.links.prod + 'Client/src/' + path
-            alert('Image Uploaded and save in :' + savePath);
+            var savePath = $scope.links.prod + 'Client/src' + path
+            //alert('Image Uploaded and save in :' + savePath);
             //check if the image is a profile image
             if ($scope.m.profile!=1) {
                 $scope.m.profile=false;
@@ -558,7 +562,6 @@ angular.module('starter.controllers', [])
             else {
                 $scope.m.profile=true;
             }
-
             var me = {
                 MediaTitle: $scope.m.title,
                 MediaDescription: $scope.m.desc,
@@ -568,7 +571,6 @@ angular.module('starter.controllers', [])
                 UserID: $scope.user.id,
                 Profile: $scope.m.profile 
             }
-            alert($scope.m.profile );
             // save to pic to DB
             $http.post('http://proj.ruppin.ac.il/bgroup48/prod/ApplicationGeneralService.asmx/SavePicToDB', { me })
             .then(function (response) {
@@ -613,7 +615,7 @@ angular.module('starter.controllers', [])
 
             options.params = params; // add parameters to the FileUploadOptions object
             var ft = new FileTransfer();
-            ft.upload($scope.videoFile, encodeURI($scope.links.prod_app + 'VideoHandler.ashx'), win, fail, options); // Upload
+                ft.upload($scope.videoFile, encodeURI('http://proj.ruppin.ac.il/bgroup48/prod/VideoHandler.ashx'), win, fail, options); // Upload
         }
         $scope.getImage = function () {
             alert("in");
@@ -680,7 +682,6 @@ angular.module('starter.controllers', [])
       $scope.clientList = [];
       $scope.clientTeam_list = [];
       $scope.me = $scope.user.id;
-
       //get User Clients
       var tempUid;
       if($scope.user.type=='Admin'){
