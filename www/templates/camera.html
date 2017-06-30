@@ -8,30 +8,38 @@
             </div>
 
         </ion-scroll>
-
-        <div class="row">
+            <div class="button-bar">
+                <a class="button icon button-calm enable-pointer-events  ion-camera" ng-click="addImage()"></a>
+                <a class="button icon button-calm enable-pointer-events  ion-paperclip" ng-click="getImage()"></a>
+                <a class="button icon button-calm enable-pointer-events  ion-videocamera " ng-click="TakeVideo()"></a>
+            </div>
+            <!--<div class="row">
             <button class="col button button-outline icon-right ion-camera button-balanced enable-pointer-events"
                     ng-click="addImage()">
-                Open Camera
+                Take Photo
             </button>
-            <button id="uploadimg" class="col button button-outline icon-right ion-folder button-balanced enable-pointer-events"
+            <button id="uploadimg" class="col button button-outline icon-right ion-paperclip button-balanced enable-pointer-events"
                     ng-click="getImage()">
                 Open Gallery
             </button>
-            <button class="col button button-outline icon-right ion-camera button-balanced enable-pointer-events"
+            <button class="col button button-outline icon-right ion-videocamera button-balanced enable-pointer-events"
                     ng-click="TakeVideo()">
-                take video
-            </button>
-            <button class="col button button-outline icon-right ion-camera button-balanced enable-pointer-events"
+                Take Video
+            </button>-->
+        </div>
+        <div class="row" ng-show="m.c_id && m.desc && m.title">
+                <div class="button-bar">
+                <a class="button icon button-balanced enable-pointer-events  ion-upload" ng-click="uploadVideo()"> Upload Video</a>
+                <a class="button icon button-balanced enable-pointer-events  ion-upload" ng-click="UploadImages(m)"> Upload Photo</a>
+            </div>
+            <!--<button class="col button button-outline icon-right ion-upload button-balanced enable-pointer-events"
                     ng-click="uploadVideo()">
           upload video
             </button>
-        </div>
-        <div class="row">
-            <button id="uploadimg" ng-show="m.c_id && m.desc && m.title" class="col button button-outline icon-right ion-upload button-balanced enable-pointer-events"
+            <button id="uploadimg"  class="col button button-outline icon-right ion-upload button-balanced enable-pointer-events"
                     ng-click="UploadImages(m)">
                 Upload Photo
-            </button>
+            </button>-->
         </div>
 
         <div class="list">
