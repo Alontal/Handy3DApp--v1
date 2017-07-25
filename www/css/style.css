@@ -263,6 +263,7 @@
     position: absolute;
     bottom: 23px; 
     margin-left: 37%;
+    z-index: 4;
 }
 .round-button-circle {
 	width: 100%;
